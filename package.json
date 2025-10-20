@@ -1,5 +1,24 @@
 {
+  "name": "pakde_har_go_digital",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ChrisGit889/Pakde_Har_Go_Digital#readme",
+  "bugs": {
+    "url": "https://github.com/ChrisGit889/Pakde_Har_Go_Digital/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisGit889/Pakde_Har_Go_Digital.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "bootstrap": "^5.3.8"
-  }
+  },
+  "devDependencies": {}
 }
