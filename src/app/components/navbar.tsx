@@ -16,16 +16,12 @@ function navbar() {
             src="/images/LogoPakde.png"
             alt="Logo PakDe"
             width="180"
-            height="50"
+            height="45"
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
+          <Nav className="ms-auto gap-5 " style={{ maxHeight: "100px" }} navbarScroll>
             <Nav.Link href="#action1">Beranda</Nav.Link>
             <Nav.Link href="#action2">Menu</Nav.Link>
             <Nav.Link href="#action2">Tentang Kami</Nav.Link>
