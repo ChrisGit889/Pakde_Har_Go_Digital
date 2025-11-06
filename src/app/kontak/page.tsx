@@ -5,18 +5,13 @@ export default function Menu() {
   return (
     <div className={styles.container}>
       <NavbarComponents />
-      <div className={styles.container2}>
-        <h1 className={styles.judulHalaman}>
-          Menu <span className={styles.kuning}>Kami</span>
-        </h1>
+      <div className={styles.containerKontak}>
+        <h1 className={styles.judulHalaman}>Hubungi Kami</h1>
 
         <h3 className={styles.deskripsisingkatberanda}>
-          Temukan berbagai nasi goreng lezat yang disajikan dengan cinta dan
-          rasa
+          Punya pertanyaan atau saran ? Kirim pesan ke kami dan kami siap
+          melayani dengan sepenuh hati
         </h3>
-        <a href="#menuUnggulan">
-          <button className={styles.tombolJelajahi}>Lihat Menu</button>
-        </a>
       </div>
 
       <img
@@ -30,10 +25,6 @@ export default function Menu() {
           bottom: "50px",
         }}
       />
-
-      <h2 className={styles.judulHalaman2} id="menuUnggulan">
-        Menu Unggulan Kami
-      </h2>
 
       <a
         href="https://wa.me/6287812134731"
