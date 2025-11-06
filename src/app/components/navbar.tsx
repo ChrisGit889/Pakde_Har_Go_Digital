@@ -7,9 +7,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-function navbar() {
+function NavbarComponents() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="sticky-top bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand href="#">
           <img
@@ -21,7 +21,7 @@ function navbar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav className="ms-auto gap-5 " style={{ maxHeight: "100px" }} navbarScroll>
+          <Nav className="ms-auto gap-5" style={{ maxHeight: "100px" }} navbarScroll>
             <Nav.Link href="#action1">Beranda</Nav.Link>
             <Nav.Link href="#action2">Menu</Nav.Link>
             <Nav.Link href="#action2">Tentang Kami</Nav.Link>
@@ -33,4 +33,5 @@ function navbar() {
   );
 }
 
-export default navbar;
+
+export default NavbarComponents;
