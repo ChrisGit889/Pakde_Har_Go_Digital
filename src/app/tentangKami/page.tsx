@@ -7,16 +7,15 @@ export default function Menu() {
       <NavbarComponents />
       <div className={styles.container2}>
         <h1 className={styles.judulHalaman}>
-          Menu <span className={styles.kuning}>Kami</span>
+          Cerita di Balik Nasi Goreng{" "}
+          <span className={styles.kuning}>Pakde Har</span>
         </h1>
 
         <h3 className={styles.deskripsisingkatberanda}>
-          Temukan berbagai nasi goreng lezat yang disajikan dengan cinta dan
-          rasa
+          Dari wajan sederhana di pinggir jalan Untar, Pakde Har menghadirkan
+          cita rasa nasi goreng yang penuh kenangan dan kehangatan.
         </h3>
-        <a href="#menuUnggulan">
-          <button className={styles.tombolJelajahi}>Lihat Menu</button>
-        </a>
+        <button className={styles.tombolJelajahi}>Tentang Pakde</button>
       </div>
 
       <img
@@ -30,10 +29,6 @@ export default function Menu() {
           bottom: "50px",
         }}
       />
-
-      <h2 className={styles.judulHalaman2} id="menuUnggulan">
-        Menu Unggulan Kami
-      </h2>
 
       <a
         href="https://wa.me/6287812134731"

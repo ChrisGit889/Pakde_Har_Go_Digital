@@ -59,9 +59,9 @@ function NavbarComponents() {
             </Nav.Link>
 
             <Nav.Link
-              href="/tentangkami"
+              href="/tentangKami"
               className={`nav-link-custom ${
-                isActive("/tentangkami") ? "active-link" : ""
+                isActive("/tentangKami") ? "active-link" : ""
               } ${scrolled || expanded ? "text-dark" : "text-white"}`}
             >
               Tentang Kami
