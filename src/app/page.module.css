@@ -3,7 +3,7 @@
 }
 .container2 {
   width: 100%;
-  height: 667px;
+  height: 740px;
   background: 
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
     url("/images/Nasi_Goreng_Ayam.jpg");
@@ -64,4 +64,24 @@
   border-radius: 5px;
   cursor: pointer;
   font-family: inter;
+}
+
+@media (max-width: 1231px) {
+ .deskripsisingkatberanda {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+  margin-right:100px;
+  margin-left:100px;
+  font-family: inter;
+}
+
+.deskripsisingkat2{
+  color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: 20px;
+  margin-right:100px;
+  margin-left:100px;
+  font-family: inter;
+}
 }
