@@ -1,0 +1,36 @@
+
+.toggler-light {
+  filter: brightness(200%);
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.toggler-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg stroke='white' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='4' y1='7' x2='26' y2='7' stroke-width='2'/%3e%3cline x1='4' y1='15' x2='26' y2='15' stroke-width='2'/%3e%3cline x1='4' y1='23' x2='26' y2='23' stroke-width='2'/%3e%3c/svg%3e") !important;
+}
+
+
+.toggler-dark {
+  border-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.toggler-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg stroke='black' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cline x1='4' y1='7' x2='26' y2='7' stroke-width='2'/%3e%3cline x1='4' y1='15' x2='26' y2='15' stroke-width='2'/%3e%3cline x1='4' y1='23' x2='26' y2='23' stroke-width='2'/%3e%3c/svg%3e") !important;
+}
+
+.nav-light {
+  color: white !important;
+}
+
+.nav-dark {
+  color: black !important;
+}
+
+.active-link {
+  background: #FF7A00; 
+  color: white !important;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600; 
+}
+
+

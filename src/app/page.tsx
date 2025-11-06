@@ -1,10 +1,13 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Card from "react-bootstrap/Card";
+import NavbarComponents from "./components/navbarWebUser/navbar";
 
 export default function Home() {
   return (
+    
     <div className={styles.container}>
+      <NavbarComponents />
     <div className={styles.container2}>
       <h1 className={styles.judulHalaman}>
         Nasi Goreng <span className={styles.kuning}>Pakde Har</span>
@@ -21,9 +24,9 @@ export default function Home() {
       </h2>
 
       <h3 className={styles.deskripsisingkat2}>
-        Bukan sekadar pengganjal lapar. Nikmati porsi brutal dengan bumbu khas yang otentik. 
-        Harga pas di kantong, rasa dijamin nendang!
+        Cobain menu favorit yang paling laris dan bikin ketagihan, dijamin bakal bikin kamu pengen nambah terus!
       </h3>
+      
     </div>
   );
 }
