@@ -27,7 +27,7 @@ export default function Menu() {
           width: "40px",
           height: "auto",
           position: "relative",
-          bottom: "50px",
+          bottom: "6vh",
         }}
       />
 
