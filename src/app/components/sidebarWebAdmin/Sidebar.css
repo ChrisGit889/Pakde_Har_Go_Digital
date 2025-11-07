@@ -1,0 +1,66 @@
+.sidebar {
+    width: 280px; /* Lebar sidebar */
+    background-color: #ffffff;
+    border-right: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  
+  .sidebar-header {
+    padding: 24px;
+    border-bottom: 1px solid #E5E7EB;
+    text-align: center;
+  }
+  
+  .sidebar-nav {
+    flex-grow: 1; /* Mendorong footer ke bawah */
+    padding: 24px 16px;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #374151; /* Warna teks abu-abu tua */
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .nav-item:hover {
+    background-color: #F3F4F6; /* Warna hover abu-abu muda */
+  }
+  
+  /* Style untuk item yang aktif */
+  .nav-item.active {
+    background-color: #FF9100; /* Warna oranye */
+    color: #ffffff;
+  }
+  
+  .sidebar-footer {
+    padding: 24px 16px;
+  }
+  
+  .logout-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: #FEF2F2; /* Latar belakang merah muda */
+    color: #EF4444; /* Teks merah */
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .logout-button:hover {
+    background-color: #FEE2E2;
+  }
