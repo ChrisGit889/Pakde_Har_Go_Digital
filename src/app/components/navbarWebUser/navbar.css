@@ -27,7 +27,7 @@
 
 .active-link {
   background: #FF7A00; 
-  color: white  ;
+  color: white !important;
   padding: 6px 14px;
   border-radius: 8px;
   font-weight: 600; 

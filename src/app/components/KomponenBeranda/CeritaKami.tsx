@@ -42,7 +42,7 @@ function CeritaKami() {
           src="/images/Gerobak_Pakde.jpg" 
           alt="Gerobak Nasi Goreng"
           style={{
-            width: "500px;",
+            width: "500px",
             borderRadius: "20px",
             objectFit: "cover",
             marginRight: "100px",
