@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation"; 
+import { usePathname } from "next/navigation";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./navbar.css";
 
 function NavbarComponents() {
-  const pathname = usePathname(); // <-- Ambil path navlink aktif
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -17,7 +17,6 @@ function NavbarComponents() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // buat cari navlink mana yang aktif
   const isActive = (path: string) => pathname === path;
 
   return (
@@ -26,18 +25,15 @@ function NavbarComponents() {
       expanded={expanded}
       onToggle={() => setExpanded(!expanded)}
       className={`position-fixed w-100 z-3 transition-all ${
-        scrolled || expanded ? "bg-white navbar-shadow py-2" : "bg-transparent py-4"
+        scrolled || expanded
+          ? "bg-white navbar-shadow py-2"
+          : "bg-transparent py-4"
       }`}
     >
       <Container fluid>
-        <Navbar.Brand href="/">
-          <img src="/images/LogoPakde.png" alt="Logo" width="160" />
-        </Navbar.Brand>
-
         <Navbar.Toggle
           className={scrolled || expanded ? "toggler-dark" : "toggler-light"}
         />
-
         <Navbar.Collapse>
           <Nav className="ms-auto gap-4 align-items-center">
             <Nav.Link
