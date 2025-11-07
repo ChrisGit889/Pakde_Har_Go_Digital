@@ -41,16 +41,36 @@ function Footer() {
         </div>
 
         {/* Kolom 3 */}
-        <div style={{ maxWidth: "300px" }}>
-          <h3 style={{ marginBottom: "12px" }}>Hubungi Kami</h3>
-          <p>Jl. Taman S. Parman, RT.7/RW.8, Grogol, Jakarta Barat</p>
-          <p>08123456789</p>
-          <p>PakDeHar@gmail.com</p>
+      <div style={{ maxWidth: "300px" }}>
+  <h3 style={{ marginBottom: "12px" }}>Hubungi Kami</h3>
 
-          <p style={{ marginTop: "10px" }}>
+  <div style={{ display: "flex", gap: "12px" }}>
+    
+    <div style={{ display: "flex", flexDirection: "column", gap: "14px", position:"relative", top:"2px" }}>
+      <img src="images/location_on.png" style={{ width: "20px" }} />
+      <img src="images/call.png" style={{ width: "20px" , position:"relative", top:"43px"}} />
+      <img src="images/mail.png" style={{ width: "20px" ,position:"relative", top:"47px"}} />
+      <img src="images/access_time.png" style={{ width: "20px",position:"relative", top:"50px" }} />
+    </div>
+
+
+    <div>
+      <p>
+        Jl. Taman S. Parman, RT.7/RW.8, Grogol,
+        Kec. Grogol Petamburan, Kota Jakarta Barat,
+        DKI Jakarta 11440
+      </p>
+      <p>08123456789</p>
+      <p>PakDeHar@gmail.com</p>
+      <p>
             <strong>Senin - Jumat:</strong> 07:00 - 22:00 <br />
             <strong>Sabtu - Minggu:</strong> Tutup
           </p>
+    </div>
+
+  </div>
+
+          
         </div>
       </div>
     </div>
