@@ -106,7 +106,153 @@ export default function Menu() {
           tetap berkomitmen menyajikan rasa autentik dan suasana akrab yang telah menjadi ciri khas kami
           sejak awal.
         </p>
+            </div>
+
+      <div
+        style={{
+          marginTop: "100px",
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "36px",
+            fontWeight: 700,
+            marginBottom: "10px",
+          }}
+        >
+          Berita Harian Kami
+        </h2>
+        <p
+          style={{
+            fontSize: "20px",
+            color: "black",
+            marginBottom: "50px",
+          }}
+        >
+          Ikuti berbagai berita dan perkembangan terbaru dari Pakde Har.
+        </p>
       </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "25px",
+          flexWrap: "wrap",
+          padding: "0 20px",
+        }}
+      >
+        <div
+          style={{
+            width: "330px",
+            borderRadius: "12px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+            overflow: "hidden",
+          }}
+        >
+          <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+          <div style={{ padding: "20px", textAlign: "left" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Menu Baru Segera Hadir</h3>
+            <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
+              Menu terbaru kami, Nasi Goreng Gila Kambing, hadir dengan rasa istimewa yang memadukan
+              bumbu khas dan kelezatan daging kambing pilihan.
+            </p>
+            <button
+              style={{
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "#ff8c00",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Detail Berita
+            </button>
+          </div>
+        </div>
+
+        <div
+          style={{
+            width: "330px",
+            borderRadius: "12px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+            overflow: "hidden",
+          }}
+        >
+          <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+          <div style={{ padding: "20px", textAlign: "left" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Pindah Lokasi</h3>
+            <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
+              Pada 22 Oktober 2025 Nasi Goreng Pakde Har pindah ke sebelah Indomaret untuk sementara
+              dikarenakan ada renovasi.
+            </p>
+            <button
+              style={{
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "#ff8c00",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Detail Berita
+            </button>
+          </div>
+        </div>
+
+        <div
+          style={{
+            width: "330px",
+            borderRadius: "12px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+            overflow: "hidden",
+          }}
+        >
+          <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+          <div style={{ padding: "20px", textAlign: "left" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Nasi Vegetarian</h3>
+            <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
+              Nikmati kelezatan Nasi Goreng Vegetarian dengan cita rasa autentik dan bahan-bahan segar
+              pilihan dan berkualitas.
+            </p>
+            <button
+              style={{
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "#ff8c00",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Detail Berita
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: "40px", marginBottom: "80px" }}>
+        <button
+          style={{
+            padding: "10px 24px",
+            backgroundColor: "white",
+            border: "2px solid #ff8c00",
+            color: "#000",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "16px",
+          }}
+        >
+          Lihat Berita Lainnya
+        </button>
+      </div>
+
     </div>
   );
 }
