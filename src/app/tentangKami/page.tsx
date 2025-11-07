@@ -119,6 +119,7 @@ export default function Menu() {
             fontSize: "36px",
             fontWeight: 700,
             marginBottom: "10px",
+            color: "black",
           }}
         >
           Berita Harian Kami
@@ -256,11 +257,3 @@ export default function Menu() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
