@@ -26,7 +26,7 @@ function NavbarComponents() {
       expanded={expanded}
       onToggle={() => setExpanded(!expanded)}
       className={`position-fixed w-100 z-3 transition-all ${
-        scrolled || expanded ? "bg-white shadow-sm py-2" : "bg-transparent py-4"
+        scrolled || expanded ? "bg-white navbar-shadow py-2" : "bg-transparent py-4"
       }`}
     >
       <Container fluid>

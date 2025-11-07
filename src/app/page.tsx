@@ -2,6 +2,11 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Card from "react-bootstrap/Card";
 import NavbarComponents from "./components/navbarWebUser/navbar";
+import MenuCards from "./components/KomponenBeranda/menuUnggulan";
+import MenuUnggulan from "./components/KomponenBeranda/menuUnggulan";
+import CeritaKami from "./components/KomponenBeranda/CeritaKami";
+import Ulasan from "./components/KomponenBeranda/Ulasan";
+import Footer from "./components/footerWebUser/footer";
 
 export default function Home() {
   return (
@@ -29,7 +34,7 @@ export default function Home() {
         bikin kamu pengen nambah terus!
       </h3>
       <a
-        href="https://wa.me/6287812134731"
+        href="https://wa.me/"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -48,6 +53,16 @@ export default function Home() {
           }}
         />
       </a>
+      <MenuUnggulan />
+      <CeritaKami />
+      <h2 className={styles.judulHalaman2} id="menuUnggulan">
+        Ulasan Tentang Pakde Har
+      </h2>
+      <h3 className={styles.deskripsisingkat2}>
+        Biarkan Pembeli yang Berbicara
+      </h3>
+      <Ulasan />
+      <Footer />
     </div>
   );
 }
