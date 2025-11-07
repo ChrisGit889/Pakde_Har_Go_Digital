@@ -28,6 +28,7 @@ function Ulasan() {
         justifyContent: "center",
         flexWrap: "wrap",
         padding: "60px 80px",
+        marginBottom: "150px",
       }}
     >
       {ulasan.map((item, index) => (
@@ -41,7 +42,7 @@ function Ulasan() {
             padding: "20px",
           }}
         >
-          <h4 style={{ marginBottom: "4px" , color: "#000000ff"}}>{item.nama}</h4>
+          <h4 style={{ marginBottom: "4px" , color: "#000000ff",fontWeight: "600"}}>{item.nama}</h4>
           <p style={{ fontSize: "14px", marginBottom: "8px", color: "#000000ff" }}>
             {item.status}
           </p>

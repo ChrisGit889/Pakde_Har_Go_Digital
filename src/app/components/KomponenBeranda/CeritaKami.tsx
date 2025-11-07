@@ -15,13 +15,11 @@ function CeritaKami() {
         marginBottom: "50px",
       }}
     >
-      {/* Bagian Teks */}
       <div style={{ flex: "1", minWidth: "280px" , marginLeft: "100px"}}>
         <h2 style={{ fontSize: "32px", fontWeight: "700", marginBottom: "10px", color: "#000000ff" }}>
           Cerita <span style={{ color: "#FFA726" }}>Kami</span>
         </h2>
 
-        {/* Garis orange */}
         <div
           style={{
             width: "100px",
