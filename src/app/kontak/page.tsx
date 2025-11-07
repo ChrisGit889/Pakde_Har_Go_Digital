@@ -27,7 +27,7 @@ export default function Menu() {
       />
 
       <a
-        href="https://wa.me/6287812134731"
+        href="https://wa.me/"
         target="_blank"
         rel="noopener noreferrer"
       >

@@ -1,0 +1,60 @@
+"use client";
+import React from "react";
+
+function Footer() {
+  return (
+    <div
+      style={{
+        width: "100%",
+        background: "linear-gradient( #FFA500, #FF4500)",
+        color: "white",
+        padding: "25px 40px",
+        marginTop: "60px",
+        fontSize: "14px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "40px",
+        }}
+      >
+        {/* Kolom 1 */}
+        <div style={{ maxWidth: "300px" }}>
+          <h4 style={{ marginBottom: "12px" }}>Nasi goreng Pakde Har</h4>
+          <p style={{ lineHeight: "1.6" }}>
+            Nasi goreng Indonesia yang autentik disajikan dengan penuh semangat sejak 2017.
+            Rasakan cita rasa nasi goreng dengan sentuhan Pakde yang bikin nagih!
+          </p>
+        </div>
+
+        {/* Kolom 2 */}
+        <div>
+          <h3 style={{ marginBottom: "12px" }}>Menu Pintasan</h3>
+          <p><a href="/" style={{ color: "white", textDecoration: "none" }}>Beranda</a></p>
+          <p><a href="/menu" style={{ color: "white", textDecoration: "none" }}>Menu</a></p>
+          <p><a href="/tentangKami" style={{ color: "white", textDecoration: "none" }}>Tentang Kami</a></p>
+          <p><a href="/kontak" style={{ color: "white", textDecoration: "none" }}>Kontak</a></p>
+          <p><a href="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</a></p>
+        </div>
+
+        {/* Kolom 3 */}
+        <div style={{ maxWidth: "300px" }}>
+          <h3 style={{ marginBottom: "12px" }}>Hubungi Kami</h3>
+          <p>Jl. Taman S. Parman, RT.7/RW.8, Grogol, Jakarta Barat</p>
+          <p>08123456789</p>
+          <p>PakDeHar@gmail.com</p>
+
+          <p style={{ marginTop: "10px" }}>
+            <strong>Senin - Jumat:</strong> 07:00 - 22:00 <br />
+            <strong>Sabtu - Minggu:</strong> Tutup
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Footer;

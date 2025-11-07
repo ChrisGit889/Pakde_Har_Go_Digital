@@ -36,7 +36,7 @@ export default function Menu() {
       </h2>
 
       <a
-        href="https://wa.me/6287812134731"
+        href="https://wa.me/"
         target="_blank"
         rel="noopener noreferrer"
       >
