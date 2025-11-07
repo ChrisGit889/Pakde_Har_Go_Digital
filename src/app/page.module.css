@@ -3,7 +3,7 @@
 }
 .container2 {
   width: 100%;
-  height: 740px;
+  height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/images/Nasi_Goreng_Ayam.jpg");
   background-size: cover;

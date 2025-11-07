@@ -11,6 +11,7 @@ function Footer() {
         padding: "25px 40px",
         marginTop: "60px",
         fontSize: "14px",
+        height:"290px"
       }}
     >
       <div
