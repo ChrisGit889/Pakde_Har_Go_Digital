@@ -1,0 +1,246 @@
+.form-container {
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-header {
+    margin-bottom: 0;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    background-color: #FFA500;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+  .back-button:hover {
+    opacity: 0.9;
+  }
+  
+  .form-page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+  }
+
+  .form-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+  }
+  
+  .form-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .form-label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+    color: #374151;
+  }
+  
+  .image-upload-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .image-uploader-box {
+    width: 250px; 
+    height: 160px;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6b7280;
+    cursor: pointer;
+    overflow: hidden; 
+    background-color: #f9fafb;
+  }
+  
+  .image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .upload-placeholder-icon {
+    font-size: 3rem;
+    color: #d1d5db;
+  }
+  
+  .button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .button-orange {
+    background-color: #FFA500;
+    color: white;
+    font-size: 0.9rem;
+  }
+  .button-orange:hover {
+    opacity: 0.9;
+  }
+  
+  .form-card textarea,
+  .form-card input[type='text'] {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #374151 !important; 
+    background-color: #ffffff !important; 
+    border: 1px solid #d1d5db;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical; 
+  }
+  .form-card textarea:focus,
+  .form-card input[type='text']:focus {
+    outline: none;
+    background-color: #ffffff; 
+    border-color: #FFA500; 
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2); 
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    padding: 16px 24px;
+    justify-content: flex-start;
+    border-top: 1px solid #f3f4f6;
+  }
+  
+  .button-green {
+    background-color: #22c55e;
+    color: white;
+  }
+  .button-red {
+    background-color: #ef4444;
+    color: white;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 16px;
+  }
+  
+  .modal-content {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .modal-content.success-modal {
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+    gap: 8px;
+  }
+  
+  .success-icon-wrapper {
+    background-color: #ECFDF5;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid #D1FAE5;
+  }
+  
+  .success-icon {
+    width: 32px;
+    height: 32px;
+    color: #10B981;
+  }
+  
+  .modal-content.success-modal h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 16px 0 0 0;
+  }
+  
+  .modal-content.success-modal p {
+    font-size: 1rem;
+    color: #6B7280;
+    margin: 0 0 16px 0;
+  }
+  
+  .modal-content .modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+    padding-top: 0;
+    border-top: none;
+  }
+  
+  .modal-button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-grow: 1;
+    max-width: 200px;
+  }
+  .modal-button.green {
+    background-color: #22c55e;
+    color: white;
+  }
+  .modal-button.red {
+    background-color: #ef4444;
+    color: white;
+  }
