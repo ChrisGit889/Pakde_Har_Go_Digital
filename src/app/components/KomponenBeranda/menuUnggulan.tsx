@@ -7,21 +7,21 @@ function MenuUnggulan() {
     {
       gambar: "/images/Nasi_Goreng_Ayam.jpg",
       nama: "Nasi Goreng Ayam",
-      label: ["Nasi Goreng", "Rekomandasi", "Paling Laris"],
+      label: ["Nasi Goreng", "Rekomandasi",],
       deskripsi:
         "Nasi Goreng Ayam khas Pakde dengan kecap manis, disajikan dengan ayam, dan kerupuk udang",
     },
     {
       gambar: "/images/Nasi_Goreng_Ayam.jpg",
       nama: "Nasi Goreng Ayam",
-      label: ["Nasi Goreng", "Rekomandasi", "Paling Laris"],
+      label: ["Nasi Goreng", "Rekomandasi",],
       deskripsi:
         "Nasi Goreng Ayam khas Pakde dengan kecap manis, disajikan dengan ayam, dan kerupuk udang",
     },
     {
       gambar: "/images/Nasi_Goreng_Ayam.jpg",
       nama: "Nasi Goreng Ayam",
-      label: ["Nasi Goreng", "Rekomandasi", "Paling Laris"],
+      label: ["Nasi Goreng", "Rekomandasi",],
       deskripsi:
         "Nasi Goreng Ayam khas Pakde dengan kecap manis, disajikan dengan ayam, dan kerupuk udang",
     },
