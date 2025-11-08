@@ -1,5 +1,9 @@
 import styles from "../page.module.css";
 import NavbarComponents from "../components/navbarWebUser/navbar";
+import KategoriMenu from "../components/KomponenMenu/ButtonKategori";
+import { Card } from "react-bootstrap";
+import CardMenu from "../components/KomponenMenu/CardMenu";
+import Footer from "../components/footerWebUser/footer";
 
 export default function Menu() {
   return (
@@ -55,6 +59,10 @@ export default function Menu() {
           }}
         />
       </a>
+
+      <KategoriMenu />
+      <CardMenu/>  
+      <Footer />
     </div>
   );
 }
