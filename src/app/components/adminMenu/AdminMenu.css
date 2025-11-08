@@ -16,15 +16,29 @@
   color: #333;
 }
 
+.topbar-right-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .admin-menu-topbar .search-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #f3f4f6;
+  background-color: #ffffff;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+.admin-menu-topbar .search-wrapper:focus-within {
+  border-color: #FFA500;
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+}
+
 .admin-menu-topbar .search-wrapper input {
   border: none;
   background: none;
@@ -50,47 +64,64 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 .admin-menu-topbar .admin-button:hover {
-  transform: scale(1.03);
+  opacity: 0.8;
 }
 
 .admin-button.primary {
   background-color: #FFA500;
   color: white;
 }
+
 .admin-button.secondary {
   background-color: #ffffff;
   color: #374151;
   border: 1px solid #e5e7eb;
 }
+.admin-button.secondary:hover {
+   background-color: #f9fafb;
+}
+
+.topbar-icon {
+  width: 20px;
+  height: 20px;
+  color: #FFA500;
+}
 
 .menu-filter-tabs {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding-bottom: 4px;
+  background-color: #FFF3E8;
+  border-radius: 12px;
+  padding: 8px;
+  border-bottom: none;
 }
 
 .filter-tab {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
   background: none;
   cursor: pointer;
   font-weight: 600;
   color: #6B7280;
-  border-bottom: 3px solid transparent;
-  border-radius: 6px 6px 0 0;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  border-bottom: none;
 }
 
-.filter-tab:hover {
-  background-color: #f9fafb;
+.filter-tab:not(.active):hover {
+  background-color: #FFFFFF;
+  color: #374151;
 }
 
 .filter-tab.active {
-  color: #FFA500;
-  border-bottom-color: #FFA500;
+  color: #1f2937;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom-color: transparent;
 }
 
 .product-grid {
@@ -241,7 +272,7 @@
   box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   background-color: #ffffff !important;
-  color: #374151 !important; 
+  color: #374151 !important;
 }
 
 .modal-content .modal-input:focus {
