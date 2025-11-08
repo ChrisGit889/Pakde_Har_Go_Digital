@@ -1,8 +1,8 @@
 .container {
   background-color: #fff;
   width: 100%;
-  max-width: 100%; /* pastikan tidak dibatasi */
-  overflow-x: hidden; /* biar tidak ada scroll horizontal */
+  max-width: 100%; 
+  overflow-x: hidden; 
 }
 
 .container2 {
