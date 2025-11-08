@@ -110,6 +110,7 @@ function CardMenu() {
                     </Card.Text>
 
                     <Button
+                    onClick={() => router.push(`/menu/${item.foodId}`)}
                       style={{
                         width: "100%",
                         backgroundColor: "#FF7A00",
