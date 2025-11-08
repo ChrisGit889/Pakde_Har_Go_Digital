@@ -12,7 +12,7 @@ function NavbarComponents() {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10);
+    const handler = () => setScrolled(window.scrollY > 1);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
@@ -31,6 +31,9 @@ function NavbarComponents() {
       }`}
     >
       <Container fluid>
+        <Navbar.Brand href="/">
+          <img src="/images/LogoPakde.png" alt="Logo" width="160" />
+        </Navbar.Brand>
         <Navbar.Toggle
           className={scrolled || expanded ? "toggler-dark" : "toggler-light"}
         />
@@ -44,7 +47,6 @@ function NavbarComponents() {
             >
               Beranda
             </Nav.Link>
-
             <Nav.Link
               href="/menu"
               className={`nav-link-custom ${

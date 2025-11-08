@@ -27,8 +27,9 @@ function Ulasan() {
         gap: "24px",
         justifyContent: "center",
         flexWrap: "wrap",
-        padding: "60px 80px",
-        marginBottom: "150px",
+        width: "100%",
+        padding: "60px 20px",
+        boxSizing: "border-box",
       }}
     >
       {ulasan.map((item, index) => (
@@ -42,8 +43,22 @@ function Ulasan() {
             padding: "20px",
           }}
         >
-          <h4 style={{ marginBottom: "4px" , color: "#000000ff",fontWeight: "600"}}>{item.nama}</h4>
-          <p style={{ fontSize: "14px", marginBottom: "8px", color: "#000000ff" }}>
+          <h4
+            style={{
+              marginBottom: "4px",
+              color: "#000000ff",
+              fontWeight: "600",
+            }}
+          >
+            {item.nama}
+          </h4>
+          <p
+            style={{
+              fontSize: "14px",
+              marginBottom: "8px",
+              color: "#000000ff",
+            }}
+          >
             {item.status}
           </p>
 
@@ -51,7 +66,11 @@ function Ulasan() {
             ★ ★ ★ ★ ★
           </div>
 
-          <p style={{ fontSize: "14px",color: "#000000ff", lineHeight: "1.6" }}>{item.teks}</p>
+          <p
+            style={{ fontSize: "14px", color: "#000000ff", lineHeight: "1.6" }}
+          >
+            {item.teks}
+          </p>
         </div>
       ))}
     </div>

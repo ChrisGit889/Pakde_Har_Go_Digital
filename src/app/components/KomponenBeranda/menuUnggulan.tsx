@@ -29,62 +29,71 @@ function MenuUnggulan() {
 
   return (
     <div>
-      <Row
-        className="justify-content-center gap-4 m-0"
-        style={{
-          marginBottom: "40px",
-        }}
-      >
-        {menu.map((item, index) => (
-          <Col key={index} md={3}>
-            <Card style={{ borderRadius: "12px", overflow: "hidden" }}>
-              <Card.Img
-                src={item.gambar}
-                style={{ height: "180px", objectFit: "cover" }}
-              />
-              <Card.Body>
-                <Card.Title className="mb-2">{item.nama}</Card.Title>
+      <div style={{ width: "100%", padding: "0 40px" }}>
+        <Row
+          className="justify-content-center gap-4 m-0"
+          style={{
+            marginBottom: "40px",
+            width: "100%",
+            margin: 0,
+          }}
+        >
+          {menu.map((item, index) => (
+            <Col key={index} md={3}>
+              <Card style={{ borderRadius: "12px", overflow: "hidden" }}>
+                <Card.Img
+                  src={item.gambar}
+                  style={{ height: "180px", objectFit: "cover" }}
+                />
+                <Card.Body>
+                  <Card.Title className="mb-2">{item.nama}</Card.Title>
 
-                <div className="d-flex justify-content gap-2 mb-3">
-                  {item.label.map((label, i) => (
-                    <Badge
-                      key={i}
-                      bg=""
-                      style={{
-                        backgroundColor: "#FFF2CC",
-                        color: "#FF941A",
-                        padding: "6px 10px",
-                        borderRadius: "6px",
-                      }}
-                    >
-                      {label}
-                    </Badge>
-                  ))}
-                </div>
+                  <div
+                    className="d-flex flex-wrap gap-2 mb-3"
+                    style={{
+                      flexDirection: "row",
+                    }}
+                  >
+                    {item.label.map((label, i) => (
+                      <Badge
+                        key={i}
+                        bg=""
+                        style={{
+                          backgroundColor: "#FFF2CC",
+                          color: "#FF941A",
+                          padding: "6px 10px",
+                          borderRadius: "6px",
+                        }}
+                      >
+                        {label}
+                      </Badge>
+                    ))}
+                  </div>
 
-                <Card.Text style={{ fontSize: "14px" }}>
-                  {item.deskripsi}
-                </Card.Text>
+                  <Card.Text style={{ fontSize: "14px" }}>
+                    {item.deskripsi}
+                  </Card.Text>
 
-                <Button
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#FF7A00",
-                    border: "none",
-                    color: "white",
-                    padding: "10px",
-                    fontWeight: "bold",
-                    display: "block",
-                    textAlign: "center",
-                  }}
-                >
-                  Detail Makanan
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                  <Button
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#FF7A00",
+                      border: "none",
+                      color: "white",
+                      padding: "10px",
+                      fontWeight: "bold",
+                      display: "block",
+                      textAlign: "center",
+                    }}
+                  >
+                    Detail Makanan
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
       <div>
         <a href="/menu">
           <Button
