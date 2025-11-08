@@ -16,15 +16,29 @@
   color: #333;
 }
 
+.topbar-right-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .admin-menu-topbar .search-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #f3f4f6;
+  background-color: #ffffff;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+.admin-menu-topbar .search-wrapper:focus-within {
+  border-color: #FFA500;
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+}
+
 .admin-menu-topbar .search-wrapper input {
   border: none;
   background: none;
@@ -50,47 +64,64 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 .admin-menu-topbar .admin-button:hover {
-  transform: scale(1.03);
+  opacity: 0.8;
 }
 
 .admin-button.primary {
   background-color: #FFA500;
   color: white;
 }
+
 .admin-button.secondary {
   background-color: #ffffff;
   color: #374151;
   border: 1px solid #e5e7eb;
 }
+.admin-button.secondary:hover {
+   background-color: #f9fafb;
+}
+
+.topbar-icon {
+  width: 20px;
+  height: 20px;
+  color: #FFA500;
+}
 
 .menu-filter-tabs {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding-bottom: 4px;
+  background-color: #FFF3E8;
+  border-radius: 12px;
+  padding: 8px;
+  border-bottom: none;
 }
 
 .filter-tab {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
   background: none;
   cursor: pointer;
   font-weight: 600;
   color: #6B7280;
-  border-bottom: 3px solid transparent;
-  border-radius: 6px 6px 0 0;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  border-bottom: none;
 }
 
-.filter-tab:hover {
-  background-color: #f9fafb;
+.filter-tab:not(.active):hover {
+  background-color: #FFFFFF;
+  color: #374151;
 }
 
 .filter-tab.active {
-  color: #FFA500;
-  border-bottom-color: #FFA500;
+  color: #1f2937;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom-color: transparent;
 }
 
 .product-grid {
@@ -130,8 +161,8 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
-  opacity: 1; 
-  filter: none; 
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 .product-card-content {
@@ -140,7 +171,7 @@
   flex-direction: column;
   gap: 8px;
   flex-grow: 1;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .product-card-title {
@@ -159,7 +190,7 @@
 .product-card-actions {
   display: flex;
   border-top: 1px solid #F3F4F6;
-  margin-top: 12px; 
+  margin-top: 12px;
 }
 
 .product-card-button {
@@ -170,7 +201,7 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   gap: 6px;
   padding: 16px 0;
   transition: background-color 0.2s ease;
@@ -184,9 +215,8 @@
 
 .product-card-button.edit {
   color: #374151;
-  border-right: 1px solid #e5e7eb; 
+  border-right: 1px solid #e5e7eb;
 }
-
 .product-card-button.edit:hover {
   background-color: #f0fdf4;
   color: #15803d;
@@ -195,8 +225,83 @@
 .product-card-button.delete {
   color: #EF4444;
 }
-
 .product-card-button.delete:hover {
   background-color: #fef2f2;
   color: #dc2626;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.modal-content .modal-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #ffffff !important;
+  color: #374151 !important;
+}
+
+.modal-content .modal-input:focus {
+  outline: none;
+  border-color: #FFA500;
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.modal-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-button.green {
+  background-color: #22c55e;
+  color: white;
+}
+.modal-button.red {
+  background-color: #ef4444;
+  color: white;
 }

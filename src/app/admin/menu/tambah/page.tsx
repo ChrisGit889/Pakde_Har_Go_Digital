@@ -78,7 +78,11 @@ export default function TambahMenuPage() {
                   <img src={previewUrl} alt="Preview" className="image-preview" />
                 ) : (
                   <>
-                    <span>➕</span>
+                    <img
+                      src="/images/addImage.png"
+                      alt="Upload"
+                      className="upload-box-icon"
+                    />
                     <strong>Tambahkan Gambar</strong>
                   </>
                 )}
