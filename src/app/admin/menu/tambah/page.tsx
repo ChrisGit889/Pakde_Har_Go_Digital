@@ -1,9 +1,58 @@
 'use client';
+import { useState } from 'react';
 import DashboardLayout from '../../../components/DashboardLayout';
 import Link from 'next/link';
-import './TambahMenu.css'; 
+import { useRouter } from 'next/navigation';
+import './TambahMenu.css';
 
 export default function TambahMenuPage() {
+  const router = useRouter();
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [namaMenu, setNamaMenu] = useState('');
+  const [kategoriMenu, setKategoriMenu] = useState('');
+  const [labelMenu, setLabelMenu] = useState('');
+  const [deskripsiMenu, setDeskripsiMenu] = useState('');
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+  const triggerFileInput = () => {
+    document.getElementById('imageUpload')?.click();
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!selectedFile) {
+      alert('Harap tambahkan gambar menu.');
+      return;
+    }
+    if (!namaMenu) {
+      alert('Harap isi Nama Menu.');
+      return;
+    }
+    if (!kategoriMenu) {
+      alert('Harap pilih Kategori Menu.');
+      return;
+    }
+    if (!deskripsiMenu) {
+      alert('Harap isi Deskripsi Menu.');
+      return;
+    }
+    console.log('DATA LENGKAP, SIAP DIKIRIM:', {
+      file: selectedFile.name,
+      nama: namaMenu,
+      kategori: kategoriMenu,
+      label: labelMenu,
+      deskripsi: deskripsiMenu,
+    });
+    alert('Menu berhasil disimpan!');
+    router.push('/admin/menu');
+  };
+
   return (
     <DashboardLayout>
       <div className="form-container">
@@ -13,16 +62,32 @@ export default function TambahMenuPage() {
           </Link>
         </div>
         <h1 className="form-page-title">Tambah Menu</h1>
-
-        <form className="menu-form">
+        <form className="menu-form" onSubmit={handleSubmit}>
           <div className="form-section">
             <label className="form-label">Gambar Menu</label>
             <div className="image-upload-section">
-              <div className="image-uploader-box">
-                <span>➕</span>
-                <strong>Tambahkan Gambar</strong>
-              </div>
-              <button type="button" className="button button-orange">
+              <input
+                type="file"
+                id="imageUpload"
+                style={{ display: 'none' }}
+                accept="image/png, image/jpeg"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="imageUpload" className="image-uploader-box">
+                {previewUrl ? (
+                  <img src={previewUrl} alt="Preview" className="image-preview" />
+                ) : (
+                  <>
+                    <span>➕</span>
+                    <strong>Tambahkan Gambar</strong>
+                  </>
+                )}
+              </label>
+              <button
+                type="button"
+                className="button button-orange"
+                onClick={triggerFileInput}
+              >
                 Ubah Gambar
               </button>
             </div>
@@ -35,6 +100,8 @@ export default function TambahMenuPage() {
               type="text"
               id="namaMenu"
               placeholder="Isi Nama Menu disini..."
+              value={namaMenu}
+              onChange={(e) => setNamaMenu(e.target.value)}
             />
           </div>
 
@@ -43,22 +110,30 @@ export default function TambahMenuPage() {
               <label htmlFor="kategoriMenu" className="form-label">
                 Pilih kategori Menu
               </label>
-              <select id="kategoriMenu">
+              <select
+                id="kategoriMenu"
+                value={kategoriMenu}
+                onChange={(e) => setKategoriMenu(e.target.value)}
+              >
                 <option value="">Isi Kategori Menu disini...</option>
-                <option value="nasi">Nasi Goreng</option>
-                <option value="mie">Mie Goreng</option>
-                <option value="minuman">Minuman</option>
+                <option value="Nasi Goreng">Nasi Goreng</option>
+                <option value="Mie Goreng">Mie Goreng</option>
+                <option value="Minuman">Minuman</option>
               </select>
             </div>
             <div className="form-section-half">
               <label htmlFor="labelMenu" className="form-label">
                 Label Menu
               </label>
-              <select id="labelMenu">
+              <select
+                id="labelMenu"
+                value={labelMenu}
+                onChange={(e) => setLabelMenu(e.target.value)}
+              >
                 <option value="">Pilih label Menu disini...</option>
-                <option value="rekomendasi">Rekomendasi</option>
-                <option value="favorit">Favorit</option>
-                <option value="baru">Baru</option>
+                <option value="Rekomendasi">Rekomendasi</option>
+                <option value="Favorit">Favorit</option>
+                <option value="Baru">Baru</option>
               </select>
             </div>
           </div>
@@ -71,6 +146,8 @@ export default function TambahMenuPage() {
               id="deskripsiMenu"
               placeholder="Isi Deskripsi disini..."
               rows={8}
+              value={deskripsiMenu}
+              onChange={(e) => setDeskripsiMenu(e.target.value)}
             ></textarea>
           </div>
 
