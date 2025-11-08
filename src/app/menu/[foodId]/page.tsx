@@ -70,7 +70,11 @@ export default function FoodDetail() {
         <div
           className="food-detail-header"
           style={{
-            padding: "36vh 15vh",
+            height: "80vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "0 10vh",
           }}
         >
           <h1>{food.name}</h1>
@@ -100,7 +104,7 @@ export default function FoodDetail() {
           width: "80%",
           display: "flex",
           justifyContent: "center",
-          padding: "15vh 15vh",
+          padding: "5vh 5vh",
           backgroundColor: "#fff",
           boxShadow: "0 8px 30px rgba(0, 0, 0, 2)",
         }}
