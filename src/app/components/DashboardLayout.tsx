@@ -1,7 +1,6 @@
-// file: src/app/components/DashboardLayout.tsx
 'use client';
 import React from 'react';
-import Sidebar from './sidebarWebAdmin/Sidebar';
+import Sidebar from './sidebarWebAdmin/Sidebar'; 
 import './DashboardLayout.css';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
