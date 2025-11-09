@@ -1,214 +1,138 @@
-.dashboard-page-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  @media (min-width: 1024px) {
-    .dashboard-page-grid {
-      flex-direction: row;
-    }
-  }
-  
-  .dashboard-main-column {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  .dashboard-side-column {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  .widget-container {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  }
-  
-  .widget-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .widget-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #333;
-  }
-  
-  .export-button {
-    background-color: #E5E7EB;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    color: #333;
-  }
-  
+.visitor-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1024px) {
   .stat-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  @media (max-width: 1024px) {
-    .stat-cards-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+}
+@media (max-width: 640px) {
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
   }
-  
-  @media (max-width: 640px) {
-    .stat-cards-grid {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-  
-  .stat-card {
-    padding: 20px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .stat-card-icon {
-    font-size: 1.875rem;
-    color: #333;
-  }
-  .stat-card-value {
-    font-size: 1.875rem;
-    font-weight: 700;
-    color: #374151;
-  }
-  .stat-card-label {
-    color: #4B5563;
-  }
-  
-  .stat-card-pink {
-    background-color: #FFE4E6;
-  }
-  .stat-card-green {
-    background-color: #E0F2E9;
-  }
-  .stat-card-purple {
-    background-color: #E9E7F9;
-  }
-  
-  .table-wrapper {
-    overflow-x: auto;
-  }
-  
-  .product-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .product-table th,
-  .product-table td {
-    padding: 12px 8px;
-    border-top: 1px solid #E5E7EB;
-    text-align: left;
-    vertical-align: middle;
-  }
-  
-  .product-table th {
-    color: #6B7280;
-    font-weight: 500;
-  }
-  
-  .product-table td {
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .product-table .text-right {
-    text-align: right;
-  }
-  
-  .product-table-img {
-    width: 64px;
-    height: 64px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  .options-button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    font-weight: 700;
-    color: #333;
-  }
-  
-  .review-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .review-card {
-    border: 1px solid #E5E7EB;
-    padding: 16px;
-    border-radius: 12px;
-  }
-  
-  .review-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  .review-name {
-    font-weight: 700;
-    color: #333;
-  }
-  .review-role {
-    font-size: 0.875rem;
-    color: #6B7280;
-  }
-  
-  .star-rating {
-    display: flex;
-  }
-  .star-filled {
-    color: #F59E0B;
-  }
-  .star-empty {
-    color: #D1D5DB;
-  }
-  
-  .review-text {
-    margin: 12px 0;
-    color: #374151;
-    font-size: 0.875rem;
-  }
-  
-  .review-actions {
-    display: flex;
-    gap: 16px;
-  }
-  .review-actions button {
-    background: none;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0;
-  }
-  .review-action-reply {
-    color: #10B981;
-  }
-  .review-action-delete {
-    color: #EF4444;
-  }
+}
+
+.stat-card.modern {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+  transition: all 0.2s ease;
+}
+.stat-card.modern:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px 0 rgb(0 0 0 / 0.07);
+}
+
+.stat-icon-wrapper {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.stat-icon-wrapper.pink { background-color: #FFE4E6; color: #D9006C; }
+.stat-icon-wrapper.blue { background-color: #E0EFFF; color: #0052CC; }
+.stat-icon-wrapper.green { background-color: #E0F2E9; color: #00875A; }
+.stat-icon-wrapper.purple { background-color: #E9E7F9; color: #5243AA; }
+
+.stat-content {
+  flex-grow: 1;
+}
+.stat-content label {
+  font-size: 0.9rem;
+  color: #6B7280;
+  font-weight: 500;
+}
+.stat-content .stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+  margin: 2px 0;
+}
+
+.stat-comparison {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.stat-comparison.positive {
+  color: #10B981;
+}
+.stat-comparison.negative {
+  color: #EF4444;
+}
+
+.widget-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 24px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.chart-title h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+.chart-title p {
+  font-size: 0.9rem;
+  color: #6B7280;
+  margin: 4px 0 0 0;
+}
+
+.chart-filters {
+  display: flex;
+  gap: 8px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+}
+.filter-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #6B7280;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.filter-button.active {
+  background-color: #ffffff;
+  color: #333;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+.chart-body {
+
+}
