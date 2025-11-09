@@ -264,7 +264,6 @@ export default function Kontak() {
               </p>
             </div>
 
-
             <h4 style={{ marginTop: "4px", marginBottom: "4px" }}>Jam Operasional :</h4>
 
             <p style={{ margin: "0", fontSize: "13px" }}>
