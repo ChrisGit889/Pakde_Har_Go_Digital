@@ -52,7 +52,14 @@ export default function FoodDetail() {
   }
 
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div
+      style={{
+        backgroundColor: "#fff",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <NavbarComponents />
 
       <div
