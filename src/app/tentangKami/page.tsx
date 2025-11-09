@@ -7,6 +7,7 @@ export default function Menu() {
     <div className={styles.container}>
       <NavbarComponents />
 
+      {/* HERO SECTION */}
       <div className={styles.container2}>
         <h1 className={styles.judulHalaman}>
           Cerita di Balik Nasi Goreng <span className={styles.kuning}>Pakde Har</span>
@@ -49,6 +50,7 @@ export default function Menu() {
         />
       </a>
 
+      {/* STORY SECTION */}
       <div
         style={{
           maxWidth: "900px",
@@ -106,8 +108,9 @@ export default function Menu() {
           tetap berkomitmen menyajikan rasa autentik dan suasana akrab yang telah menjadi ciri khas kami
           sejak awal.
         </p>
-            </div>
+      </div>
 
+      {/* BERITA SECTION */}
       <div
         style={{
           marginTop: "100px",
@@ -124,6 +127,7 @@ export default function Menu() {
         >
           Berita Harian Kami
         </h2>
+
         <p
           style={{
             fontSize: "20px",
@@ -144,12 +148,14 @@ export default function Menu() {
           padding: "0 20px",
         }}
       >
+        {/* Kartu 1 */}
         <div
           style={{
             width: "330px",
             borderRadius: "12px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             overflow: "hidden",
+            backgroundColor: "white",
           }}
         >
           <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
@@ -175,12 +181,14 @@ export default function Menu() {
           </div>
         </div>
 
+        {/* Kartu 2 */}
         <div
           style={{
             width: "330px",
             borderRadius: "12px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             overflow: "hidden",
+            backgroundColor: "white",
           }}
         >
           <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
@@ -206,12 +214,14 @@ export default function Menu() {
           </div>
         </div>
 
+        {/* Kartu 3 */}
         <div
           style={{
             width: "330px",
             borderRadius: "12px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             overflow: "hidden",
+            backgroundColor: "white",
           }}
         >
           <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
@@ -252,6 +262,98 @@ export default function Menu() {
         >
           Lihat Berita Lainnya
         </button>
+      </div>
+
+      {/* KENALI TIM KAMI */}
+      <div
+        style={{
+          marginTop: "120px",
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "36px",
+            fontWeight: 700,
+            marginBottom: "10px",
+            color: "#000",
+          }}
+        >
+          Kenali Tim Kami
+        </h2>
+
+        <p
+          style={{
+            fontSize: "20px",
+            color: "#000",
+            marginBottom: "50px",
+          }}
+        >
+          Orang dibalik Nasi Goreng Pakde Har
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "0 20px",
+          marginBottom: "80px",
+        }}
+      >
+        <div
+          style={{
+            width: "400px",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
+            overflow: "hidden",
+            backgroundColor: "white",
+          }}
+        >
+          <img
+            src="/images/Wajah_Pakde.jpg"
+            style={{
+              width: "100%",
+              height: "300px",
+              objectFit: "cover",
+            }}
+          />
+
+          <div style={{ padding: "20px", textAlign: "left" }}>
+            <h3
+              style={{
+                fontSize: "22px",
+                fontWeight: 700,
+                color: "#000",
+                marginBottom: "6px",
+              }}
+            >
+              Pakde Har
+            </h3>
+
+            <p
+              style={{
+                fontSize: "16px",
+                color: "#ff8c00",
+                fontWeight: 600,
+                marginBottom: "12px",
+              }}
+            >
+              Pendiri & Koki
+            </p>
+
+            <p
+              style={{
+                fontSize: "16px",
+                color: "#000",
+                lineHeight: 1.6,
+              }}
+            >
+              Dengan pengalaman berjualan sejak tahun 2017, Pakde Har menghadirkan cita rasa nasi
+              goreng dengan rasa yang khas dan harga yang terjangkau.
+            </p>
+          </div>
+        </div>
       </div>
 
     </div>
