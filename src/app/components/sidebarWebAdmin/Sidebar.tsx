@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation'; 
 import './Sidebar.css';
 
 const navLinks = [
@@ -13,6 +13,10 @@ const navLinks = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const handleLogout = () => {
+    router.push('/');
+  };
 
   return (
     <aside className="sidebar">
@@ -42,7 +46,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        <button className="logout-button">
+        <button className="logout-button" onClick={handleLogout}>
           <span>Keluar</span>
         </button>
       </div>
