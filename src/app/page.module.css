@@ -1,13 +1,17 @@
 .container {
   background-color: #fff;
   width: 100%;
-  max-width: 100%; 
-  overflow-x: hidden; 
+  max-width: 100%;
+  overflow-x: hidden;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container2 {
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/images/Nasi_Goreng_Ayam.jpg");
   background-size: cover;
@@ -16,7 +20,7 @@
 
 .containerKontak {
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("/images/backgroundKontak.png");
   background-size: cover;
@@ -26,7 +30,7 @@
 .judulHalaman {
   color: white;
   text-align: center;
-  padding-top: 20vh; 
+  padding-top: 20vh;
   font-size: clamp(32px, 6vw, 70px);
   font-weight: bold;
   font-family: inter;
@@ -48,7 +52,7 @@
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 800px; 
+  max-width: 800px;
   font-family: inter;
   color: white;
 }
@@ -69,11 +73,11 @@
   cursor: pointer;
   font-family: inter;
   position: relative;
-  top:10vh;
+  top: 10vh;
 }
 
-.kuning{
-  color:#fa8f15
+.kuning {
+  color: #fa8f15;
 }
 
 .panahBawah {

@@ -1,18 +1,22 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation'; 
 import './Sidebar.css';
 
 const navLinks = [
-  { name: 'Pengunjung', href: '/admin/dashboard', icon: '...' },
-  { name: 'Menu', href: '/admin/menu', icon: '...' },
-  { name: 'Informasi', href: '/admin/informasi', icon: '...' },
-  { name: 'Berita', href: '/admin/berita', icon: '...' },
-  { name: 'Ulasan', href: '/admin/ulasan', icon: '...' },
+  { name: 'Pengunjung', href: '/admin/dashboard', icon: '/images/profilePutih.png' },
+  { name: 'Menu', href: '/admin/menu', icon: '/images/cutleryPutih.png' },
+  { name: 'Informasi', href: '/admin/informasi', icon: '/images/informationPutih.png' },
+  { name: 'Berita', href: '/admin/berita', icon: '/images/beritaPutih.png' },
+  { name: 'Ulasan', href: '/admin/ulasan', icon: '/images/reviewPutih.png' },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const handleLogout = () => {
+    router.push('/');
+  };
 
   return (
     <aside className="sidebar">
@@ -30,6 +34,11 @@ export default function Sidebar() {
               href={link.href}
               className={`nav-item ${isActive ? 'active' : ''}`}
             >
+              <img 
+                src={link.icon} 
+                alt={link.name} 
+                className="nav-icon"
+              />
               <span>{link.name}</span>
             </Link>
           );
@@ -37,7 +46,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        <button className="logout-button">
+        <button className="logout-button" onClick={handleLogout}>
           <span>Keluar</span>
         </button>
       </div>

@@ -71,3 +71,13 @@
 .logout-button:hover {
   background-color: #DC2626;
 }
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.nav-item.active .nav-icon {
+  filter: invert(60%) sepia(90%) saturate(800%) hue-rotate(350deg) brightness(100%) contrast(100%);
+}

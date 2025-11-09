@@ -1,29 +1,72 @@
 "use client";
 import React from "react";
 import { Card, Button, Row, Col, Badge } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+
+const getImagePath = (imageid: string) => {
+  switch (imageid) {
+    case "image_1":
+      return "/images/Nasi_Goreng_Ayam.jpg";
+    case "image_2":
+      return "/images/miegorengayam.png";
+    case "image_3":
+      return "/images/kwetiaugorengayam.png";
+    default:
+      return "/images/local_dining.png";
+  }
+};
+
+const IDCategory = (categoryId: string) => {
+  switch (categoryId) {
+    case "Category_1":
+      return "Nasi Goreng";
+    case "Category_2":
+      return "Mie Goreng";
+    case "Category_3":
+      return "Kwetiau Goreng";
+    case "Category_4":
+      return "Rekomendasi";
+    default:
+      return "Lainnya";
+  }
+};
 
 function MenuUnggulan() {
+  const router = useRouter();
+
   const menu = [
     {
-      gambar: "/images/Nasi_Goreng_Ayam.jpg",
-      nama: "Nasi Goreng Ayam",
-      label: ["Nasi Goreng", "Rekomandasi", "Paling Laris"],
-      deskripsi:
+      foodId: "food_1",
+      name: "Nasi Goreng Ayam",
+      description:
         "Nasi Goreng Ayam khas Pakde dengan kecap manis, disajikan dengan ayam, dan kerupuk udang",
+      flavour: "pedas",
+      price: 22000,
+      visitors: 0,
+      categoryid: ["Category_4", "Category_1"],
+      imageid: "image_1",
     },
     {
-      gambar: "/images/Nasi_Goreng_Ayam.jpg",
-      nama: "Nasi Goreng Ayam",
-      label: ["Nasi Goreng", "Rekomandasi", "Paling Laris"],
-      deskripsi:
+      foodId: "food_2",
+      name: "Nasi Goreng Ayam",
+      description:
         "Nasi Goreng Ayam khas Pakde dengan kecap manis, disajikan dengan ayam, dan kerupuk udang",
+      flavour: "pedas",
+      price: 22000,
+      visitors: 0,
+      categoryid: ["Category_4", "Category_1"],
+      imageid: "image_1",
     },
     {
-      gambar: "/images/Nasi_Goreng_Ayam.jpg",
-      nama: "Nasi Goreng Ayam",
-      label: ["Nasi Goreng", "Rekomandasi", "Paling Laris"],
-      deskripsi:
+      foodId: "food_3",
+      name: "Nasi Goreng Ayam",
+      description:
         "Nasi Goreng Ayam khas Pakde dengan kecap manis, disajikan dengan ayam, dan kerupuk udang",
+      flavour: "pedas",
+      price: 22000,
+      visitors: 0,
+      categoryid: ["Category_4", "Category_1"],
+      imageid: "image_1",
     },
   ];
 
@@ -32,29 +75,21 @@ function MenuUnggulan() {
       <div style={{ width: "100%", padding: "0 40px" }}>
         <Row
           className="justify-content-center gap-4 m-0"
-          style={{
-            marginBottom: "40px",
-            width: "100%",
-            margin: 0,
-          }}
+          style={{ marginBottom: "40px" }}
         >
           {menu.map((item, index) => (
             <Col key={index} md={3}>
               <Card style={{ borderRadius: "12px", overflow: "hidden" }}>
                 <Card.Img
-                  src={item.gambar}
+                  src={getImagePath(item.imageid)}
                   style={{ height: "180px", objectFit: "cover" }}
                 />
-                <Card.Body>
-                  <Card.Title className="mb-2">{item.nama}</Card.Title>
 
-                  <div
-                    className="d-flex flex-wrap gap-2 mb-3"
-                    style={{
-                      flexDirection: "row",
-                    }}
-                  >
-                    {item.label.map((label, i) => (
+                <Card.Body>
+                  <Card.Title className="mb-2 fw-bold">{item.name}</Card.Title>
+
+                  <div className="d-flex flex-wrap gap-2 mb-3">
+                    {item.categoryid.map((cat, i) => (
                       <Badge
                         key={i}
                         bg=""
@@ -65,16 +100,17 @@ function MenuUnggulan() {
                           borderRadius: "6px",
                         }}
                       >
-                        {label}
+                        {IDCategory(cat)}
                       </Badge>
                     ))}
                   </div>
 
                   <Card.Text style={{ fontSize: "14px" }}>
-                    {item.deskripsi}
+                    {item.description}
                   </Card.Text>
 
                   <Button
+                    onClick={() => router.push(`/menu/${item.foodId}`)}
                     style={{
                       width: "100%",
                       backgroundColor: "#FF7A00",
@@ -94,25 +130,23 @@ function MenuUnggulan() {
           ))}
         </Row>
       </div>
-      <div>
-        <a href="/menu">
-          <Button
-            type="button"
-            className="btn btn-outline-warning mx-auto d-block"
-            style={{
-              width: "200px",
-              backgroundColor: "#ffffffff",
-              color: "#FF941A",
-              padding: "10px",
-              fontWeight: "bold",
-              textAlign: "center",
-              marginTop: "50px",
-            }}
-          >
-            Lihat Menu Lainnya
-          </Button>
-        </a>
-      </div>
+      <a href="/menu">
+        <Button
+          type="button"
+          className="btn btn-outline-warning mx-auto d-block"
+          style={{
+            width: "200px",
+            backgroundColor: "#ffffffff",
+            color: "#FF941A",
+            padding: "10px",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginTop: "50px",
+          }}
+        >
+          Lihat Menu Lainnya
+        </Button>
+      </a>
     </div>
   );
 }
