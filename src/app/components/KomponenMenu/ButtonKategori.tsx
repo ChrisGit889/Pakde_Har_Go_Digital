@@ -82,7 +82,7 @@ function KategoriMenu() {
         variant="outline-warning"
         onClick={() => KategoriAktif("Category_4", "Rekomendasi")}
         style={{
-          width: "clamp(120px, 15vw, 180px)",
+          width: "clamp(150px, 17vw, 200px)",
           borderColor: "#FF941A",
           padding: "10px",
           fontWeight: "bold",
