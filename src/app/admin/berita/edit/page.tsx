@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation'; 
 import DashboardLayout from '@/app/components/DashboardLayout'; 
 import { dummyBerita } from '@/app/components/berita/BeritaList'; 
-import '../tambah/TambahBerita.css'; 
+import SuccessModal from '@/app/components/berita/Successmodal';
+import '../tambah/TambahBerita.css';
 
 export default function EditBeritaPage() {
   const router = useRouter(); 
@@ -39,8 +40,7 @@ export default function EditBeritaPage() {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    
+    event.preventDefault();    
     if (!judul || !isiBerita) {
       alert('Judul dan Isi Berita tidak boleh kosong.');
       return;
@@ -115,7 +115,11 @@ export default function EditBeritaPage() {
           </div>
         </form>
       </div>
-      
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={handleModalClose}
+        message="Perubahan Anda berhasil disimpan." 
+      />
     </DashboardLayout>
   );
 }
