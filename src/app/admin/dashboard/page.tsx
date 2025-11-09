@@ -8,7 +8,10 @@ export default function DashboardPengunjungPage() {
   return (
     <DashboardLayout>
       <div className="visitor-dashboard-container">
-        <h1 className="page-title">Dashboard Pengunjung</h1>
+        <div className="admin-page-header">
+          <h1 className="page-title">Dashboard Pengunjung</h1>
+        </div>
+
         <StatCards />
         <SalesChart />
       </div>

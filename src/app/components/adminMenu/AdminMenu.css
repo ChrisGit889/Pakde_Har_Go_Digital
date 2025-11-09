@@ -7,7 +7,8 @@
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid #f3f4f6;
-  margin-bottom: 16px;
+  min-height: 80px;
+  box-sizing: border-box;
 }
 
 .admin-menu-title {

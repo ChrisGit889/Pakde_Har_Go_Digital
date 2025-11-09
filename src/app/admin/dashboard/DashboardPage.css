@@ -4,10 +4,31 @@
   gap: 24px;
 }
 
+.admin-page-header {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
 .page-title {
   font-size: 1.75rem;
   font-weight: 700;
   color: #333;
+  margin: 0;
+}
+
+.admin-page-header {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  min-height: 80px; 
+  box-sizing: border-box; 
 }
 
 .stat-cards-grid {
@@ -15,6 +36,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
+
 @media (max-width: 1024px) {
   .stat-cards-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -131,8 +153,4 @@
   background-color: #ffffff;
   color: #333;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-}
-
-.chart-body {
-
 }
