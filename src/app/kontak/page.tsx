@@ -9,13 +9,13 @@ export default function Kontak() {
       <NavbarComponents />
 
       <div className={styles.containerKontak}>
-        <h1 className={styles.judulHalaman} style={{ color: "black" }}>
+        <h1 className={styles.judulHalaman} style={{ color: "white"}}>
           Hubungi Kami
         </h1>
 
         <h3
           className={styles.deskripsisingkatberanda}
-          style={{ color: "black" }}
+          style={{ color: "white" }}
         >
           Punya pertanyaan atau saran ? Kirim pesan ke kami dan kami siap
           melayani dengan sepenuh hati
@@ -263,6 +263,7 @@ export default function Kontak() {
                 Kota Jakarta Barat, DKI Jakarta 11440
               </p>
             </div>
+
 
             <h4 style={{ marginTop: "4px", marginBottom: "4px" }}>Jam Operasional :</h4>
 
