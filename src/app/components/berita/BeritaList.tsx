@@ -15,7 +15,7 @@ export const dummyBerita = [
     id: 2,
     title: 'Pindah Lokasi',
     excerpt: 'Pada 22 Oktober 2025 Nasi Goreng Pakde Har pindah...',
-    imageUrl: '/images/gerobak.jpg',
+    imageUrl: '/images/Gerobak_Pakde.jpg',
     isiLengkap: 'Isi berita lengkap untuk Pindah Lokasi...'
   },
 ];
@@ -62,6 +62,7 @@ export default function BeritaList() {
       <SuccessModal 
         isOpen={isSuccessModalOpen} 
         onClose={() => setIsSuccessModalOpen(false)} 
+        message="Berita Anda berhasil dihapus."
       />
     </>
   );

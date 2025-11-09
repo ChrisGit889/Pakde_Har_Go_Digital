@@ -4,13 +4,7 @@ import ProductCard from './ProductCard';
 import './AdminMenu.css';
 
 const products = [
-  {
-    id: 1,
-    name: 'Nasi Goreng Ayam',
-    img: '/images/Nasi_Goreng_Ayam.jpg',
-    rasa: 'Pedas / Sedang',
-    desc: 'Nasi Goreng Ayam dibuat dari nasi pilihan yang digoreng dengan bumbu rempah khas, potongan daging ayam segar'
-  },
+  { id: 1, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Nasi Goreng Ayam dibuat dari nasi pilihan yang digoreng dengan bumbu rempah khas, potongan daging ayam segar'},
   { id: 2, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
   { id: 3, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
   { id: 4, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
