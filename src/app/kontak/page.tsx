@@ -248,19 +248,30 @@ export default function Kontak() {
               color: "black",
             }}
           >
-            <h3 style={{ marginBottom: "5px" }}>Kunjungi kami</h3>
+            <h3 style={{ marginBottom: "8px" }}>Kunjungi kami</h3>
 
-            <p style={{ lineHeight: 1, fontSize: "12px" }}>
-              Sebelah Alfa X S Parman
-              <br />
-              Jl. Taman S. Parman, RT.7/RW.8, Grogol, Kec. Grogol Petamburan,
-              Kota Jakarta Barat, DKI Jakarta 11440
+            <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+              <img
+                src="/images/location_on.png"
+                style={{ width: "20px", marginTop: "3px", filter: "brightness(0) saturate(100%)" }}
+              />
+
+              <p style={{ lineHeight: 1.3, fontSize: "12px", marginBottom: "8px" }}>
+                Sebelah Alfa X S Parman
+                <br />
+                Jl. Taman S. Parman, RT.7/RW.8, Grogol, Kec. Grogol Petamburan,
+                Kota Jakarta Barat, DKI Jakarta 11440
+              </p>
+            </div>
+
+            <h4 style={{ marginTop: "4px", marginBottom: "4px" }}>Jam Operasional :</h4>
+
+            <p style={{ margin: "0", fontSize: "13px" }}>
+              Senin–Jumat : 07:00 – 22:00
             </p>
-
-            <h4 style={{ marginTop: "5px", marginBottom: "4px" }}>Jam Operasional :</h4>
-
-            <p style={{ margin: "0" }}>Senin–Jumat : 07:00 – 22:00</p>
-            <p style={{ margin: "0" }}>Sabtu–Minggu : Tutup</p>
+            <p style={{ margin: "0", fontSize: "13px" }}>
+              Sabtu–Minggu : Tutup
+            </p>
           </div>
         </div>
       </div>
