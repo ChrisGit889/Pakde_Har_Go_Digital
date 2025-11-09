@@ -1,6 +1,7 @@
 "use client";
 import styles from "../page.module.css";
 import NavbarComponents from "../components/navbarWebUser/navbar";
+import Footer from "../components/footerWebUser/footer";
 
 export default function Menu() {
   return (
@@ -45,6 +46,7 @@ export default function Menu() {
             border: "4px solid #ffffff",
             backgroundColor: "#ffffff",
             cursor: "pointer",
+            zIndex: 999,
           }}
         />
       </a>
@@ -69,69 +71,38 @@ export default function Menu() {
           Dari Awal yang Sederhana
         </h2>
 
-        <p
-          style={{
-            fontSize: "20px",
-            lineHeight: 1.7,
-            color: "#000",
-            marginBottom: "22px",
-          }}
-        >
-          Perjalanan Pakde Har dimulai pada tahun 2017, ketika Pakde Har mulai membuat nasi goreng khas
-          buatannya dari dapur rumah sederhana. Berkat cita rasa bumbu khas dan harga yang ramah di
-          kantong mahasiswa, aroma nasi goreng Pakde Har cepat menarik perhatian banyak pelanggan.
+        <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }}>
+          Perjalanan Pakde Har dimulai pada tahun 2017, ketika Pakde Har mulai membuat nasi goreng
+          khas buatannya dari dapur rumah sederhana. Berkat cita rasa bumbu khas dan harga yang ramah
+          di kantong mahasiswa, aroma nasi goreng Pakde Har cepat menarik perhatian banyak pelanggan.
         </p>
 
-        <p
-          style={{
-            fontSize: "20px",
-            lineHeight: 1.7,
-            color: "#000",
-            marginBottom: "22px",
-          }}
-        >
-          Setahun kemudian, Pakde mulai berjualan di samping Universitas Tarumanagara — tempat di mana
-          kehangatan, tawa, dan cerita para mahasiswa selalu menemani setiap wajan yang bergoyang.
+        <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }}>
+          Setahun kemudian, Pakde mulai berjualan di samping Universitas Tarumanagara — tempat di
+          mana kehangatan, tawa, dan cerita para mahasiswa selalu menemani setiap wajan yang
+          bergoyang.
         </p>
 
-        <p
-          style={{
-            fontSize: "20px",
-            lineHeight: 1.7,
-            color: "#000",
-            marginBottom: "22px",
-          }}
-        >
-          Kini, Warung Nasi Goreng Pakde Har terus berkembang. Dengan tempat yang telah direnovasi, kami
-          tetap berkomitmen menyajikan rasa autentik dan suasana akrab yang telah menjadi ciri khas kami
-          sejak awal.
+        <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }}>
+          Kini, Warung Nasi Goreng Pakde Har terus berkembang. Dengan tempat yang telah direnovasi,
+          kami tetap berkomitmen menyajikan rasa autentik dan suasana akrab yang telah menjadi ciri
+          khas kami sejak awal.
         </p>
       </div>
 
-      <div
-        style={{
-          marginTop: "100px",
-          textAlign: "center",
-        }}
-      >
+      <div style={{ marginTop: "100px", textAlign: "center" }}>
         <h2
           style={{
             fontSize: "36px",
             fontWeight: 700,
             marginBottom: "10px",
-            color: "black",
+            color: "#000",
           }}
         >
           Berita Harian Kami
         </h2>
 
-        <p
-          style={{
-            fontSize: "20px",
-            color: "black",
-            marginBottom: "50px",
-          }}
-        >
+        <p style={{ fontSize: "20px", color: "#000", marginBottom: "50px" }}>
           Ikuti berbagai berita dan perkembangan terbaru dari Pakde Har.
         </p>
       </div>
@@ -154,7 +125,10 @@ export default function Menu() {
             backgroundColor: "white",
           }}
         >
-          <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+          <img
+            src="/images/Gerobak_Pakde.jpg"
+            style={{ width: "100%", height: "200px", objectFit: "cover" }}
+          />
           <div style={{ padding: "20px", textAlign: "left" }}>
             <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Menu Baru Segera Hadir</h3>
             <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
@@ -186,7 +160,10 @@ export default function Menu() {
             backgroundColor: "white",
           }}
         >
-          <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+          <img
+            src="/images/Gerobak_Pakde.jpg"
+            style={{ width: "100%", height: "200px", objectFit: "cover" }}
+          />
           <div style={{ padding: "20px", textAlign: "left" }}>
             <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Pindah Lokasi</h3>
             <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
@@ -218,7 +195,10 @@ export default function Menu() {
             backgroundColor: "white",
           }}
         >
-          <img src="/images/Gerobak_Pakde.jpg" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+          <img
+            src="/images/Gerobak_Pakde.jpg"
+            style={{ width: "100%", height: "200px", objectFit: "cover" }}
+          />
           <div style={{ padding: "20px", textAlign: "left" }}>
             <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Nasi Vegetarian</h3>
             <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
@@ -258,30 +238,12 @@ export default function Menu() {
         </button>
       </div>
 
-      <div
-        style={{
-          marginTop: "120px",
-          textAlign: "center",
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "36px",
-            fontWeight: 700,
-            marginBottom: "10px",
-            color: "#000",
-          }}
-        >
+      <div style={{ marginTop: "120px", textAlign: "center" }}>
+        <h2 style={{ fontSize: "36px", fontWeight: 700, marginBottom: "10px", color: "#000" }}>
           Kenali Tim Kami
         </h2>
 
-        <p
-          style={{
-            fontSize: "20px",
-            color: "#000",
-            marginBottom: "50px",
-          }}
-        >
+        <p style={{ fontSize: "20px", color: "#000", marginBottom: "50px" }}>
           Orang dibalik Nasi Goreng Pakde Har
         </p>
       </div>
@@ -305,43 +267,19 @@ export default function Menu() {
         >
           <img
             src="/images/Wajah_Pakde.jpg"
-            style={{
-              width: "100%",
-              height: "300px",
-              objectFit: "cover",
-            }}
+            style={{ width: "100%", height: "300px", objectFit: "cover" }}
           />
 
           <div style={{ padding: "20px", textAlign: "left" }}>
-            <h3
-              style={{
-                fontSize: "22px",
-                fontWeight: 700,
-                color: "#000",
-                marginBottom: "6px",
-              }}
-            >
+            <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#000", marginBottom: "6px" }}>
               Pakde Har
             </h3>
 
-            <p
-              style={{
-                fontSize: "16px",
-                color: "#ff8c00",
-                fontWeight: 600,
-                marginBottom: "12px",
-              }}
-            >
+            <p style={{ fontSize: "16px", color: "#ff8c00", fontWeight: 600, marginBottom: "12px" }}>
               Pendiri & Koki
             </p>
 
-            <p
-              style={{
-                fontSize: "16px",
-                color: "#000",
-                lineHeight: 1.6,
-              }}
-            >
+            <p style={{ fontSize: "16px", color: "#000", lineHeight: 1.6 }}>
               Dengan pengalaman berjualan sejak tahun 2017, Pakde Har menghadirkan cita rasa nasi
               goreng dengan rasa yang khas dan harga yang terjangkau.
             </p>
@@ -349,6 +287,7 @@ export default function Menu() {
         </div>
       </div>
 
+      <Footer />
     </div>
   );
 }
