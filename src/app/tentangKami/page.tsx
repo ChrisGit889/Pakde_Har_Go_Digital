@@ -7,7 +7,6 @@ export default function Menu() {
     <div className={styles.container}>
       <NavbarComponents />
 
-      {/* HERO SECTION */}
       <div className={styles.container2}>
         <h1 className={styles.judulHalaman}>
           Cerita di Balik Nasi Goreng <span className={styles.kuning}>Pakde Har</span>
@@ -50,7 +49,6 @@ export default function Menu() {
         />
       </a>
 
-      {/* STORY SECTION */}
       <div
         style={{
           maxWidth: "900px",
@@ -110,7 +108,6 @@ export default function Menu() {
         </p>
       </div>
 
-      {/* BERITA SECTION */}
       <div
         style={{
           marginTop: "100px",
@@ -148,7 +145,6 @@ export default function Menu() {
           padding: "0 20px",
         }}
       >
-        {/* Kartu 1 */}
         <div
           style={{
             width: "330px",
@@ -181,7 +177,6 @@ export default function Menu() {
           </div>
         </div>
 
-        {/* Kartu 2 */}
         <div
           style={{
             width: "330px",
@@ -214,7 +209,6 @@ export default function Menu() {
           </div>
         </div>
 
-        {/* Kartu 3 */}
         <div
           style={{
             width: "330px",
@@ -264,7 +258,6 @@ export default function Menu() {
         </button>
       </div>
 
-      {/* KENALI TIM KAMI */}
       <div
         style={{
           marginTop: "120px",
