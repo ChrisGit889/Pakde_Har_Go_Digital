@@ -5,9 +5,10 @@ import '../../admin/berita/BeritaPage.css';
 interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
+  message: string;
 }
 
-export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
+export default function SuccessModal({ isOpen, onClose, message }: SuccessModalProps) {
   if (!isOpen) {
     return null;
   }
@@ -25,7 +26,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
         </div>
         
         <h3>Berhasil!</h3>
-        <p>Berita Anda berhasil dihapus.</p>
+        <p>{message}</p>
         
         <div className="modal-actions">
           <button className="modal-button green" onClick={onClose}>
