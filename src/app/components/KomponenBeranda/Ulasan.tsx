@@ -20,18 +20,18 @@ function Ulasan() {
       teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
     },
     {
-      nama: "Boruto Uzumaki",
-      status: "Shinobi Muda",
+      nama: "Christio",
+      status: "investor",
       teks: `"Nasi Goreng di Pakde Har benar-benar lezat! Setiap suapan membawa kenikmatan yang tak terlupakan. Saya sangat merekomendasikan tempat ini kepada siapa saja yang mencari cita rasa autentik."`,
     },
     {
-      nama: "Sasuke Uchiha",
-      status: "Shinobi Pengembara",
+      nama: "NuelGB",
+      status: "trader",
       teks: `"Nasi Goreng di sini luar biasa! Rasanya yang kaya dan bumbu yang pas membuat saya ketagihan. Tempat yang sempurna untuk menikmati hidangan Indonesia yang autentik."`,
     },
     {
-      nama: "Naruto Uzumaki",
-      status: "Hokage Ke-7",
+      nama: "Annuel",
+      status: "Hfinancial advisor",
       teks: `"Nasi Goreng disini enak sekali, Seenak Ramen Ichiraku Favoritku!"`,
     },
   ];

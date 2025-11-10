@@ -174,6 +174,11 @@ export default function FoodDetail() {
             </div>
 
             <Button
+              onClick={() => {
+                const message = `Lihat menu ${food.name} yang saya lihat di link: http://localhost:3001/menu/${food.foodId}`;
+                const encodedMessage = encodeURIComponent(message);
+                window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
+              }}
               style={{
                 width: "100%",
                 marginTop: "30px",
