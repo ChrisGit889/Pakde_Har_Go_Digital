@@ -92,7 +92,7 @@ function MenuUnggulan() {
             className="d-flex align-items-stretch"
           >
             <Card
-              className="w-100 shadow-sm border-0"
+              className="w-100 shadow-lg p-3 mb-5 bg-white rounded"
               style={{
                 borderRadius: "12px",
                 overflow: "hidden",

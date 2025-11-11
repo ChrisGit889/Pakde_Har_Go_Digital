@@ -73,6 +73,15 @@ function NavbarComponents() {
             >
               Kontak
             </Nav.Link>
+
+            <Nav.Link
+              href="/blog"
+              className={`nav-link-custom ${
+                isActive("/blog") ? "active-link" : ""
+              } ${scrolled || expanded ? "text-dark" : "text-white"}`}
+            >
+              Blog
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
