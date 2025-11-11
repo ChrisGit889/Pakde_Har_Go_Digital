@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
 import { Eye, EyeSlash } from 'react-bootstrap-icons';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; 
 import './LoginPage.css';
 
 export default function LoginPage() {
@@ -23,17 +23,16 @@ export default function LoginPage() {
       newErrors.email = 'Harap isi bagian Email.';
       hasError = true;
     }
-    
     if (!password) {
-      newErrors.password = 'Harap isi bagian Kata sandi.';
+      newErrors.password = 'Harap isi bagian Password.';
       hasError = true;
     }
-
-    setErrors(newErrors);
+    setErrors(newErrors); 
 
     if (!hasError) {
+      localStorage.setItem('admin_token', '12345_ini_adalah_admin_sah');
       console.log('Login berhasil, mengarahkan ke dashboard...');
-      router.push('/admin/dashboard');
+      router.push('/admin/dashboard'); 
     }
   };
 
@@ -49,16 +48,15 @@ export default function LoginPage() {
         </Col>
 
         <Col md={6} lg={5} className="login-form-column">
-          <div className="login-form-wrapper">          
-            <h2 className="login-title mb-3">Selamat Datang kembali!</h2>
+          <div className="login-form-wrapper">
+            <h2 className="login-title mb-3">Welcome Back!</h2>
             <p className="login-subtitle mb-4">Masuk untuk melanjutkan ke dashboard.</p>
-
             <Form> 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control 
                   type="email" 
-                  placeholder="namaemail@.com"
+                  placeholder="name@example.com" 
                   className="modern-input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -68,13 +66,12 @@ export default function LoginPage() {
                   {errors.email}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group className="mb-4" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
-                    type={showPassword ? "text" : "Kata sandi"}
-                    placeholder="Kata sandi"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
                     className="modern-input"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -92,16 +89,14 @@ export default function LoginPage() {
                 </InputGroup>
               </Form.Group>
               <div className="mb-4"></div>
-
               <Button 
                 className="btn-login-modern w-100 mb-3" 
                 onClick={handleSignIn}
                 type="button" 
               >
-                Masuk
+                Sign In
               </Button>
             </Form>
-            
           </div>
         </Col>
       </Row>
