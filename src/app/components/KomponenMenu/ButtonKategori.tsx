@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import { useRouter, useSearchParams } from "next/navigation";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function KategoriMenu() {
   const router = useRouter();
@@ -25,9 +26,8 @@ function KategoriMenu() {
           return "Semua";
       }
     };
-
     setActiveCategory(CategoryID(kategori));
-  }, [kategori]); 
+  }, [kategori]);
 
   const KategoriAktif = (kategoriValue: string, label: string) => {
     setActiveCategory(label);
@@ -38,169 +38,81 @@ function KategoriMenu() {
     }
   };
 
+  const categories = [
+    {
+      id: "Semua",
+      label: "Semua",
+      img: "/images/local_dining.png",
+    },
+    {
+      id: "Category_4",
+      label: "Rekomendasi",
+      img: "/images/starsOrange.png",
+    },
+    {
+      id: "Category_1",
+      label: "Nasi Goreng",
+      img: "/images/rice_bowl.png",
+    },
+    {
+      id: "Category_2",
+      label: "Mie Goreng",
+      img: "/images/mieGoreng.png",
+    },
+    {
+      id: "Category_3",
+      label: "Kwetiau Goreng",
+      img: "/images/mieGoreng.png",
+    },
+  ];
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: "3vh",
-        margin: "5vh 10vw",
-      }}
-    >
-
-      <Button
-        variant="outline-warning"
-        onClick={() => KategoriAktif("Semua", "Semua")}
-        style={{
-          width: "clamp(120px, 15vw, 180px)",
-          borderColor: "#FF941A",
-          padding: "10px",
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          backgroundColor: activeCategory === "Semua" ? "#FF941A" : "#fff",
-          color: activeCategory === "Semua" ? "#fff" : "#FF941A",
-        }}
-      >
-        <img
-          src="/images/local_dining.png"
-          style={{
-            width: "clamp(20px, 3vw, 20px)",
-            filter:
-              activeCategory === "Semua" ? "brightness(0) invert(1)" : "none",
-          }}
-          alt="Semua"
-        />
-        Semua
-      </Button>
-
-      <Button
-        variant="outline-warning"
-        onClick={() => KategoriAktif("Category_4", "Rekomendasi")}
-        style={{
-          width: "clamp(150px, 17vw, 200px)",
-          borderColor: "#FF941A",
-          padding: "10px",
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          backgroundColor:
-            activeCategory === "Rekomendasi" ? "#FF941A" : "#fff",
-          color: activeCategory === "Rekomendasi" ? "#fff" : "#FF941A",
-        }}
-      >
-        <img
-          src="/images/starsOrange.png"
-          style={{
-            width: "clamp(20px, 3vw, 20px)",
-            filter:
-              activeCategory === "Rekomendasi"
-                ? "brightness(0) invert(1)"
-                : "none",
-          }}
-          alt="Rekomendasi"
-        />
-        Rekomendasi
-      </Button>
-
-      <Button
-        variant="outline-warning"
-        onClick={() => KategoriAktif("Category_1", "Nasi Goreng")}
-        style={{
-          width: "clamp(120px, 15vw, 180px)",
-          borderColor: "#FF941A",
-          padding: "10px",
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          backgroundColor:
-            activeCategory === "Nasi Goreng" ? "#FF941A" : "#fff",
-          color: activeCategory === "Nasi Goreng" ? "#fff" : "#FF941A",
-        }}
-      >
-        <img
-          src="/images/rice_bowl.png"
-          style={{
-            width: "clamp(20px, 3vw, 20px)",
-            filter:
-              activeCategory === "Nasi Goreng"
-                ? "brightness(0) invert(1)"
-                : "none",
-          }}
-          alt="Nasi Goreng"
-        />
-        Nasi Goreng
-      </Button>
-
-      <Button
-        variant="outline-warning"
-        onClick={() => KategoriAktif("Category_2", "Mie Goreng")}
-        style={{
-          width: "clamp(120px, 15vw, 180px)",
-          borderColor: "#FF941A",
-          padding: "10px",
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          backgroundColor: activeCategory === "Mie Goreng" ? "#FF941A" : "#fff",
-          color: activeCategory === "Mie Goreng" ? "#fff" : "#FF941A",
-        }}
-      >
-        <img
-          src="/images/mieGoreng.png"
-          style={{
-            width: "clamp(20px, 3vw, 20px)",
-            filter:
-              activeCategory === "Mie Goreng"
-                ? "brightness(0) invert(1)"
-                : "none",
-          }}
-          alt="Mie Goreng"
-        />
-        Mie Goreng
-      </Button>
-
-      <Button
-        variant="outline-warning"
-        onClick={() => KategoriAktif("Category_3", "Kwetiau Goreng")}
-        style={{
-          width: "clamp(120px, 15vw, 180px)",
-          borderColor: "#FF941A",
-          padding: "10px",
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          backgroundColor:
-            activeCategory === "Kwetiau Goreng" ? "#FF941A" : "#fff",
-          color: activeCategory === "Kwetiau Goreng" ? "#fff" : "#FF941A",
-        }}
-      >
-        <img
-          src="/images/mieGoreng.png"
-          style={{
-            width: "clamp(20px, 3vw, 20px)",
-            filter:
-              activeCategory === "Kwetiau Goreng"
-                ? "brightness(0) invert(1)"
-                : "none",
-          }}
-          alt="Kwetiau Goreng"
-        />
-        Kwetiau Goreng
-      </Button>
-    </div>
+    <Container className="my-5">
+      <Row className="justify-content-center g-3 text-center">
+        {categories.map((cat) => (
+          <Col
+            key={cat.id}
+            xs={6}
+            sm={4}
+            md={3}
+            lg={2}
+            className="d-flex justify-content-center"
+          >
+            <Button
+              variant="outline-warning"
+              onClick={() => KategoriAktif(cat.id, cat.label)}
+              className="d-flex align-items-center justify-content-center fw-bold w-100"
+              style={{
+                borderColor: "#FF941A",
+                backgroundColor:
+                  activeCategory === cat.label ? "#FF941A" : "#fff",
+                color: activeCategory === cat.label ? "#fff" : "#FF941A",
+                padding: "10px",
+                gap: "8px",
+                borderRadius: "8px",
+                transition: "all 0.3s ease",
+              }}
+            >
+              <Image
+                src={cat.img}
+                alt={cat.label}
+                style={{
+                  width: "22px",
+                  height: "22px",
+                  filter:
+                    activeCategory === cat.label
+                      ? "brightness(0) invert(1)"
+                      : "none",
+                }}
+              />
+              <span style={{ fontSize: "clamp(12px, 2vw, 16px)" }}>
+                {cat.label}
+              </span>
+            </Button>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 }
 

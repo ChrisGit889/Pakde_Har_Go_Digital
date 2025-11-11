@@ -1,6 +1,6 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
-import { Badge, Button, Col, Row } from "react-bootstrap";
+import { Badge, Button, Col, Row, Container } from "react-bootstrap";
 import foods from "@/app/components/KomponenMenu/DataMenu";
 import NavbarComponents from "@/app/components/navbarWebUser/navbar";
 import Footer from "@/app/components/footerWebUser/footer";
@@ -42,27 +42,25 @@ export default function FoodDetail() {
 
   if (!food) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
+      <Container className="text-center py-5">
         <h3>Makanan tidak ditemukan 😢</h3>
-        <Button onClick={() => router.push("/menu")} variant="secondary">
+        <Button
+          onClick={() => router.push("/menu")}
+          variant="secondary"
+          className="mt-3"
+        >
           Kembali ke Menu
         </Button>
-      </div>
+      </Container>
     );
   }
 
   return (
-    <div
-      style={{
-        backgroundColor: "#fff",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div className="d-flex flex-column min-vh-100 bg-white">
       <NavbarComponents />
 
       <div
+        className="position-relative text-white"
         style={{
           width: "100%",
           height: "50vh",
@@ -74,18 +72,12 @@ export default function FoodDetail() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div
-          className="food-detail-header"
-          style={{
-            height: "80vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "0 10vh",
-          }}
+        <Container
+          className="position-absolute bottom-0 start-0 pb-5 ps-5"
+          style={{ maxWidth: "90%" }}
         >
-          <h1>{food.name}</h1>
-          <div className="badgefood" style={{ display: "flex", gap: "3vh" }}>
+          <h1 className="fw-bold mb-3">{food.name}</h1>
+          <div className="d-flex flex-wrap gap-2">
             {food.categoryid.map((cat, i) => (
               <Badge
                 key={i}
@@ -93,7 +85,7 @@ export default function FoodDetail() {
                 style={{
                   backgroundColor: "#FFF2CC",
                   color: "#FF941A",
-                  padding: "6px 10px",
+                  padding: "6px 12px",
                   borderRadius: "6px",
                 }}
               >
@@ -101,50 +93,39 @@ export default function FoodDetail() {
               </Badge>
             ))}
           </div>
-        </div>
+        </Container>
       </div>
 
-      <div
-        className="FoodDetail"
+      <Container
+        fluid="md"
+        className="my-5 p-4 shadow-lg rounded"
         style={{
-          margin: "6vh auto",
-          width: "80%",
-          display: "flex",
-          justifyContent: "center",
-          padding: "5vh 5vh",
           backgroundColor: "#fff",
-          boxShadow: "0 8px 30px rgba(0, 0, 0, 2)",
+          boxShadow: "0 8px 30px rgba(0, 0, 0, 0.2)",
+          maxWidth: "85%",
         }}
       >
-        <Row className="align-items-center">
-          <Col md={6} style={{ textAlign: "center" }}>
+        <Row className="align-items-center g-4">
+          <Col xs={12} md={6} className="text-center">
             <img
               src={getImagePath(food.imageid)}
               alt={food.name}
+              className="img-fluid rounded shadow-sm"
               style={{
-                width: "90%",
-                borderRadius: "12px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-                height: "50vh",
+                height: "auto",
+                maxHeight: "55vh",
+                objectFit: "cover",
               }}
             />
           </Col>
 
-          <Col md={6}>
-            <h2
-              style={{
-                marginBottom: "10px",
-                fontWeight: "bold",
-                color: "#000000ff",
-              }}
-            >
-              {food.name}
-            </h2>
-            <p style={{ fontSize: "16px", color: "#000000ff" }}>
+          <Col xs={12} md={6}>
+            <h2 className="fw-bold text-dark mb-3">{food.name}</h2>
+            <p className="text-dark" style={{ fontSize: "16px" }}>
               {food.description}
             </p>
 
-            <div style={{ margin: "20px 0", color: "#000000ff" }}>
+            <div className="my-3 text-dark">
               <p>
                 <strong>Rasa:</strong> {food.flavour}
               </p>
@@ -156,7 +137,7 @@ export default function FoodDetail() {
               </p>
             </div>
 
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <div className="d-flex flex-wrap gap-2 mb-3">
               {food.categoryid.map((cat, i) => (
                 <Badge
                   key={i}
@@ -179,29 +160,39 @@ export default function FoodDetail() {
                 const encodedMessage = encodeURIComponent(message);
                 window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
               }}
+              className="w-100 fw-bold d-flex align-items-center justify-content-center gap-2"
               style={{
-                width: "100%",
-                marginTop: "30px",
                 backgroundColor: "#FF7A00",
                 border: "none",
                 padding: "10px 20px",
-                fontWeight: "bold",
               }}
             >
               <img
                 src="/images/whatsapp.svg"
+                alt="WhatsApp"
                 style={{
-                  width: "clamp(30px, 3vw, 30px)",
-                  marginRight: "1vh",
-                  marginBottom: "4px",
+                  width: "24px",
+                  height: "24px",
                 }}
-                alt="Nasi Goreng"
               />
               Share
             </Button>
+            <Button
+              onClick={() => router.back()}
+              className="w-100 fw-bold d-flex align-items-center justify-content-center gap-2"
+              style={{
+                backgroundColor: "#FF7A00",
+                border: "none",
+                padding: "10px 50px",
+                marginTop: "2vh",
+              }}
+            >
+              Kembali
+            </Button>
           </Col>
         </Row>
-      </div>
+      </Container>
+
       <Footer />
     </div>
   );

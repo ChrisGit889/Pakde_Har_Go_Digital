@@ -7,25 +7,13 @@ import MenuUnggulan from "./components/KomponenBeranda/menuUnggulan";
 import CeritaKami from "./components/KomponenBeranda/CeritaKami";
 import Ulasan from "./components/KomponenBeranda/Ulasan";
 import Footer from "./components/footerWebUser/footer";
+import HalamanUtama from "./components/KomponenBeranda/HalamanUtama";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <NavbarComponents />
-      <div className={styles.container2}>
-        <h1 className={styles.judulHalaman}>
-          Nasi Goreng <span className={styles.kuning}>Pakde Har</span>
-        </h1>
-
-        <h3 className={styles.deskripsisingkatberanda}>
-          Bukan sekadar pengganjal lapar. Nikmati porsi brutal dengan bumbu khas
-          yang otentik. Harga pas di kantong, rasa dijamin nendang!
-        </h3>
-        <a href="#menuUnggulan">
-          <button className={styles.tombolJelajahi}>Ayo Jelajahi !</button>
-        </a>
-        <img src="/images/PanahBawah.png" className={styles.panahBawah} />
-      </div>
+      <HalamanUtama />
       <h2 className={styles.judulHalaman2} id="menuUnggulan">
         Menu Unggulan Kami
       </h2>

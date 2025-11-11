@@ -4,36 +4,13 @@ import KategoriMenu from "../components/KomponenMenu/ButtonKategori";
 import { Card } from "react-bootstrap";
 import CardMenu from "../components/KomponenMenu/CardMenu";
 import Footer from "../components/footerWebUser/footer";
+import HalamanUtamaMenu from "../components/KomponenMenu/HalamanUtamaMenu";
 
 export default function Menu() {
   return (
     <div className={styles.container}>
       <NavbarComponents />
-      <div className={styles.container2}>
-        <h1 className={styles.judulHalaman}>
-          Menu <span className={styles.kuning}>Kami</span>
-        </h1>
-
-        <h3 className={styles.deskripsisingkatberanda}>
-          Temukan berbagai nasi goreng lezat yang disajikan dengan cinta dan
-          rasa
-        </h3>
-        <a href="#menuUnggulan">
-          <button className={styles.tombolJelajahi}>Lihat Menu</button>
-        </a>
-      </div>
-
-      <img
-        src="/images/PanahBawah.png"
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "40px",
-          height: "auto",
-          position: "relative",
-          bottom: "6vh",
-        }}
-      />
+      <HalamanUtamaMenu />
 
       <h2 className={styles.judulHalaman2} id="menuUnggulan">
         Menu Unggulan Kami

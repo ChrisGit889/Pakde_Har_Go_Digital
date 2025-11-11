@@ -1,7 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  Badge,
+  Pagination,
+  Container,
+} from "react-bootstrap";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { Row, Col, Card, Button, Badge, Pagination } from "react-bootstrap";
 import foods from "./DataMenu";
 
 const IDCategory = (categoryId: string) => {
@@ -66,26 +74,41 @@ function CardMenu() {
   };
 
   return (
-    <div>
-      <div style={{ width: "100%", padding: "0 40px" }}>
-        <Row
-          id="cardmenu"
-          className="justify-content-center gap-4 m-0"
-          style={{
-            marginBottom: "40px",
-            width: "100%",
-          }}
-        >
-          {currentItems.length > 0 ? (
-            currentItems.map((item) => (
-              <Col key={item.foodId} md={3}>
-                <Card style={{ borderRadius: "12px", overflow: "hidden" }}>
-                  <Card.Img
-                    src={getImagePath(item.imageid)}
-                    style={{ height: "180px", objectFit: "cover" }}
-                    alt={item.name}
-                  />
-                  <Card.Body>
+    <Container fluid className="py-4 px-3 px-md-5">
+      <Row
+        id="cardmenu"
+        className="justify-content-center g-4"
+        style={{ marginBottom: "40px" }}
+      >
+        {currentItems.length > 0 ? (
+          currentItems.map((item) => (
+            <Col
+              key={item.foodId}
+              xs={12}
+              sm={6}
+              md={6}
+              lg={4}
+              className="d-flex align-items-stretch"
+            >
+              <Card
+                className="w-100 shadow-sm"
+                style={{
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+              >
+                <Card.Img
+                  src={getImagePath(item.imageid)}
+                  alt={item.name}
+                  style={{
+                    height: "180px",
+                    objectFit: "cover",
+                    width: "100%",
+                  }}
+                />
+                <Card.Body className="d-flex flex-column justify-content-between">
+                  <div>
                     <Card.Title className="mb-2">{item.name}</Card.Title>
 
                     <div className="d-flex flex-wrap gap-2 mb-3">
@@ -105,126 +128,97 @@ function CardMenu() {
                       ))}
                     </div>
 
-                    <Card.Text style={{ fontSize: "14px" }}>
+                    <Card.Text
+                      className="text-muted"
+                      style={{ fontSize: "14px", color: "black" }}
+                    >
                       {item.description}
                     </Card.Text>
+                  </div>
 
-                    <Button
+                  <Button
                     onClick={() => router.push(`/menu/${item.foodId}`)}
-                      style={{
-                        width: "100%",
-                        backgroundColor: "#FF7A00",
-                        border: "none",
-                        color: "white",
-                        padding: "10px",
-                        fontWeight: "bold",
-                        display: "block",
-                        textAlign: "center",
-                      }}
-                    >
-                      Detail Makanan
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))
-          ) : (
-            <p
-              style={{
-                textAlign: "center",
-                marginTop: "50px",
-                fontWeight: "bold",
-              }}
-            >
-              Tidak ada makanan untuk kategori ini.
-            </p>
-          )}
-        </Row>
-
-        {totalPages > 1 && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "20px",
-            }}
-          >
-            <Pagination>
-              {totalPages > 1 && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Pagination>
-                    <Pagination.Prev
-                      onClick={() =>
-                        handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
-                      }
-                      disabled={currentPage === 1}
-                    />
-
-                    <Pagination.Item
-                      active={1 === currentPage}
-                      onClick={() => handlePageChange(1)}
-                    >
-                      1
-                    </Pagination.Item>
-
-                    {currentPage > 4 && <Pagination.Ellipsis disabled />}
-
-                    {Array.from({ length: totalPages }, (_, i) => i + 1)
-                      .filter(
-                        (num) =>
-                          num !== 1 &&
-                          num !== totalPages &&
-                          num >= currentPage - 2 &&
-                          num <= currentPage + 2
-                      )
-                      .map((num) => (
-                        <Pagination.Item
-                          key={num}
-                          active={num === currentPage}
-                          onClick={() => handlePageChange(num)}
-                        >
-                          {num}
-                        </Pagination.Item>
-                      ))}
-
-                    {currentPage < totalPages - 3 && (
-                      <Pagination.Ellipsis disabled />
-                    )}
-
-                    {totalPages > 1 && (
-                      <Pagination.Item
-                        active={totalPages === currentPage}
-                        onClick={() => handlePageChange(totalPages)}
-                      >
-                        {totalPages}
-                      </Pagination.Item>
-                    )}
-
-                    <Pagination.Next
-                      id="next-button"
-                      onClick={() =>
-                        handlePageChange(
-                          currentPage < totalPages
-                            ? currentPage + 1
-                            : totalPages
-                        )
-                      }
-                      disabled={currentPage === totalPages}
-                    />
-                  </Pagination>
-                </div>
-              )}
-            </Pagination>
-          </div>
+                    className="mt-3 fw-bold"
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#FF7A00",
+                      border: "none",
+                      padding: "10px",
+                    }}
+                  >
+                    Detail Makanan
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        ) : (
+          <p className="text-center fw-bold mt-5">
+            Tidak ada makanan untuk kategori ini.
+          </p>
         )}
-      </div>
-    </div>
+      </Row>
+
+      {totalPages > 1 && (
+        <div className="d-flex justify-content-center mt-3">
+          <Pagination>
+            <Pagination.Prev
+              onClick={() =>
+                handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+              }
+              disabled={currentPage === 1}
+            />
+
+            <Pagination.Item
+              active={1 === currentPage}
+              onClick={() => handlePageChange(1)}
+            >
+              1
+            </Pagination.Item>
+
+            {currentPage > 4 && <Pagination.Ellipsis disabled />}
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter(
+                (num) =>
+                  num !== 1 &&
+                  num !== totalPages &&
+                  num >= currentPage - 2 &&
+                  num <= currentPage + 2
+              )
+              .map((num) => (
+                <Pagination.Item
+                  key={num}
+                  active={num === currentPage}
+                  onClick={() => handlePageChange(num)}
+                >
+                  {num}
+                </Pagination.Item>
+              ))}
+
+            {currentPage < totalPages - 3 && <Pagination.Ellipsis disabled />}
+
+            {totalPages > 1 && (
+              <Pagination.Item
+                active={totalPages === currentPage}
+                onClick={() => handlePageChange(totalPages)}
+              >
+                {totalPages}
+              </Pagination.Item>
+            )}
+
+            <Pagination.Next
+              onClick={() =>
+                handlePageChange(
+                  currentPage < totalPages ? currentPage + 1 : totalPages
+                )
+              }
+              disabled={currentPage === totalPages}
+            />
+          </Pagination>
+        </div>
+      )}
+    </Container>
   );
 }
 
