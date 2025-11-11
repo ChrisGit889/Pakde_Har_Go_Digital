@@ -1,0 +1,167 @@
+.login-page-wrapper-modern {
+    padding: 0;
+    overflow: hidden; 
+    height: 100vh; 
+  }
+  
+  .login-image-column {
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/images/Nasi_Goreng_Ayam.jpg') center center / cover;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; 
+  }
+  
+  .login-branding-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 32px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+  }
+
+  .login-branding-overlay img {
+    filter: brightness(0) invert(1);
+    margin-bottom: 16px;
+    width: 160px;
+  }
+  .login-branding-overlay h2,
+  .login-branding-overlay p {
+    color: #ffffff;
+  }
+  .login-branding-overlay h2 {
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  .login-branding-overlay p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  @media (max-width: 767px) {
+    .login-image-column {
+      display: none;
+    }
+  }
+  
+  .login-form-column {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .login-form-wrapper {
+    width: 100%;
+    max-width: 400px;
+  }
+  .login-title {
+    font-weight: 700;
+    color: #1f2937;
+    font-size: 2rem;
+  }
+  .login-subtitle {
+    color: #6B7280;
+    font-size: 1rem;
+  }
+  
+  .form-label {
+    color: #6B7280;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  .modern-input,
+  .modern-input:focus {
+    background-color: #f9fafb !important; 
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    color: #374151 !important;
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  .modern-input:not(:placeholder-shown):not(.is-invalid),
+  .modern-input:focus:not(.is-invalid),
+  .modern-input:valid {
+    background-color: #ffffff !important;
+    border-color: #FFA500 !important;
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2) !important;
+  }
+  
+  .modern-input:-webkit-autofill,
+  .modern-input:-webkit-autofill:hover, 
+  .modern-input:-webkit-autofill:focus, 
+  .modern-input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+      -webkit-text-fill-color: #374151 !important;
+      box-shadow: 0 0 0 30px white inset !important;
+  }
+  
+  .modern-password-toggle {
+    background-color: #f9fafb !important;
+    border: 1px solid #d1d5db !important;
+    border-left: none !important;
+    border-radius: 0 8px 8px 0 !important;
+    color: #6B7280;
+    cursor: pointer;
+  }
+  .modern-input:not(:placeholder-shown):not(.is-invalid) + .modern-password-toggle,
+  .modern-input:focus:not(.is-invalid) + .modern-password-toggle,
+  .modern-input:valid + .modern-password-toggle {
+    background-color: #ffffff !important;
+    border-color: #FFA500 !important;
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2) !important;
+  }
+  
+  .btn-login-modern {
+    background-color: #FFA500 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    color: #ffffff !important;
+    transition: all 0.2s ease !important;
+  }
+  .btn-login-modern:hover,
+  .btn-login-modern:focus,
+  .btn-login-modern:active {
+    background-color: #E68A00 !important;
+    transform: translateY(-2px);
+    color: #ffffff !important;
+    box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3) !important; 
+  }
+  
+  .login-link {
+    color: #FFA500;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  
+  .error-message {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .modern-input.is-invalid,
+  .modern-input.is-invalid:focus {
+    border-color: #dc3545 !important; 
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2) !important;
+  }
+  .modern-input.is-invalid + .modern-password-toggle {
+     border-color: #dc3545 !important;
+     background-color: #f9fafb !important;
+  }
