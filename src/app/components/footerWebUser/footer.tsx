@@ -12,7 +12,6 @@ function Footer() {
         padding: "25px 40px",
         marginTop: "60px",
         fontSize: "14px",
-        //height:"39vh"
       }}
     >
       <div
@@ -36,7 +35,7 @@ function Footer() {
           <p><Link href="/menu" style={{ color: "white", textDecoration: "none" }}>Menu</Link></p>
           <p><Link href="/tentangKami" style={{ color: "white", textDecoration: "none" }}>Tentang Kami</Link></p>
           <p><Link href="/kontak" style={{ color: "white", textDecoration: "none" }}>Kontak</Link></p>
-          <p><Link href="/admin/dashboard" style={{ color: "white", textDecoration: "none" }}>Admin</Link></p>
+          <p><Link href="/login" style={{ color: "white", textDecoration: "none" }}>Admin</Link></p>
         </div>
         <div style={{ maxWidth: "300px" }}>
           <h3 style={{ marginBottom: "12px" }}>Hubungi Kami</h3>

@@ -1,0 +1,98 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #FFF3E8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.not-found-box {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.6s ease-out;
+}
+
+.not-found-box img {
+  margin-bottom: 24px;
+  width: 150px;
+}
+
+.not-found-title {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #FFA500;
+  margin: 0;
+  line-height: 1;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.not-found-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 16px 0 8px 0;
+}
+
+.not-found-message {
+  font-size: 1rem;
+  color: #6B7280;
+  margin: 0 0 32px 0;
+}
+
+.not-found-button {
+  display: inline-block;
+  background-color: #FFA500;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.not-found-button:hover {
+  background-color: #E68A00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

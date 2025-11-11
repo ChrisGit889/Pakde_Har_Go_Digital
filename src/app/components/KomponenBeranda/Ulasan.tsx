@@ -5,12 +5,12 @@ import { Container, Row, Col, Card, Pagination } from "react-bootstrap";
 function Ulasan() {
   const ulasan = [
     {
-      nama: "Budi Is Man",
-      status: "Mahasiswa Untar",
+      nama: "Zen",
+      status: "Trader Crypto",
       teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
     },
     {
-      nama: "Budi Is Man",
+      nama: "Vivi",
       status: "Mahasiswa Untar",
       teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
     },
