@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Pagination } from "react-bootstrap";
+import { Container, Row, Col, Card, Pagination } from "react-bootstrap";
 
 function Ulasan() {
   const ulasan = [
@@ -21,17 +21,17 @@ function Ulasan() {
     },
     {
       nama: "Christio",
-      status: "investor",
+      status: "Investor",
       teks: `"Nasi Goreng di Pakde Har benar-benar lezat! Setiap suapan membawa kenikmatan yang tak terlupakan. Saya sangat merekomendasikan tempat ini kepada siapa saja yang mencari cita rasa autentik."`,
     },
     {
       nama: "NuelGB",
-      status: "trader",
+      status: "Trader",
       teks: `"Nasi Goreng di sini luar biasa! Rasanya yang kaya dan bumbu yang pas membuat saya ketagihan. Tempat yang sempurna untuk menikmati hidangan Indonesia yang autentik."`,
     },
     {
       nama: "Annuel",
-      status: "Hfinancial advisor",
+      status: "Financial Advisor",
       teks: `"Nasi Goreng disini enak sekali, Seenak Ramen Ichiraku Favoritku!"`,
     },
   ];
@@ -49,125 +49,120 @@ function Ulasan() {
   };
 
   return (
-    <div style={{ width: "100%" }}>
-      <div
-        style={{
-          display: "flex",
-          gap: "24px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          width: "100%",
-          padding: "60px 20px",
-          boxSizing: "border-box",
-        }}
+    <Container fluid className="py-4">
+      
+
+      <Row
+        className="justify-content-center g-4"
+        style={{ padding: "0 20px" }}
       >
         {currentItems.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              width: "320px",
-              background: "white",
-              borderRadius: "10px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-              padding: "20px",
-            }}
-          >
-            <h4
+          <Col key={index} xs={12} sm={8} md={6} lg={3}>
+            <Card
+              className="shadow-sm"
               style={{
-                marginBottom: "4px",
-                color: "#000000ff",
-                fontWeight: "600",
+                borderRadius: "10px",
+                minHeight: "270px",
               }}
             >
-              {item.nama}
-            </h4>
-            <p
-              style={{
-                fontSize: "14px",
-                marginBottom: "8px",
-                color: "#000000ff",
-              }}
-            >
-              {item.status}
-            </p>
-            <div style={{ color: "#FFA726", marginBottom: "12px" }}>
-              ★ ★ ★ ★ ★
-            </div>
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#000000ff",
-                lineHeight: "1.6",
-              }}
-            >
-              {item.teks}
-            </p>
-          </div>
+              <Card.Body>
+                <Card.Title
+                  style={{
+                    color: "#000",
+                    fontWeight: 600,
+                    marginBottom: "4px",
+                  }}
+                >
+                  {item.nama}
+                </Card.Title>
+                <Card.Subtitle
+                  className="mb-2"
+                  style={{ color: "#000", fontSize: "14px" }}
+                >
+                  {item.status}
+                </Card.Subtitle>
+                <div
+                  style={{
+                    color: "#FFA726",
+                    marginBottom: "12px",
+                    fontSize: "1.2rem",
+                  }}
+                >
+                  ★ ★ ★ ★ ★
+                </div>
+                <Card.Text
+                  style={{
+                    fontSize: "14px",
+                    color: "#000",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  {item.teks}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
+      </Row>
 
-      <Pagination
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "40px",
-        }}
-      >
-        <Pagination.Prev
-          onClick={() =>
-            handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
-          }
-          disabled={currentPage === 1}
-        />
+      <div className="d-flex justify-content-center mt-4 mb-5">
+        <Pagination>
+          <Pagination.Prev
+            onClick={() =>
+              handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+            }
+            disabled={currentPage === 1}
+          />
 
-        <Pagination.Item
-          active={currentPage === 1}
-          onClick={() => handlePageChange(1)}
-        >
-          1
-        </Pagination.Item>
-
-        {currentPage > 3 && <Pagination.Ellipsis disabled />}
-
-        {Array.from({ length: totalPages }, (_, i) => i + 1)
-          .filter(
-            (num) =>
-              num !== 1 &&
-              num !== totalPages &&
-              num >= currentPage - 1 &&
-              num <= currentPage + 1
-          )
-          .map((num) => (
-            <Pagination.Item
-              key={num}
-              active={currentPage === num}
-              onClick={() => handlePageChange(num)}
-            >
-              {num}
-            </Pagination.Item>
-          ))}
-
-        {currentPage < totalPages - 2 && <Pagination.Ellipsis disabled />}
-
-        {totalPages > 1 && (
           <Pagination.Item
-            active={currentPage === totalPages}
-            onClick={() => handlePageChange(totalPages)}
+            active={currentPage === 1}
+            onClick={() => handlePageChange(1)}
           >
-            {totalPages}
+            1
           </Pagination.Item>
-        )}
 
-        <Pagination.Next
-          onClick={() =>
-            handlePageChange(
-              currentPage < totalPages ? currentPage + 1 : totalPages
+          {currentPage > 3 && <Pagination.Ellipsis disabled />}
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter(
+              (num) =>
+                num !== 1 &&
+                num !== totalPages &&
+                num >= currentPage - 1 &&
+                num <= currentPage + 1
             )
-          }
-          disabled={currentPage === totalPages}
-        />
-      </Pagination>
-    </div>
+            .map((num) => (
+              <Pagination.Item
+                key={num}
+                active={currentPage === num}
+                onClick={() => handlePageChange(num)}
+              >
+                {num}
+              </Pagination.Item>
+            ))}
+
+          {currentPage < totalPages - 2 && <Pagination.Ellipsis disabled />}
+
+          {totalPages > 1 && (
+            <Pagination.Item
+              active={currentPage === totalPages}
+              onClick={() => handlePageChange(totalPages)}
+            >
+              {totalPages}
+            </Pagination.Item>
+          )}
+
+          <Pagination.Next
+            onClick={() =>
+              handlePageChange(
+                currentPage < totalPages ? currentPage + 1 : totalPages
+              )
+            }
+            disabled={currentPage === totalPages}
+          />
+        </Pagination>
+      </div>
+    </Container>
   );
 }
 
