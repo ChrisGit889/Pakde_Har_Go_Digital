@@ -1,21 +1,4 @@
-.modern-dashboard-layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 24px;
-}
-
-@media (max-width: 1200px) {
-  .modern-dashboard-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-.main-column {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.sidebar-column {
+.visitor-dashboard-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -31,7 +14,6 @@
   min-height: 80px; 
   box-sizing: border-box; 
 }
-
 .page-title {
   font-size: 1.75rem;
   font-weight: 700;
@@ -41,10 +23,15 @@
 
 .stat-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr); 
   gap: 20px;
 }
 
+@media (max-width: 1024px) {
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media (max-width: 640px) {
   .stat-cards-grid {
     grid-template-columns: 1fr;
@@ -62,7 +49,6 @@
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
   transition: all 0.2s ease;
 }
-
 .stat-card.modern:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 10px 0 rgb(0 0 0 / 0.07);
@@ -77,12 +63,10 @@
   align-items: center;
   justify-content: center;
 }
-
 .stat-icon-wrapper svg {
   width: 24px;
   height: 24px;
 }
-
 .stat-icon-wrapper.pink { background-color: #FFE4E6; color: #D9006C; }
 .stat-icon-wrapper.blue { background-color: #E0EFFF; color: #0052CC; }
 .stat-icon-wrapper.green { background-color: #E0F2E9; color: #00875A; }
@@ -112,7 +96,18 @@
 .filter-button.active { background-color: #ffffff; color: #333; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
 .chart-datepicker .datepicker-input { padding: 6px 12px; border: 1px solid #e5e7eb; border-radius: 6px; background-color: #ffffff; color: #333; font-weight: 600; font-size: 0.8rem; width: 200px; text-align: center; cursor: pointer; }
 .chart-datepicker .datepicker-input:focus { outline: none; border-color: #FFA500; box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2); }
-.chart-body
+.chart-body.modern { height: 300px; position: relative; }
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 1024px) {
+  .widget-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .widget-title {
   font-size: 1.25rem; 
@@ -122,22 +117,14 @@
   padding-bottom: 12px;
   border-bottom: 1px solid #f3f4f6;
 }
-.widget-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+
+.donut-chart-container {
+  height: 250px;
+  position: relative;
+  margin-top: 16px;
 }
-.widget-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  color: #6B7280;
-}
-.widget-list li span:last-child {
-  font-weight: 600;
-  color: #333;
+.bar-chart-container {
+  height: 250px;
+  position: relative;
+  margin-top: 16px;
 }
