@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation'; 
+import { usePathname, useRouter } from 'next/navigation';
 import './Sidebar.css';
 
 const navLinks = [
@@ -14,7 +14,9 @@ const navLinks = [
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
+
   const handleLogout = () => {
+    localStorage.removeItem('admin_token');
     router.push('/');
   };
 
@@ -26,17 +28,17 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         {navLinks.map((link) => {
-          const isActive = pathname.startsWith(link.href); 
-          
+          const isActive = pathname.startsWith(link.href);
+
           return (
             <Link
               key={link.name}
               href={link.href}
               className={`nav-item ${isActive ? 'active' : ''}`}
             >
-              <img 
-                src={link.icon} 
-                alt={link.name} 
+              <img
+                src={link.icon}
+                alt={link.name}
                 className="nav-icon"
               />
               <span>{link.name}</span>
