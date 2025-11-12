@@ -64,17 +64,28 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  text-decoration: none;
   transition: opacity 0.2s ease;
 }
 .admin-menu-topbar .admin-button:hover {
   opacity: 0.8;
 }
 
+.admin-menu-topbar .button-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .admin-button.primary {
   background-color: #FFA500;
   color: white;
 }
+.admin-button.primary .button-icon {
+  color: white; 
+}
+
 
 .admin-button.secondary {
   background-color: #ffffff;
@@ -83,6 +94,9 @@
 }
 .admin-button.secondary:hover {
    background-color: #f9fafb;
+}
+.admin-button.secondary .button-icon {
+  color: #FFA500; 
 }
 
 .topbar-icon {
