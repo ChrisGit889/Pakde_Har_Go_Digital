@@ -12,6 +12,7 @@ export default function AdminMenuPage() {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const storedProducts = localStorage.getItem('myProducts');
@@ -24,16 +25,29 @@ export default function AdminMenuPage() {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    if (activeCategory === 'Semua') {
-      return products;
+    let productsToFilter = products;
+
+    if (activeCategory !== 'Semua') {
+      productsToFilter = productsToFilter.filter(product => product.category === activeCategory);
     }
-    return products.filter(product => product.category === activeCategory);
-  }, [activeCategory, products]); 
+
+    if (searchTerm.trim() !== '') {
+      productsToFilter = productsToFilter.filter(product =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    return productsToFilter;
+  }, [activeCategory, products, searchTerm]); 
 
   return (
     <DashboardLayout>
       <div className="menu-page-container">
-        <AdminMenuTopbar onAddCategoryClick={() => setIsModalOpen(true)} />
+        <AdminMenuTopbar 
+          onAddCategoryClick={() => setIsModalOpen(true)}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm} 
+        />
+
         <MenuFilterTabs 
           categories={categories}
           activeCategory={activeCategory}
