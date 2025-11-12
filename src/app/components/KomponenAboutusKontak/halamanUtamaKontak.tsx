@@ -5,11 +5,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "@mui/material";
 
 
-function HalamanUtamaBerita() {
+function HalamanUtamaKontak() {
   return (
     <div
       style={{
-        backgroundImage: "url('/images/Nasi_Goreng_Ayam.jpg')", 
+        backgroundImage: "url('/images/backgroundKontak.png')", 
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -21,13 +21,14 @@ function HalamanUtamaBerita() {
         textAlign: "center",
         position: "relative",
         color: "white",
+
       }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          background: "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))"
         }}
       ></div>
 
@@ -41,7 +42,7 @@ function HalamanUtamaBerita() {
             fontSize: "clamp(32px, 5vw, 64px)",
           }}
         >
-          Berita <span style={{ color: "#FF941A" }}>Terbaru</span>
+          Hubungi<span style={{ color: "#FF941A" }}> Kami</span>
         </h1>
 
         <p
@@ -51,11 +52,11 @@ function HalamanUtamaBerita() {
             lineHeight: "1.6",
           }}
         >
-          Temukan Berita Baru
+          Punya pertanyaan atau saran ? Kirim pesan ke kami dan kami siap melayani dengan sepenuh hati
         </p>
 
         <div style={{ marginTop: "30px" }}>
-          <Link href="/blog/#blogterbaru">
+          <Link href="/kontak/#kontak">
           <Button
             style={{
               backgroundColor: "#FF941A",
@@ -66,7 +67,7 @@ function HalamanUtamaBerita() {
               borderRadius: "6px",
             }}
           >
-            Ayo Jelajahi !
+            Hubungi
           </Button>
           </Link>
         </div>
@@ -90,4 +91,4 @@ function HalamanUtamaBerita() {
   );
 }
 
-export default HalamanUtamaBerita;
+export default HalamanUtamaKontak;

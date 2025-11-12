@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "@mui/material";
 
 
-function HalamanUtamaBerita() {
+function HalamanUtamatentangKami() {
   return (
     <div
       style={{
@@ -41,7 +41,7 @@ function HalamanUtamaBerita() {
             fontSize: "clamp(32px, 5vw, 64px)",
           }}
         >
-          Berita <span style={{ color: "#FF941A" }}>Terbaru</span>
+          Cerita di Balik Nasi Goreng <span style={{ color: "#FF941A" }}>Pakde Har</span>
         </h1>
 
         <p
@@ -51,11 +51,11 @@ function HalamanUtamaBerita() {
             lineHeight: "1.6",
           }}
         >
-          Temukan Berita Baru
+          Dari wajan sederhana di pinggir jalan Untar, Pakde Har menghadirkan cita rasa nasi goreng yang penuh kenangan dan kehangatan.
         </p>
 
         <div style={{ marginTop: "30px" }}>
-          <Link href="/blog/#blogterbaru">
+          <Link href="/tentangKami/#tentangKami">
           <Button
             style={{
               backgroundColor: "#FF941A",
@@ -66,7 +66,7 @@ function HalamanUtamaBerita() {
               borderRadius: "6px",
             }}
           >
-            Ayo Jelajahi !
+            Tentang Kami
           </Button>
           </Link>
         </div>
@@ -90,4 +90,4 @@ function HalamanUtamaBerita() {
   );
 }
 
-export default HalamanUtamaBerita;
+export default HalamanUtamatentangKami;

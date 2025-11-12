@@ -7,6 +7,8 @@ import Footer from "../components/footerWebUser/footer";
 import HalamanUtamaMenu from "../components/KomponenMenu/HalamanUtamaMenu";
 import HalamanUtamaBerita from "../components/KomponenBerita/HalamanUtamaBerita";
 import BeritaList from "../components/berita/BeritaList";
+import KategoriBerita from "../components/KomponenBerita/KategoriBerita";
+import CardBerita from "../components/KomponenBerita/CardBerita";
 
 export default function Menu() {
   return (
@@ -14,8 +16,8 @@ export default function Menu() {
       <NavbarComponents />
       <HalamanUtamaBerita />
 
-    
-
+      <KategoriBerita />
+      <CardBerita />
       <Footer />
     </div>
   );
