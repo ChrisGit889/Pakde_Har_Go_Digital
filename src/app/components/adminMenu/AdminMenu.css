@@ -152,6 +152,31 @@
   .product-grid {
     grid-template-columns: 1fr;
   }
+
+  .admin-menu-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar-right-group {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .admin-menu-topbar .search-wrapper {
+    width: 100%;
+  }
+
+  .admin-menu-topbar .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .admin-menu-topbar .admin-button {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .product-card {
