@@ -1,23 +1,50 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import ProductCard from './ProductCard';
+import DeleteModal from './Delete';
 import './AdminMenu.css';
 
-const products = [
-  { id: 1, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Nasi Goreng Ayam dibuat dari nasi pilihan yang digoreng dengan bumbu rempah khas, potongan daging ayam segar'},
-  { id: 2, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
-  { id: 3, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
-  { id: 4, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
-  { id: 5, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
-  { id: 6, name: 'Nasi Goreng Ayam', img: '/images/Nasi_Goreng_Ayam.jpg', rasa: 'Pedas / Sedang', desc: 'Deskripsi...' },
-];
+interface Product {
+  id: number, name: string, img: string, rasa: string, desc: string, category: string,
+}
 
-export default function ProductGrid() {
+export default function ProductGrid({ products }: { products: Product[] }) {
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+  const openDeleteModal = (product: Product) => {
+    setProductToDelete(product);
+  };
+  const closeDeleteModal = () => {
+    setProductToDelete(null);
+  };
+  const confirmDelete = () => {
+    if (productToDelete) {
+      console.log(`Menghapus produk: ${productToDelete.name}`);
+      closeDeleteModal();
+    }
+  };
+
   return (
-    <div className="product-grid">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
+    <>
+      <div className="product-grid">
+        {products.length === 0 ? (
+          <p>Tidak ada produk dalam kategori ini.</p>
+        ) : (
+          products.map((product) => (
+            <ProductCard 
+              key={product.id} 
+              product={product} 
+              onDeleteClick={openDeleteModal} 
+            />
+          ))
+        )}
+      </div>
+
+      <DeleteModal 
+        isOpen={!!productToDelete}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        productName={productToDelete?.name || ''}
+      />
+    </>
   );
 }

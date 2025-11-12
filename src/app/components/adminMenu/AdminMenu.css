@@ -7,7 +7,7 @@
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid #f3f4f6;
-  min-height: 80px;
+  min-height: 80px; 
   box-sizing: border-box;
 }
 
@@ -89,6 +89,7 @@
   width: 20px;
   height: 20px;
   color: #FFA500;
+  object-fit: contain;
 }
 
 .menu-filter-tabs {
@@ -112,12 +113,10 @@
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   border-bottom: none;
 }
-
 .filter-tab:not(.active):hover {
   background-color: #FFFFFF;
   color: #374151;
 }
-
 .filter-tab.active {
   color: #1f2937;
   background-color: #ffffff;
@@ -130,7 +129,6 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
-
 @media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -138,7 +136,7 @@
 }
 @media (max-width: 640px) {
   .product-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -152,12 +150,10 @@
   display: flex;
   flex-direction: column;
 }
-
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
 }
-
 .product-card-image {
   width: 100%;
   height: 200px;
@@ -165,7 +161,6 @@
   opacity: 1 !important;
   filter: none !important;
 }
-
 .product-card-content {
   padding: 20px;
   display: flex;
@@ -174,13 +169,11 @@
   flex-grow: 1;
   justify-content: space-between;
 }
-
 .product-card-title {
   font-size: 1.125rem;
   font-weight: 700;
   color: #333;
 }
-
 .product-card-subtitle,
 .product-card-description {
   font-size: 0.875rem;
@@ -193,7 +186,6 @@
   border-top: 1px solid #F3F4F6;
   margin-top: 12px;
 }
-
 .product-card-button {
   flex: 1;
   background: none;
@@ -207,13 +199,11 @@
   padding: 16px 0;
   transition: background-color 0.2s ease;
 }
-
 .product-card-button .button-icon {
   width: 16px;
   height: 16px;
   object-fit: contain;
 }
-
 .product-card-button.edit {
   color: #374151;
   border-right: 1px solid #e5e7eb;
@@ -222,7 +212,6 @@
   background-color: #f0fdf4;
   color: #15803d;
 }
-
 .product-card-button.delete {
   color: #EF4444;
 }
@@ -243,6 +232,7 @@
   align-items: center;
   z-index: 1000;
   padding: 16px;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .modal-content {
@@ -255,6 +245,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  animation: scaleIn 0.3s ease-out;
 }
 
 .modal-content h3 {
@@ -275,7 +266,6 @@
   background-color: #ffffff !important;
   color: #374151 !important;
 }
-
 .modal-content .modal-input:focus {
   outline: none;
   border-color: #FFA500;
@@ -285,7 +275,7 @@
 .modal-actions {
   display: flex;
   gap: 12px;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .modal-button {
@@ -296,7 +286,13 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  transition: opacity 0.2s ease;
+  flex: 1;
+}
+.modal-button:hover {
+  opacity: 0.9;
 }
 .modal-button.green {
   background-color: #22c55e;
@@ -305,4 +301,85 @@
 .modal-button.red {
   background-color: #ef4444;
   color: white;
+}
+.modal-button.secondary {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+.modal-button.secondary:hover {
+  background-color: #f9fafb;
+}
+
+.modal-content.delete-modal {
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+  gap: 16px;
+}
+
+.modal-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-icon-wrapper.warning {
+  background-color: #FEF2F2;
+  border: 6px solid #FEE2E2;
+}
+
+.modal-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.modal-icon-wrapper.warning .modal-icon {
+  color: #EF4444;
+}
+
+.modal-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-content.delete-modal h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.modal-content.delete-modal p {
+  font-size: 1rem;
+  color: #6B7280;
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+}
+
+.modal-content.delete-modal .modal-actions {
+  justify-content: center;
+  width: 100%;
+  padding-top: 0;
+  border-top: none;
+  background: none;
+}
+
+.modal-content.delete-modal .modal-button {
+  flex-grow: 1; 
+  max-width: 200px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }

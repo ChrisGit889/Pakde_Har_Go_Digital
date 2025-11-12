@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import './AdminMenu.css';
 
-interface AddCategoryModalProps {
+interface AddCategoryProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
+export default function AddCategory({ isOpen, onClose }: AddCategoryProps) {
   const [kategori, setKategori] = useState('');
   if (!isOpen) {
     return null;
@@ -15,16 +15,21 @@ export default function AddCategoryModal({ isOpen, onClose }: AddCategoryModalPr
 
   const handleSimpan = () => {
     if (!kategori) {
-      alert('Harap isi nama kategori terlebih dahulu.');
+      alert('Harap isi nama kategori.');
       return;
     }
     console.log('Kategori baru disimpan:', kategori);
-    alert('Kategori berhasil disimpan!');
+    setKategori('');
+    onClose();
+  };
+
+  const handleClose = () => {
+    setKategori('');
     onClose();
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h3>Tambah Kategori</h3>
         <input 
@@ -36,11 +41,11 @@ export default function AddCategoryModal({ isOpen, onClose }: AddCategoryModalPr
         />
         
         <div className="modal-actions">
-          <button className="modal-button green" onClick={handleSimpan}>
-            <span>✓</span> Simpan Perubahan
+          <button className="modal-button secondary" onClick={handleClose}>
+            Batal
           </button>
-          <button className="modal-button red" onClick={onClose}>
-            <span>✕</span> Hapus Perubahan
+          <button className="modal-button green" onClick={handleSimpan}>
+            Simpan Perubahan
           </button>
         </div>
       </div>
