@@ -26,7 +26,7 @@
 }
 
 .active-link {
-  background: #FF7A00; 
+  background: #FF7A00 !important; 
   color: white !important;
   padding: 6px 14px;
   border-radius: 8px;

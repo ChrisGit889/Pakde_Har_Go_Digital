@@ -60,7 +60,13 @@ function NavbarComponents() {
               href="/tentangKami"
               className={`nav-link-custom ${
                 isActive("/tentangKami") ? "active-link" : ""
-              } ${scrolled || expanded ? "text-dark" : "text-white"}`}
+              } ${
+                !isActive("/tentangKami") && (scrolled || expanded)
+                  ? "text-dark"
+                  : !isActive("/tentangKami")
+                  ? "text-white"
+                  : ""
+              }`}
             >
               Tentang Kami
             </Nav.Link>
@@ -69,7 +75,13 @@ function NavbarComponents() {
               href="/kontak"
               className={`nav-link-custom ${
                 isActive("/kontak") ? "active-link" : ""
-              } ${scrolled || expanded ? "text-dark" : "text-white"}`}
+              } ${
+                !isActive("/kontak") && (scrolled || expanded)
+                  ? "text-dark"
+                  : !isActive("/kontak")
+                  ? "text-white"
+                  : ""
+              }`}
             >
               Kontak
             </Nav.Link>
