@@ -20,12 +20,15 @@
     "react-bootstrap": "^2.10.10",
     "react-bootstrap-icons": "^1.11.6",
     "react-chartjs-2": "^5.3.1",
+    "react-datepicker": "^8.9.0",
     "react-dom": "^18",
+    "react-hot-toast": "^2.6.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18",
     "typescript": "^5"
   }

@@ -1,19 +1,26 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import './AdminMenu.css';
 
-const tabs = ['Semua', 'Nasi Goreng', 'Mie Goreng', 'Minuman']; // Sesuaikan
+interface MenuFilterTabsProps {
+  categories: string[];
+  activeCategory: string;
+  onCategoryChange: (category: string) => void;
+}
 
-export default function MenuFilterTabs() {
-  const [activeTab, setActiveTab] = useState('Semua');
-
+export default function MenuFilterTabs({ 
+  categories, 
+  activeCategory, 
+  onCategoryChange 
+}: MenuFilterTabsProps) {
+  const tabs = ['Semua', ...categories];
   return (
     <div className="menu-filter-tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`filter-tab ${activeTab === tab ? 'active' : ''}`}
-          onClick={() => setActiveTab(tab)}
+          className={`filter-tab ${activeCategory === tab ? 'active' : ''}`}
+          onClick={() => onCategoryChange(tab)}
         >
           {tab}
         </button>
