@@ -8,31 +8,37 @@ function Ulasan() {
       nama: "Zen",
       status: "Trader Crypto",
       teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
+      review_rating: 3,
     },
     {
       nama: "Vivi",
       status: "Mahasiswa Untar",
       teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
+      review_rating: 4,
     },
     {
       nama: "Budi Is Man",
       status: "Mahasiswa Untar",
       teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
+      review_rating: 4,
     },
     {
       nama: "Christio",
       status: "Investor",
       teks: `"Nasi Goreng di Pakde Har benar-benar lezat! Setiap suapan membawa kenikmatan yang tak terlupakan. Saya sangat merekomendasikan tempat ini kepada siapa saja yang mencari cita rasa autentik."`,
+      review_rating: 5,
     },
     {
       nama: "NuelGB",
       status: "Trader",
       teks: `"Nasi Goreng di sini luar biasa! Rasanya yang kaya dan bumbu yang pas membuat saya ketagihan. Tempat yang sempurna untuk menikmati hidangan Indonesia yang autentik."`,
+      review_rating: 5,
     },
     {
       nama: "Annuel",
       status: "Financial Advisor",
       teks: `"Nasi Goreng disini enak sekali, Seenak Ramen Ichiraku Favoritku!"`,
+      review_rating: 5,
     },
   ];
 
@@ -48,14 +54,23 @@ function Ulasan() {
     setCurrentPage(page);
   };
 
+  const renderStars = (rating: number) => {
+    const totalStars = 5;
+    return Array.from({ length: totalStars }, (_, i) => (
+      <span
+        key={i}
+        style={{
+          color: i < rating ? "#FFA726" : "#E0E0E0", 
+        }}
+      >
+        ★
+      </span>
+    ));
+  };
+
   return (
     <Container fluid className="py-4">
-      
-
-      <Row
-        className="justify-content-center g-4"
-        style={{ padding: "0 20px" }}
-      >
+      <Row className="justify-content-center g-4" style={{ padding: "0 20px" }}>
         {currentItems.map((item, index) => (
           <Col key={index} xs={12} sm={8} md={6} lg={3}>
             <Card
@@ -81,15 +96,9 @@ function Ulasan() {
                 >
                   {item.status}
                 </Card.Subtitle>
-                <div
-                  style={{
-                    color: "#FFA726",
-                    marginBottom: "12px",
-                    fontSize: "1.2rem",
-                  }}
-                >
-                  ★ ★ ★ ★ ★
-                </div>
+
+                <div style={{ marginBottom: "12px" }}>{renderStars(item.review_rating)}</div>
+
                 <Card.Text
                   style={{
                     fontSize: "14px",

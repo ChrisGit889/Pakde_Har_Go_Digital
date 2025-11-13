@@ -14,18 +14,18 @@ import berita from "./DummyBerita";
 
 const IDCategory = (categoryId: string) => {
   switch (categoryId) {
-     case "Category_1":
-          return "Nasi Goreng";
-        case "Category_2":
-          return "Mie Goreng";
-        case "Category_3":
-          return "Lainnya";
-        case "Category_4":
-          return "Kwetiau Goreng";
-        case "Semua":
-          return "Semua";
-        default:
-          return "lainnya";
+    case "Category_1":
+      return "Nasi Goreng";
+    case "Category_2":
+      return "Mie Goreng";
+    case "Category_3":
+      return "Lainnya";
+    case "Category_4":
+      return "Kwetiau Goreng";
+    case "Semua":
+      return "Semua";
+    default:
+      return "lainnya";
   }
 };
 
@@ -60,10 +60,9 @@ function CardBerita() {
   }, [pageFromUrl]);
 
   const filteredblogs =
-  kategori && kategori.toLowerCase() !== "semua"
-    ? berita.filter((blog) => blog.CategoryID === kategori)
-    : berita;
-
+    kategori && kategori.toLowerCase() !== "semua"
+      ? berita.filter((blog) => blog.CategoryID === kategori)
+      : berita;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -75,7 +74,7 @@ function CardBerita() {
 
     const params = new URLSearchParams(searchParams);
     params.set("page", pageNumber.toString());
-    router.push(`${pathname}?${params.toString()}#cardmenu`);
+     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return (
@@ -116,7 +115,6 @@ function CardBerita() {
                   <div>
                     <Card.Title className="mb-2">{item.title}</Card.Title>
 
-
                     <Card.Text
                       className="text-muted"
                       style={{ fontSize: "14px", color: "black" }}
@@ -148,8 +146,65 @@ function CardBerita() {
         )}
       </Row>
 
+      {totalPages > 1 && (
+        <div className="d-flex justify-content-center mt-3">
+          <Pagination>
+            <Pagination.Prev
+              onClick={() =>
+                handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+              }
+              disabled={currentPage === 1}
+            />
 
+            <Pagination.Item
+              active={1 === currentPage}
+              onClick={() => handlePageChange(1)}
+            >
+              1
+            </Pagination.Item>
 
+            {currentPage > 4 && <Pagination.Ellipsis disabled />}
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter(
+                (num) =>
+                  num !== 1 &&
+                  num !== totalPages &&
+                  num >= currentPage - 2 &&
+                  num <= currentPage + 2
+              )
+              .map((num) => (
+                <Pagination.Item
+                  key={num}
+                  active={num === currentPage}
+                  onClick={() => handlePageChange(num)}
+                >
+                  {num}
+                </Pagination.Item>
+              ))}
+
+            {currentPage < totalPages - 3 && <Pagination.Ellipsis disabled />}
+
+            {totalPages > 1 && (
+              <Pagination.Item
+                active={totalPages === currentPage}
+                onClick={() => handlePageChange(totalPages)}
+              >
+                {totalPages}
+              </Pagination.Item>
+            )}
+
+            <Pagination.Next
+              onClick={() =>
+                handlePageChange(
+                  currentPage < totalPages ? currentPage + 1 : totalPages
+                )
+              }
+              disabled={currentPage === totalPages}
+            />
+          </Pagination>
+        </div>
+      )}
     </Container>
   );
 }
