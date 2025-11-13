@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import './Sidebar.css';
+import { logout } from '@/utils/utils';
 
 const navLinks = [
   { name: 'Pengunjung', href: '/admin/dashboard', icon: '/images/profilePutih.png' },
@@ -15,8 +16,8 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLogout = () => {
-    localStorage.removeItem('admin_token');
+  const handleLogout = async () => {
+    await logout();
     router.push('/');
   };
 
