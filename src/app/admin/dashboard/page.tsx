@@ -1,11 +1,12 @@
-'use client';
+'use server';
 import StatCards from '@/app/components/dashboard/StatCards';
 import SalesChart from '@/app/components/dashboard/SalesChart';
 import MenuDonutChart from '@/app/components/dashboard/MenuDonutChart';
 import VisitorSourceChart from '@/app/components/dashboard/VisitorSourceChart';
 import './DashboardPage.css';
+import { revalidatePath } from 'next/cache';
 
-export default function DashboardPengunjungPage() {
+export default async function DashboardPengunjungPage() {
   return (
     <>
       <div className="visitor-dashboard-container">

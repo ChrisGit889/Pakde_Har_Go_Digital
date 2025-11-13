@@ -2,57 +2,151 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { dummyBerita } from '@/app/components/berita/BeritaList';
 import SuccessModal from '@/app/components/berita/Successmodal';
 import '../tambah/TambahBerita.css';
+import { BlogData } from '@/utils/dataTypes/BlogData';
+import { getToken, route } from '@/utils/utils';
 
 export default function EditBeritaPage() {
   const router = useRouter();
+
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-  const [judul, setJudul] = useState('');
-  const [isiBerita, setIsiBerita] = useState('');
+
+  const [data, setData] = useState<BlogData | null>(null);
+  const [load, setLoad] = useState<boolean>(false);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [story, setStory] = useState('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [file, setFile] = useState<File | undefined>(undefined);
+
+  if (!id) {
+    return <>Page Missing...</>;
+  }
+
+  async function asyncFetch() {
+    const data: BlogData = await fetch(await route('/blog/' + blogId), {
+      method: 'GET',
+    }).then((res) => {
+      if (res.status == 200) {
+        return res.json();
+      }
+      throw Error('Database Err!');
+    }).catch((e) => {
+      console.log(e);
+      return null;
+    });
+
+    if (data) {
+      setData(data);
+    } else {
+      setData(null);
+    }
+  }
+
+  const blogId = parseInt(id, 10);
 
   useEffect(() => {
-    if (id) {
-      const beritaId = parseInt(id, 10);
-      const dataToEdit = dummyBerita.find((b) => b.id === beritaId);
+    asyncFetch();
+  }, []);
 
-      if (dataToEdit) {
-        setJudul(dataToEdit.title);
-        setIsiBerita(dataToEdit.isiLengkap);
-        setPreviewUrl(dataToEdit.imageUrl);
+  useEffect(() => {
+    if (data != null) {
+      setTitle(data.blog.title || '');
+      setStory(data.blog.story || '');
+      setDescription(data.blog.description || '');
+      if (data.image.data != null) {
+        setPreviewUrl(`data:image/${data.image.name.split('.')[data.image.name.split('.').length - 1]};base64,${Buffer.from(data.image.data).toString("base64")}`);
       }
     }
-  }, [id]);
+    setLoad(!load);
+  }, [data]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
+    const tempFile = event.target.files?.[0];
+    if (tempFile) {
+      setPreviewUrl(URL.createObjectURL(tempFile));
+      setFile(tempFile);
     }
   };
   const triggerFileInput = () => {
     document.getElementById('imageUpload')?.click();
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!judul || !isiBerita) {
+    if (!title || !story) {
       alert('Judul dan Isi Berita tidak boleh kosong.');
       return;
     }
-    console.log("Perubahan disimpan:", { id, judul, isiBerita });
-    setIsSuccessModalOpen(true);
+    let headers;
+    let res1 = true;
+    const tok = await getToken();
+    if ((data!.image.name == null ? true : previewUrl != `data:image/${data!.image.name.split('.')[data!.image.name.split('.').length - 1]};base64,${Buffer.from(data!.image.data).toString("base64")}`) && file != undefined) {
+      headers = new Headers();
+      let formdata = new FormData()
+      formdata.append('uploaded_img', file!);
+      headers.append('Authorization', tok!.toString());
+      res1 = await fetch(await route('/blog/' + blogId + '/image'), {
+        method: 'PUT',
+        body: formdata,
+        headers: headers,
+      }).then((res) => {
+        if (res.status == 200) return true;
+        throw Error("Something went wrong");
+      }).catch((e) => {
+        console.log(e);
+        return false;
+      });
+    }
+    headers = new Headers();
+    headers.append('Content-type', "application/json");
+    headers.append('Authorization', tok!.toString());
+    let res2 = await fetch(await route('/blog/' + blogId), {
+      method: 'PUT',
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        story: story,
+      }),
+      headers: headers
+    }).then((res) => {
+      if (res.status == 200) return true;
+      throw Error("Something went wrong");
+    }).catch((e) => {
+      console.log(e);
+      return false;
+    });
+    if (res1 && res2) setModal(true);
   };
 
   const handleModalClose = () => {
-    setIsSuccessModalOpen(false);
+    setModal(false);
     router.push('/admin/berita');
   };
 
+  if (!load) {
+    return (
+      <>
+        <div className="berita-detail-container">
+          <p>Loading</p>
+        </div>
+      </>
+    );
+  }
+
+  if (data == null) {
+    return (
+      <>
+        <div className="berita-detail-container">
+          <p>Error loading blog</p>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -81,28 +175,41 @@ export default function EditBeritaPage() {
             </div>
 
             <div className="form-section">
-              <label htmlFor="judulBerita" className="form-label">
+              <label htmlFor="title" className="form-label">
                 Judul Berita
               </label>
               <input
                 type="text"
-                id="judulBerita"
+                id="title"
                 placeholder="Isi judul berita disini..."
-                value={judul}
-                onChange={(e) => setJudul(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
 
             <div className="form-section">
-              <label htmlFor="isiBerita" className="form-label">
+              <label htmlFor="description" className="form-label">
+                Deskripsi Singkat
+              </label>
+              <input
+                type="text"
+                id="descripition"
+                placeholder="Isi deskripsi singkat berita disini..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <div className="form-section">
+              <label htmlFor="story" className="form-label">
                 Isi Berita
               </label>
               <textarea
-                id="isiBerita"
+                id="story"
                 placeholder="Isi berita lengkap disini..."
                 rows={12}
-                value={isiBerita}
-                onChange={(e) => setIsiBerita(e.target.value)}
+                value={story}
+                onChange={(e) => setStory(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -115,7 +222,7 @@ export default function EditBeritaPage() {
         </form>
       </div>
       <SuccessModal
-        isOpen={isSuccessModalOpen}
+        isOpen={modal}
         onClose={handleModalClose}
         message="Perubahan Anda berhasil disimpan."
       />

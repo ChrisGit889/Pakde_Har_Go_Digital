@@ -1,9 +1,9 @@
-'use client';
+'use server';
 import Link from 'next/link';
 import BeritaList from '@/app/components/berita/BeritaList';
 import './BeritaPage.css';
 
-export default function BeritaPage() {
+export default async function BeritaPage() {
   return (
     <>
       <div className="berita-page-header">

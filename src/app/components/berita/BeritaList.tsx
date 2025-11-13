@@ -1,69 +1,24 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import SuccessModal from './Successmodal'; 
+'use server';
 
-export const dummyBerita = [
-  {
-    id: 1,
-    title: 'Menu Baru Segera Hadir',
-    excerpt: 'Menu terbaru kami, Nasi Goreng Gila Kambing...',
-    imageUrl: '/images/Nasi_Goreng_Ayam.jpg',
-    isiLengkap: 'Kami dengan bangga memperkenalkan menu terbaru...' 
-  },
-  {
-    id: 2,
-    title: 'Pindah Lokasi',
-    excerpt: 'Pada 22 Oktober 2025 Nasi Goreng Pakde Har pindah...',
-    imageUrl: '/images/Gerobak_Pakde.jpg',
-    isiLengkap: 'Isi berita lengkap untuk Pindah Lokasi...'
-  },
-];
+import { route } from "@/utils/utils";
+import BeritaListSync from "./BeritaListSync";
 
-export default function BeritaList() {
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const handleDeleteClick = () => {
-    console.log("Berita dihapus!");
-    setIsSuccessModalOpen(true);
-  };
+//Komponen Async untuk merequest datanya
+export default async function BeritaListAsync() {
+  const data = await fetch(await route('/blog/list'), {
+    method: 'GET'
+  }).then((res) => {
+    if (res.status == 200) {
+      return res.json();
+    } else {
+      throw Error(JSON.stringify(res.json()));
+    }
+  }).catch((e) => {
+    console.log(e);
+    return false;
+  })
 
-  return (
-    <>
-      {dummyBerita.map((berita) => (
-        <div key={berita.id} className="berita-card">
-          <img src={berita.imageUrl} alt={berita.title} className="berita-card-image" />
-          
-          <div className="berita-content">
-            <div className="berita-content-top">
-              <h3>{berita.title}</h3>
-              <p>{berita.excerpt}</p>
-            </div>
-            
-            <div className="berita-actions">
-              <Link href={`/admin/berita/edit?id=${berita.id}`} className="button-ubah">
-                Edit
-              </Link>
-              
-              <button 
-                className="button-delete" 
-                onClick={handleDeleteClick}
-              >
-                Hapus
-              </button>
+  const list = data.data;
 
-              <Link href={`/admin/berita/detail?id=${berita.id}`} className="button-orange">
-                Lihat Detail
-              </Link>
-            </div>
-          </div>
-        </div>
-      ))}
-
-      <SuccessModal 
-        isOpen={isSuccessModalOpen} 
-        onClose={() => setIsSuccessModalOpen(false)} 
-        message="Berita Anda berhasil dihapus."
-      />
-    </>
-  );
+  return (<BeritaListSync data={list} />);
 }
