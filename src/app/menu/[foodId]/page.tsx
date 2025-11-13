@@ -137,22 +137,7 @@ export default function FoodDetail() {
               </p>
             </div>
 
-            <div className="d-flex flex-wrap gap-2 mb-3">
-              {food.categoryid.map((cat, i) => (
-                <Badge
-                  key={i}
-                  bg=""
-                  style={{
-                    backgroundColor: "#FFF2CC",
-                    color: "#FF941A",
-                    padding: "6px 10px",
-                    borderRadius: "6px",
-                  }}
-                >
-                  {IDCategory(cat)}
-                </Badge>
-              ))}
-            </div>
+           
 
             <Button
               onClick={() => {

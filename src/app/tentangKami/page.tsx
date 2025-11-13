@@ -2,36 +2,14 @@
 import styles from "../page.module.css";
 import NavbarComponents from "../components/navbarWebUser/navbar";
 import Footer from "../components/footerWebUser/footer";
+import HalamanUtamatentangKami from "../components/KomponenAboutusKontak/HalamanUtamatentangKami";
 
 export default function Menu() {
   return (
     <div className={styles.container}>
       <NavbarComponents />
 
-      <div className={styles.container2}>
-        <h1 className={styles.judulHalaman}>
-          Cerita di Balik Nasi Goreng <span className={styles.kuning}>Pakde Har</span>
-        </h1>
-
-        <h3 className={styles.deskripsisingkatberanda}>
-          Dari wajan sederhana di pinggir jalan Untar, Pakde Har menghadirkan cita rasa nasi goreng
-          yang penuh kenangan dan kehangatan.
-        </h3>
-
-        <button className={styles.tombolJelajahi}>Tentang Pakde</button>
-      </div>
-
-      <img
-        src="/images/PanahBawah.png"
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "40px",
-          height: "auto",
-          position: "relative",
-          bottom: "6vh",
-        }}
-      />
+      <HalamanUtamatentangKami/>
 
       <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
         <img
@@ -67,6 +45,7 @@ export default function Menu() {
             marginBottom: "40px",
             color: "#000",
           }}
+          id="tentangKami"
         >
           Dari Awal yang Sederhana
         </h2>
