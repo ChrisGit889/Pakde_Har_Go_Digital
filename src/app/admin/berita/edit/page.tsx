@@ -1,16 +1,15 @@
 'use client';
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation'; 
-import DashboardLayout from '@/app/components/DashboardLayout'; 
-import { dummyBerita } from '@/app/components/berita/BeritaList'; 
+import { useSearchParams, useRouter } from 'next/navigation';
+import { dummyBerita } from '@/app/components/berita/BeritaList';
 import SuccessModal from '@/app/components/berita/Successmodal';
 import '../tambah/TambahBerita.css';
 
 export default function EditBeritaPage() {
-  const router = useRouter(); 
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get('id'); 
+  const id = searchParams.get('id');
   const [judul, setJudul] = useState('');
   const [isiBerita, setIsiBerita] = useState('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -27,7 +26,7 @@ export default function EditBeritaPage() {
         setPreviewUrl(dataToEdit.imageUrl);
       }
     }
-  }, [id]); 
+  }, [id]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -40,7 +39,7 @@ export default function EditBeritaPage() {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();    
+    event.preventDefault();
     if (!judul || !isiBerita) {
       alert('Judul dan Isi Berita tidak boleh kosong.');
       return;
@@ -56,7 +55,7 @@ export default function EditBeritaPage() {
 
 
   return (
-    <DashboardLayout>
+    <>
       <div className="form-container">
         <div className="form-header">
           <Link href="/admin/berita" className="back-button">
@@ -89,7 +88,7 @@ export default function EditBeritaPage() {
                 type="text"
                 id="judulBerita"
                 placeholder="Isi judul berita disini..."
-                value={judul} 
+                value={judul}
                 onChange={(e) => setJudul(e.target.value)}
               />
             </div>
@@ -102,12 +101,12 @@ export default function EditBeritaPage() {
                 id="isiBerita"
                 placeholder="Isi berita lengkap disini..."
                 rows={12}
-                value={isiBerita} 
+                value={isiBerita}
                 onChange={(e) => setIsiBerita(e.target.value)}
               ></textarea>
             </div>
           </div>
-          
+
           <div className="form-actions">
             <button type="submit" className="button button-orange">
               Simpan Perubahan
@@ -118,8 +117,8 @@ export default function EditBeritaPage() {
       <SuccessModal
         isOpen={isSuccessModalOpen}
         onClose={handleModalClose}
-        message="Perubahan Anda berhasil disimpan." 
+        message="Perubahan Anda berhasil disimpan."
       />
-    </DashboardLayout>
+    </>
   );
 }

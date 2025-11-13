@@ -1,6 +1,5 @@
-'use client'; 
-import React, { useState, useMemo, useEffect } from 'react'; 
-import DashboardLayout from '@/app/components/DashboardLayout'; 
+'use client';
+import React, { useState, useMemo, useEffect } from 'react';
 import AdminMenuTopbar from '@/app/components/adminMenu/AdminMenuTopbar';
 import MenuFilterTabs from '@/app/components/adminMenu/MenuFilterTabs';
 import ProductGrid from '@/app/components/adminMenu/ProductGrid';
@@ -28,25 +27,25 @@ export default function AdminMenuPage() {
       return products;
     }
     return products.filter(product => product.category === activeCategory);
-  }, [activeCategory, products]); 
+  }, [activeCategory, products]);
 
   return (
-    <DashboardLayout>
+    <>
       <div className="menu-page-container">
         <AdminMenuTopbar onAddCategoryClick={() => setIsModalOpen(true)} />
-        <MenuFilterTabs 
+        <MenuFilterTabs
           categories={categories}
           activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory} 
+          onCategoryChange={setActiveCategory}
         />
-        <ProductGrid 
-          products={filteredProducts} 
+        <ProductGrid
+          products={filteredProducts}
         />
       </div>
       <AddCategory
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    </DashboardLayout>
+    </>
   );
 }

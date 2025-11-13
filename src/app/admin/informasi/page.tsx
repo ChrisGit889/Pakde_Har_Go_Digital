@@ -1,16 +1,15 @@
 'use client';
-import React, { useState } from 'react'; 
-import DashboardLayout from '@/app/components/DashboardLayout'; 
+import React, { useState } from 'react';
 import InfoAlamat from '@/app/components/informasi/InfoAlamat';
 import InfoJamOperasional from '@/app/components/informasi/InfoJamOperasional';
 import InfoKontak from '@/app/components/informasi/InfoKontak';
 import AlamatModal from '@/app/components/informasi/Alamat';
 import JamModal from '@/app/components/informasi/Jam';
 import KontakModal from '@/app/components/informasi/Kontak';
-import './InformasiPage.css'; 
+import './InformasiPage.css';
 
-const dummyAlamat1 = { id: 1, namaToko: 'Nasi Goreng Pakde Har', alamat: 'Sebelah Alfa-X S.Parman, Jl. Taman S. Parman, RT.7/RW.8, Grogol...'};
-const dummyAlamat2 = { id: 2, namaToko: 'Nasi Goreng Pakde Har', alamat: 'Alamat 2...'};
+const dummyAlamat1 = { id: 1, namaToko: 'Nasi Goreng Pakde Har', alamat: 'Sebelah Alfa-X S.Parman, Jl. Taman S. Parman, RT.7/RW.8, Grogol...' };
+const dummyAlamat2 = { id: 2, namaToko: 'Nasi Goreng Pakde Har', alamat: 'Alamat 2...' };
 const dummyJamKerja = { senin: '07:00 - 22:00', selasa: '07:00 - 22:00' };
 const dummyJamLibur = { sabtu: 'Tutup', minggu: 'Tutup' };
 const dummyKontak = '08123456789';
@@ -33,46 +32,46 @@ export default function InformasiPage() {
   };
 
   return (
-    <DashboardLayout>
+    <>
       <h1 className="page-title">Pengaturan Informasi</h1>
       <div className="informasi-container">
-        <InfoAlamat 
-          alamat1={dummyAlamat1} 
+        <InfoAlamat
+          alamat1={dummyAlamat1}
           alamat2={dummyAlamat2}
           onTambah={() => handleOpenAlamatModal(null)}
           onUbah={handleOpenAlamatModal}
         />
-        
+
         <div className="info-row">
-          <InfoJamOperasional 
+          <InfoJamOperasional
             jamKerja={dummyJamKerja}
             jamLibur={dummyJamLibur}
             onUbahJamKerja={() => handleOpenJamModal('kerja', dummyJamKerja)}
             onUbahJamLibur={() => handleOpenJamModal('libur', dummyJamLibur)}
           />
-          <InfoKontak 
+          <InfoKontak
             kontak={dummyKontak}
             onUbah={() => handleOpenKontakModal(dummyKontak)}
           />
         </div>
       </div>
 
-      <AlamatModal 
+      <AlamatModal
         isOpen={alamatModal.isOpen}
         onClose={() => setAlamatModal({ isOpen: false, data: null })}
         alamatData={alamatModal.data}
       />
-      <JamModal 
+      <JamModal
         isOpen={jamModal.isOpen}
         onClose={() => setJamModal({ isOpen: false, mode: '', data: null })}
         mode={jamModal.mode}
         jamData={jamModal.data}
       />
-      <KontakModal 
+      <KontakModal
         isOpen={kontakModal.isOpen}
         onClose={() => setKontakModal({ isOpen: false, data: null })}
         kontakData={kontakModal.data}
       />
-    </DashboardLayout>
+    </>
   );
 }

@@ -2,6 +2,7 @@
 import React from 'react';
 import Forbidden from '../components/Forbidden';
 import { authenticate } from '@/utils/utils';
+import DashboardLayout from '../components/DashboardLayout';
 
 export default async function AdminLayout({
   children,
@@ -15,8 +16,8 @@ export default async function AdminLayout({
   }
 
   return (
-    <>
+    <DashboardLayout>
       {children}
-    </>
+    </DashboardLayout>
   );
 }
