@@ -73,6 +73,36 @@ Menu ini sangat cocok untuk kamu yang suka eksplorasi rasa dan kuliner yang unik
     CategoryID: "Category_4",
     imageid: "image_3",
   },
+
+  {
+    blogId: "Blog_6",
+    title: "Menu Baru Kwetiau Goreng Gila Kambing !",
+    description:
+      "Menu terbaru kami, Kwetiau Goreng Gila Kambing, hadir dengan rasa istimewa yang memadukan bumbu khas dan kelezatan daging kambing pilihan.",
+    story: `
+Kwetiau Goreng Gila Kambing ini hadir sebagai lanjutan inovasi kami untuk memberikan lebih banyak variasi menu kepada pelanggan setia. Tekstur kwetiau yang lembut dan kenyal memberikan pengalaman yang berbeda dibanding mie atau nasi. Ketika dipadukan dengan bumbu rempah yang kaya, rasa yang dihasilkan menjadi lebih dalam dan gurih.
+
+Kami memastikan daging kambing diolah dengan baik agar teksturnya empuk dan mudah disantap. Bumbu yang digunakan sengaja dibuat lebih aromatik untuk menonjolkan karakter rasa khas dari menu ini. Proses masaknya dilakukan dengan api besar untuk menjaga aroma dan rasa tetap kuat.
+
+Menu ini sangat cocok untuk kamu yang suka eksplorasi rasa dan kuliner yang unik. Kwetiau Goreng Gila Kambing bukan hanya sekadar menu baru, tetapi pengalaman baru yang ingin kami bagikan kepada setiap pelanggan.`,
+    CategoryID: "Category_4",
+    imageid: "image_3",
+  },
+
+  {
+    blogId: "Blog_7",
+    title: "Menu Baru Kwetiau Goreng Gila Kambing !",
+    description:
+      "Menu terbaru kami, Kwetiau Goreng Gila Kambing, hadir dengan rasa istimewa yang memadukan bumbu khas dan kelezatan daging kambing pilihan.",
+    story: `
+Kwetiau Goreng Gila Kambing ini hadir sebagai lanjutan inovasi kami untuk memberikan lebih banyak variasi menu kepada pelanggan setia. Tekstur kwetiau yang lembut dan kenyal memberikan pengalaman yang berbeda dibanding mie atau nasi. Ketika dipadukan dengan bumbu rempah yang kaya, rasa yang dihasilkan menjadi lebih dalam dan gurih.
+
+Kami memastikan daging kambing diolah dengan baik agar teksturnya empuk dan mudah disantap. Bumbu yang digunakan sengaja dibuat lebih aromatik untuk menonjolkan karakter rasa khas dari menu ini. Proses masaknya dilakukan dengan api besar untuk menjaga aroma dan rasa tetap kuat.
+
+Menu ini sangat cocok untuk kamu yang suka eksplorasi rasa dan kuliner yang unik. Kwetiau Goreng Gila Kambing bukan hanya sekadar menu baru, tetapi pengalaman baru yang ingin kami bagikan kepada setiap pelanggan.`,
+    CategoryID: "Category_4",
+    imageid: "image_3",
+  },
 ]
 
 export default berita;
