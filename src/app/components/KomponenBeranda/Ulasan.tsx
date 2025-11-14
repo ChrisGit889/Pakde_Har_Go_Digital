@@ -42,6 +42,14 @@ function Ulasan() {
     },
   ];
 
+  if (ulasan.length === 0) {
+  return (
+    <Container fluid className="py-4">
+      <p className="text-center fw-bold mt-5">Saat ini belum ada ulasan.</p>
+    </Container>
+  );
+}
+
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
 

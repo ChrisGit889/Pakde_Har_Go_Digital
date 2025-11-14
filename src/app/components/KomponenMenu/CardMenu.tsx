@@ -55,6 +55,15 @@ function CardMenu() {
     setCurrentPage(pageFromUrl);
   }, [pageFromUrl]);
 
+
+  if (foods.length === 0) {
+    return (
+      <Container fluid className="py-4 px-3 px-md-5">
+        <p className="text-center fw-bold mt-5">Saat ini belum ada menu.</p>
+      </Container>
+    );
+  }
+
   const filteredFoods =
     kategori && kategori !== "semua"
       ? foods.filter((food) => food.categoryid.includes(kategori))
