@@ -56,10 +56,9 @@ export default async function InformasiPage() {
           <InfoJamOperasional
             schedule={schedule!}
           />
-          {/* <InfoKontak
-            kontak={dummyKontak}
-            onUbah={() => { }}
-          /> */}
+          <InfoKontak
+            contacts={{ emails, phones }}
+          />
         </div>
       </div>
     </>
