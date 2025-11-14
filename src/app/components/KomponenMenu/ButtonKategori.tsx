@@ -32,7 +32,7 @@ function KategoriMenu() {
   const KategoriAktif = (kategoriValue: string, label: string) => {
     setActiveCategory(label);
     if (kategoriValue === "Semua") {
-      router.push("/menu#cardmenu");
+      router.push("/menu#menuUnggulan");
     } else {
       router.push(`/menu?kategori=${kategoriValue}#menuUnggulan`);
     }
