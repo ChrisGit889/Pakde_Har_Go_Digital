@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './TambahMenu.css';
-import SuccessModal from '@/app/components/berita/Successmodal';
+import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import { Product, masterProductList } from '../data';
 
 export default function TambahMenuPage() {

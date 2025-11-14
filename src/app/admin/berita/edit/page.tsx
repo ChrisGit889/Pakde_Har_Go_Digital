@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import SuccessModal from '@/app/components/berita/Successmodal';
+import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import '../tambah/TambahBerita.css';
 import { BlogData } from '@/utils/dataTypes/BlogData';
 import { getToken, route } from '@/utils/utils';
@@ -16,11 +16,11 @@ export default function EditBeritaPage() {
   const [data, setData] = useState<BlogData | null>(null);
   const [load, setLoad] = useState<boolean>(false);
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [story, setStory] = useState('');
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [story, setStory] = useState<string>('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [modal, setModal] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
   const [file, setFile] = useState<File | undefined>(undefined);
 
   if (!id) {
@@ -120,11 +120,11 @@ export default function EditBeritaPage() {
       console.log(e);
       return false;
     });
-    if (res1 && res2) setModal(true);
+    if (res1 && res2) setSuccess(true);
   };
 
   const handleModalClose = () => {
-    setModal(false);
+    setSuccess(false);
     router.push('/admin/berita');
   };
 
@@ -191,13 +191,13 @@ export default function EditBeritaPage() {
               <label htmlFor="description" className="form-label">
                 Deskripsi Singkat
               </label>
-              <input
-                type="text"
+              <textarea
                 id="descripition"
                 placeholder="Isi deskripsi singkat berita disini..."
+                rows={4}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-              />
+              ></textarea>
             </div>
 
             <div className="form-section">
@@ -222,7 +222,7 @@ export default function EditBeritaPage() {
         </form>
       </div>
       <SuccessModal
-        isOpen={modal}
+        isOpen={success}
         onClose={handleModalClose}
         message="Perubahan Anda berhasil disimpan."
       />

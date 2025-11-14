@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { Product, masterProductList } from '../../data';
 import '../../tambah/TambahMenu.css';
-import SuccessModal from '@/app/components/berita/Successmodal';
+import SuccessModal from '@/app/admin/berita/components/Successmodal';
 
 export default function EditMenuPage() {
   const router = useRouter();
