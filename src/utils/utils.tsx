@@ -2,14 +2,14 @@
 
 import { cookies } from "next/headers";
 
-function route(endpoint: string) {
+async function route(endpoint: string) {
     return process.env.API_URL + endpoint;
 }
 
 async function login(username: string, password: string): Promise<Number | string> {
     "use server"
 
-    const data = await fetch(route('/auth/signin'), {
+    const data = await fetch(await route('/auth/signin'), {
         body: JSON.stringify({
             username: username,
             password: password,
@@ -37,7 +37,7 @@ async function login(username: string, password: string): Promise<Number | strin
 async function authenticate(): Promise<boolean> {
     const token = await getToken();
     if (token == null) return false;
-    const data = await fetch(route(`/auth/verify?token=${token}`), {
+    const data = await fetch(await route(`/auth/verify?token=${token}`), {
         method: 'GET'
     }).then(res => {
         if (res.status == 200) return res.json();

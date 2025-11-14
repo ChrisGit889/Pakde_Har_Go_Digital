@@ -1,46 +1,73 @@
 'use client';
-import { useState, useEffect } from 'react'; 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation'; 
-import DashboardLayout from '@/app/components/DashboardLayout'; 
-import { dummyBerita } from '@/app/components/berita/BeritaList'; 
 import './BeritaDetail.css';
-
-interface BeritaData {
-  id: number;
-  title: string;
-  excerpt: string;
-  imageUrl: string;
-  isiLengkap: string;
-}
+import { BlogData } from '@/utils/dataTypes/BlogData';
+import { route } from '@/utils/utils';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function BeritaDetailPage() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  const [berita, setBerita] = useState<BeritaData | null>(null);
+  const [data, setData] = useState<BlogData | null>(null);
+  const [load, setLoad] = useState<boolean>(false);
+  const params = useSearchParams();
+  const id = params.get('id');
+
+  if (!id) {
+    return <>Page Missing...</>
+  }
+  const blogId = parseInt(id, 10);
+
+  const asyncFetch = async () => {
+    const data: BlogData = await fetch(await route('/blog/' + blogId), {
+      method: 'GET',
+    }).then((res) => {
+      if (res.status == 200) {
+        return res.json();
+      }
+      throw Error('Database Err!');
+    }).catch((e) => {
+      console.log(e);
+      return null;
+    });
+
+    if (data) {
+      setData(data);
+    } else {
+      setData(null);
+    }
+  }
 
   useEffect(() => {
-    if (id) {
-      const beritaId = parseInt(id, 10);
-      const data = dummyBerita.find((b) => b.id === beritaId);
-      if (data) {
-        setBerita(data);
-      }
-    }
-  }, [id]);
+    asyncFetch();
+  }, []);
 
-  if (!berita) {
+  useEffect(() => {
+    setLoad(!load);
+  }, [data]);
+
+  if (!load) {
     return (
-      <DashboardLayout>
+      <>
         <div className="berita-detail-container">
-          <p>Loading...</p>
+          <p>Loading</p>
         </div>
-      </DashboardLayout>
+      </>
     );
   }
 
+  if (data == null) {
+    return (
+      <>
+        <div className="berita-detail-container">
+          <p>Error loading blog</p>
+        </div>
+      </>
+    )
+  }
+
+
   return (
-    <DashboardLayout>
+    <>
       <div className="berita-detail-container">
         <div className="detail-header">
           <Link href="/admin/berita" className="back-button">
@@ -49,21 +76,30 @@ export default function BeritaDetailPage() {
         </div>
 
         <article className="detail-article-card">
-          <img 
-            src={berita.imageUrl} 
-            alt={berita.title} 
-            className="detail-image" 
-          />
-          
+          {
+            data.image.data == null ?
+              <img
+                src={"data:image/jpeg;base64,"}
+                alt={data.blog.title}
+                className="detail-image"
+              />
+              :
+              <img
+                src={`data:image/${data.image.name.split('.')[data.image.name.split('.').length - 1]};base64,` + Buffer.from(data.image.data).toString("base64")}
+                alt={data.blog.title}
+                className="detail-image"
+              />
+          }
+
           <div className="detail-text-content">
-            <h1 className="detail-title">{berita.title}</h1>
+            <h1 className="detail-title">{data.blog.title}</h1>
             <div className="detail-content">
-              {berita.isiLengkap}
+              {data.blog.story}
             </div>
           </div>
         </article>
 
       </div>
-    </DashboardLayout>
+    </>
   );
 }

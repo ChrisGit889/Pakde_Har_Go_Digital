@@ -1,11 +1,10 @@
 'use client';
-import { useState } from 'react'; 
+import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'; 
-import DashboardLayout from '@/app/components/DashboardLayout'; 
-import './TambahBerita.css'; 
+import { useRouter } from 'next/navigation';
+import './TambahBerita.css';
 export default function TambahBeritaPage() {
-  const router = useRouter(); 
+  const router = useRouter();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [deskripsiSingkat, setDeskripsiSingkat] = useState('');
@@ -28,11 +27,11 @@ export default function TambahBeritaPage() {
       alert('Harap lengkapi semua data (Gambar, Deskripsi Singkat, dan Isi Berita).');
       return;
     }
-    
-    console.log("Data baru siap dikirim:", { 
-      file: selectedFile.name, 
-      deskripsi: deskripsiSingkat, 
-      isi: isiBerita 
+
+    console.log("Data baru siap dikirim:", {
+      file: selectedFile.name,
+      deskripsi: deskripsiSingkat,
+      isi: isiBerita
     });
     setIsSuccessModalOpen(true);
   };
@@ -43,7 +42,7 @@ export default function TambahBeritaPage() {
   };
 
   return (
-    <DashboardLayout>
+    <>
       <div className="form-container">
         <div className="form-header">
           <Link href="/admin/berita" className="back-button">
@@ -58,22 +57,22 @@ export default function TambahBeritaPage() {
             <div className="form-section">
               <label className="form-label">Gambar Berita</label>
               <div className="image-upload-section">
-                <input 
-                  type="file" 
-                  id="imageUpload" 
-                  style={{ display: 'none' }} 
-                  onChange={handleFileChange} 
+                <input
+                  type="file"
+                  id="imageUpload"
+                  style={{ display: 'none' }}
+                  onChange={handleFileChange}
                 />
                 <label htmlFor="imageUpload" className="image-uploader-box">
                   {previewUrl ? (
                     <img src={previewUrl} alt="Preview" className="image-preview" />
                   ) : (
-                    <span className="upload-placeholder-icon">🖼️</span> 
+                    <span className="upload-placeholder-icon">🖼️</span>
                   )}
                 </label>
-                <button 
-                  type="button" 
-                  className="button button-orange" 
+                <button
+                  type="button"
+                  className="button button-orange"
                   onClick={triggerFileInput}
                 >
                   Ubah Gambar
@@ -107,7 +106,7 @@ export default function TambahBeritaPage() {
               ></textarea>
             </div>
           </div>
-          
+
           <div className="form-actions">
             <button type="submit" className="button button-green">
               Simpan Perubahan
@@ -118,6 +117,6 @@ export default function TambahBeritaPage() {
           </div>
         </form>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

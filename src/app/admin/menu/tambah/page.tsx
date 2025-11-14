@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import DashboardLayout from '@/app/components/DashboardLayout';
 import './TambahMenu.css';
 import SuccessModal from '@/app/components/berita/Successmodal';
 import { Product, masterProductList } from '../data';
@@ -64,7 +63,7 @@ export default function TambahMenuPage() {
   };
 
   return (
-    <DashboardLayout>
+    <>
       <div className="form-container">
         <div className="form-header">
           <Link href="/admin/menu" className="back-button">
@@ -187,6 +186,6 @@ export default function TambahMenuPage() {
         onClose={handleModalClose}
         message="Menu baru berhasil disimpan."
       />
-    </DashboardLayout>
+    </>
   );
 }
