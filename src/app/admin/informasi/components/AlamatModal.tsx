@@ -122,8 +122,8 @@ export default function AlamatModal({ id, data, modify, show, onClose }: { id: n
         </div>
 
         <div className="modal-actions">
-          <button className="modal-button secondary" onClick={onClose}>Batal</button>
-          <button className="modal-button red" onClick={onDelete}>Buang</button>
+          <button className="modal-button secondary" onClick={onClose} disabled={submitDisabled}>Batal</button>
+          <button className="modal-button red" onClick={onDelete} disabled={submitDisabled}>Buang</button>
           <button className="modal-button green" onClick={modify ? handleModify : handleMake} disabled={submitDisabled}>Simpan</button>
         </div>
       </div>

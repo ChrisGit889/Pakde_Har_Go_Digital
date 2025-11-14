@@ -53,13 +53,10 @@ export default async function InformasiPage() {
         <InfoAlamat data={places} />
 
         <div className="info-row">
-          {/* <InfoJamOperasional
-            jamKerja={dummyJamKerja}
-            jamLibur={dummyJamLibur}
-            onUbahJamKerja={() => { }}
-            onUbahJamLibur={() => { }}
+          <InfoJamOperasional
+            schedule={schedule!}
           />
-          <InfoKontak
+          {/* <InfoKontak
             kontak={dummyKontak}
             onUbah={() => { }}
           /> */}

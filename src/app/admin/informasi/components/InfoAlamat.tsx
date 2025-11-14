@@ -11,12 +11,12 @@ export default function InfoAlamat({ data }: { data: { name: string, address: st
   const [id, setId] = useState<number | null>(null);
   const [modalData, setModalData] = useState<{ name: string, address: string }>({ name: '', address: '' });
   const [modifying, setModifying] = useState<boolean>(false);
-  const [modalShow, setModalShow] = useState<boolean>(false);
+  const [modalShow, setShow] = useState<boolean>(false);
 
   function onAdd() {
     setId(null);
     setModifying(false);
-    setModalShow(true);
+    setShow(true);
   }
 
   function createOnChange(id: number) {
@@ -28,12 +28,12 @@ export default function InfoAlamat({ data }: { data: { name: string, address: st
         name: data[id].name,
         address: data[id].address,
       })
-      setModalShow(true);
+      setShow(true);
     };
   }
 
   function onClose() {
-    setModalShow(false);
+    setShow(false);
     router.refresh();
   }
 
