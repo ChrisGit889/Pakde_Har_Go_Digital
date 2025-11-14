@@ -3,41 +3,107 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './TambahBerita.css';
+import { getToken, route } from '@/utils/utils';
+import SuccessModal from '@/app/components/berita/Successmodal';
+
 export default function TambahBeritaPage() {
   const router = useRouter();
+
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [story, setStory] = useState<string>('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [deskripsiSingkat, setDeskripsiSingkat] = useState('');
-  const [isiBerita, setIsiBerita] = useState('');
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [file, setFile] = useState<File | undefined>(undefined);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
+    const tempFile = event.target.files?.[0];
+    if (tempFile) {
+      setPreviewUrl(URL.createObjectURL(tempFile));
+      setFile(tempFile);
     }
   };
   const triggerFileInput = () => {
     document.getElementById('imageUpload')?.click();
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleReset = (e: any) => {
+    setTitle('');
+    setDescription('');
+    setStory('');
+    setPreviewUrl(null);
+    setFile(undefined);
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!selectedFile || !deskripsiSingkat || !isiBerita) {
-      alert('Harap lengkapi semua data (Gambar, Deskripsi Singkat, dan Isi Berita).');
+    if (!description || !story || !title) {
+      alert('Harap lengkapi Judul , Deskripsi Singkat, dan Isi Berita!');
       return;
     }
 
-    console.log("Data baru siap dikirim:", {
-      file: selectedFile.name,
-      deskripsi: deskripsiSingkat,
-      isi: isiBerita
+    const tok = await getToken();
+
+    let headers;
+    let id;
+    headers = new Headers();
+    headers.append('Content-type', "application/json");
+    headers.append('Authorization', tok!.toString());
+    let res2 = await fetch(await route('/blog/'), {
+      method: 'POST',
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        story: story,
+      }),
+      headers: headers
+    }).then(async (res) => {
+      if (res.status == 200) {
+        id = (await res.json()).blogId;
+        return true;
+      }
+      throw Error("Something went wrong");
+    }).catch((e) => {
+      console.log(e);
+      return false;
     });
-    setIsSuccessModalOpen(true);
+
+    let res1 = true;
+    if (res2 && file) {
+      headers = new Headers();
+      let formdata = new FormData()
+      formdata.append('uploaded_img', file!);
+      headers.append('Authorization', tok!.toString());
+      res1 = await fetch(await route('/blog/' + id + '/image'), {
+        method: 'PUT',
+        body: formdata,
+        headers: headers,
+      }).then((res) => {
+        if (res.status == 200) return true;
+        throw Error("Something went wrong");
+      }).catch((e) => {
+        console.log(e);
+        return false;
+      });
+    }
+
+    if (res1 && res2) setSuccess(true);
+    else {
+      res1 = await fetch(await route('/blog/' + id), {
+        method: 'DELETE',
+        headers: headers,
+      }).then((res) => {
+        if (res.status == 200) return true;
+        throw Error("Something went wrong");
+      }).catch((e) => {
+        console.log(e);
+        return false;
+      });
+    }
   };
 
   const handleModalClose = () => {
-    setIsSuccessModalOpen(false);
+    setSuccess(false);
     router.push('/admin/berita');
   };
 
@@ -81,28 +147,41 @@ export default function TambahBeritaPage() {
             </div>
 
             <div className="form-section">
-              <label htmlFor="deskripsiSingkat" className="form-label">
+              <label htmlFor="title" className="form-label">
+                Judul Berita
+              </label>
+              <input
+                type="text"
+                id="title"
+                placeholder="Isi judul berita disini..."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="form-section">
+              <label htmlFor="description" className="form-label">
                 Deskripsi Singkat
               </label>
               <textarea
-                id="deskripsiSingkat"
-                placeholder="Isi deskripsi disini..."
+                id="description"
+                placeholder="Isi deskripsi singkat berita disini..."
                 rows={4}
-                value={deskripsiSingkat}
-                onChange={(e) => setDeskripsiSingkat(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
 
             <div className="form-section">
-              <label htmlFor="isiBerita" className="form-label">
+              <label htmlFor="story" className="form-label">
                 Isi Berita
               </label>
               <textarea
-                id="isiBerita"
-                placeholder="Isi beritamu disini..."
+                id="story"
+                placeholder="Isi berita lengkap disini..."
                 rows={12}
-                value={isiBerita}
-                onChange={(e) => setIsiBerita(e.target.value)}
+                value={story}
+                onChange={(e) => setStory(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -111,12 +190,17 @@ export default function TambahBeritaPage() {
             <button type="submit" className="button button-green">
               Simpan Perubahan
             </button>
-            <button type="button" className="button button-red">
+            <button type="button" className="button button-red" onClick={handleReset}>
               Hapus Perubahan
             </button>
           </div>
         </form>
       </div>
+      <SuccessModal
+        isOpen={success}
+        onClose={handleModalClose}
+        message="Perubahan Anda berhasil disimpan."
+      />
     </>
   );
 }
