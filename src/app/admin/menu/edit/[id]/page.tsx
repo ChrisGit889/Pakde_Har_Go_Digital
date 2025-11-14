@@ -1,10 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import DashboardLayout from '@/app/components/DashboardLayout';
-import { Product, masterProductList } from '../../data'; 
-import '../../tambah/TambahMenu.css'; 
+import { Product, masterProductList } from '../../data';
+import '../../tambah/TambahMenu.css';
 import SuccessModal from '@/app/components/berita/Successmodal';
 
 export default function EditMenuPage() {
@@ -18,20 +17,20 @@ export default function EditMenuPage() {
   const [hargaMenu, setHargaMenu] = useState<number | ''>('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  
+
   useEffect(() => {
     if (id) {
       const productId = parseInt(Array.isArray(id) ? id[0] : id, 10);
       const storedProducts = localStorage.getItem('myProducts');
       const products: Product[] = storedProducts ? JSON.parse(storedProducts) : masterProductList;
       const product = products.find(p => p.id === productId);
-      
+
       if (product) {
         setNamaMenu(product.name);
         setDeskripsiMenu(product.desc);
         setPreviewUrl(product.img);
         setKategoriMenu(product.category);
-        setLabelMenu(product.rasa); 
+        setLabelMenu(product.rasa);
         setHargaMenu(product.harga || '');
       }
     }
@@ -50,14 +49,14 @@ export default function EditMenuPage() {
     console.log("Menyimpan perubahan untuk ID:", id);
     setIsSuccessModalOpen(true);
   };
-  
+
   const handleModalClose = () => {
     setIsSuccessModalOpen(false);
     router.push('/admin/menu');
   };
 
   return (
-    <DashboardLayout>
+    <>
       <div className="form-container">
         <div className="form-header">
           <Link href="/admin/menu" className="back-button">
@@ -69,7 +68,7 @@ export default function EditMenuPage() {
 
         <form className="form-card" onSubmit={handleSubmit}>
           <div className="form-card-content">
-            
+
             <div className="form-section">
               <label className="form-label">Gambar Menu</label>
               <div className="image-upload-section">
@@ -138,7 +137,7 @@ export default function EditMenuPage() {
               ></textarea>
             </div>
           </div>
-          
+
           <div className="form-actions">
             <button type="submit" className="button button-green">
               Simpan Perubahan
@@ -152,6 +151,6 @@ export default function EditMenuPage() {
         onClose={handleModalClose}
         message="Perubahan berhasil disimpan."
       />
-    </DashboardLayout>
+    </>
   );
 }

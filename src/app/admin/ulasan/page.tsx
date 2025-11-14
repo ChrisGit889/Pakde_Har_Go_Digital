@@ -1,11 +1,10 @@
 'use client';
 import React, { useState, useMemo } from 'react';
-import DashboardLayout from '@/app/components/DashboardLayout'; 
 import UlasanStats from '@/app/components/ulasan/UlasanStats';
 import UlasanFilter from '@/app/components/ulasan/UlasanFilter';
 import UlasanList from '@/app/components/ulasan/UlasanList';
 import UlasanReplyModal from '@/app/components/ulasan/UlasanReply';
-import './UlasanPage.css'; 
+import './UlasanPage.css';
 
 const masterUlasanList = [
   {
@@ -46,7 +45,7 @@ type Ulasan = typeof masterUlasanList[0];
 
 export default function UlasanPage() {
   const [activeStatus, setActiveStatus] = useState('semua');
-  const [activeRating, setActiveRating] = useState(0); 
+  const [activeRating, setActiveRating] = useState(0);
   const [replyingUlasan, setReplyingUlasan] = useState<Ulasan | null>(null);
   const stats = useMemo(() => {
     const diterima = masterUlasanList.length;
@@ -57,9 +56,9 @@ export default function UlasanPage() {
     return {
       diterima,
       tingkatBaik: `${Math.round((baik / diterima) * 100)}%`,
-      belumDibalas, 
+      belumDibalas,
       burukBelumDibalas,
-      baru: 0, 
+      baru: 0,
     };
   }, [masterUlasanList]);
 
@@ -83,17 +82,17 @@ export default function UlasanPage() {
       masterUlasanList[ulasanIndex].reply = balasan;
       masterUlasanList[ulasanIndex].status = 'replied';
     }
-    
+
     setReplyingUlasan(null);
   };
 
   return (
-    <DashboardLayout>
-      <div className="ulasan-container">        
+    <>
+      <div className="ulasan-container">
         <h1 className="ulasan-page-title">Penilaian Toko</h1>
         <UlasanStats stats={stats} />
-        
-        <UlasanFilter 
+
+        <UlasanFilter
           counts={{
             semua: masterUlasanList.length,
             pending: stats.belumDibalas,
@@ -103,17 +102,17 @@ export default function UlasanPage() {
           onRatingChange={setActiveRating}
         />
 
-        <UlasanList 
+        <UlasanList
           ulasanList={filteredUlasan}
           onBalasClick={(ulasan: Ulasan) => setReplyingUlasan(ulasan)}
         />
 
-        <UlasanReplyModal 
+        <UlasanReplyModal
           ulasan={replyingUlasan}
           onClose={() => setReplyingUlasan(null)}
           onKirim={handleBalasKirim}
         />
       </div>
-    </DashboardLayout>
+    </>
   );
 }
