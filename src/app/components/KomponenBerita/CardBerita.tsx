@@ -59,6 +59,14 @@ function CardBerita() {
     setCurrentPage(pageFromUrl);
   }, [pageFromUrl]);
 
+  if (berita.length === 0) {
+    return (
+      <Container fluid className="py-4 px-3 px-md-5">
+        <p className="text-center fw-bold mt-5">Saat ini belum ada blog.</p>
+      </Container>
+    );
+  }
+
   const filteredblogs =
     kategori && kategori.toLowerCase() !== "semua"
       ? berita.filter((blog) => blog.CategoryID === kategori)
