@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import '../../admin/informasi/InformasiPage.css'; 
+import './InformasiPage.css';
 
 interface JamModalProps {
   isOpen: boolean;
@@ -14,7 +14,7 @@ export default function JamModal({ isOpen, onClose, mode, jamData }: JamModalPro
   const handleSubmit = () => {
     onClose();
   };
-  
+
   const isHariKerja = mode === 'kerja';
 
   return (

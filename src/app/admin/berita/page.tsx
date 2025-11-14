@@ -1,6 +1,6 @@
 'use server';
 import Link from 'next/link';
-import BeritaList from '@/app/components/berita/BeritaList';
+import BeritaList from '@/app/admin/berita/components/BeritaList';
 import './BeritaPage.css';
 
 export default async function BeritaPage() {

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import SuccessModal from '@/app/components/berita/Successmodal';
+import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import '../tambah/TambahBerita.css';
 import { BlogData } from '@/utils/dataTypes/BlogData';
 import { getToken, route } from '@/utils/utils';

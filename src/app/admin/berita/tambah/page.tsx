@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './TambahBerita.css';
 import { getToken, route } from '@/utils/utils';
-import SuccessModal from '@/app/components/berita/Successmodal';
+import SuccessModal from '@/app/admin/berita/components/Successmodal';
 
 export default function TambahBeritaPage() {
   const router = useRouter();
