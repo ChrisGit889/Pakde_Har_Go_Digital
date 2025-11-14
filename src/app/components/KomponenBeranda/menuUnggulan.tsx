@@ -69,6 +69,15 @@ function MenuUnggulan() {
       imageid: "image_3",
     },
   ];
+  if (menu.length === 0) {
+    return (
+      <Container fluid className="py-5" style={{ padding: "0 5vw" }}>
+        <p className="text-center fw-bold mt-5">
+          Saat ini belum ada menu unggulan.
+        </p>
+      </Container>
+    );
+  }
 
   return (
     <Container
