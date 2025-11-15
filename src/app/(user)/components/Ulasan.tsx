@@ -1,62 +1,26 @@
 "use client";
+import { ReviewData } from "@/utils/dataTypes/ReviewData";
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Pagination } from "react-bootstrap";
+import { Star, StarFill } from "react-bootstrap-icons";
 
-function Ulasan() {
-  const ulasan = [
-    {
-      nama: "Zen",
-      status: "Trader Crypto",
-      teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
-      review_rating: 3,
-    },
-    {
-      nama: "Vivi",
-      status: "Mahasiswa Untar",
-      teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
-      review_rating: 4,
-    },
-    {
-      nama: "Budi Is Man",
-      status: "Mahasiswa Untar",
-      teks: `"Nasi Goreng Original di sini adalah yang terbaik yang pernah saya coba di Jakarta. Bumbu yang sempurna dan pelayanan yang ramah membuat saya selalu kembali."`,
-      review_rating: 4,
-    },
-    {
-      nama: "Christio",
-      status: "Investor",
-      teks: `"Nasi Goreng di Pakde Har benar-benar lezat! Setiap suapan membawa kenikmatan yang tak terlupakan. Saya sangat merekomendasikan tempat ini kepada siapa saja yang mencari cita rasa autentik."`,
-      review_rating: 5,
-    },
-    {
-      nama: "NuelGB",
-      status: "Trader",
-      teks: `"Nasi Goreng di sini luar biasa! Rasanya yang kaya dan bumbu yang pas membuat saya ketagihan. Tempat yang sempurna untuk menikmati hidangan Indonesia yang autentik."`,
-      review_rating: 5,
-    },
-    {
-      nama: "Annuel",
-      status: "Financial Advisor",
-      teks: `"Nasi Goreng disini enak sekali, Seenak Ramen Ichiraku Favoritku!"`,
-      review_rating: 5,
-    },
-  ];
-
-  if (ulasan.length === 0) {
-  return (
-    <Container fluid className="py-4">
-      <p className="text-center fw-bold mt-5">Saat ini belum ada ulasan.</p>
-    </Container>
-  );
-}
-
+function Ulasan({ review }: { review: ReviewData }) {
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(ulasan.length / itemsPerPage);
+
+  if (review.data.length === 0) {
+    return (
+      <Container fluid className="py-4">
+        <p className="text-center fw-bold mt-5">Saat ini belum ada ulasan.</p>
+      </Container>
+    );
+  }
+
+  const totalPages = Math.ceil(review.data.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = ulasan.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = review.data.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -68,10 +32,10 @@ function Ulasan() {
       <span
         key={i}
         style={{
-          color: i < rating ? "#FFA726" : "#E0E0E0", 
+          color: i < rating ? "#FFA726" : "#E0E0E0",
         }}
       >
-        ★
+        {i < rating ? <StarFill /> : <Star />}
       </span>
     ));
   };
@@ -96,16 +60,16 @@ function Ulasan() {
                     marginBottom: "4px",
                   }}
                 >
-                  {item.nama}
+                  {item.user.name}
                 </Card.Title>
                 <Card.Subtitle
                   className="mb-2"
                   style={{ color: "#000", fontSize: "14px" }}
                 >
-                  {item.status}
+                  {item.user.details}
                 </Card.Subtitle>
 
-                <div style={{ marginBottom: "12px" }}>{renderStars(item.review_rating)}</div>
+                <div style={{ marginBottom: "12px" }}>{renderStars(item.review.rating)}</div>
 
                 <Card.Text
                   style={{
@@ -114,7 +78,7 @@ function Ulasan() {
                     lineHeight: "1.6",
                   }}
                 >
-                  {item.teks}
+                  {item.review.description}
                 </Card.Text>
               </Card.Body>
             </Card>

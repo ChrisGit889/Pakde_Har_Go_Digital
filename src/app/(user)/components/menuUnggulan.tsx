@@ -2,38 +2,11 @@
 "use client";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { MenuData } from "@/utils/dataTypes/MenuData";
-import { fetchData } from "@/utils/utils";
 import { imgToData } from "@/utils/clientUtils";
 
-function MenuUnggulan() {
+function MenuUnggulan({ menu }: { menu: MenuData }) {
   const router = useRouter();
-
-  const [menu, setMenu] = useState<MenuData | null>(null);
-
-  const [load, setLoad] = useState(false);
-  const [err, setErr] = useState(false);
-
-
-  async function asyncFetch() {
-    const data = await fetchData('/menu/list?limit=3', { method: 'GET' }); //TODO: CHANGE TO HIGHLIGHT
-    if (data) {
-      setMenu(data);
-    } else {
-      setErr(true);
-    }
-
-    setLoad(true);
-  }
-
-  useEffect(() => {
-    asyncFetch();
-  }, [])
-
-  if (!load) return <>Loading</>;
-
-  if (err) return <>Something went wrong</>;
 
   if (menu!.data.length === 0) {
     return (
