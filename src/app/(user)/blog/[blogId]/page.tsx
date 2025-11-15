@@ -1,48 +1,41 @@
 "use client";
+import { imgToData } from "@/utils/clientUtils";
+import { BlogData } from "@/utils/dataTypes/BlogData";
+import { fetchData } from "@/utils/utils";
 import { useParams, useRouter } from "next/navigation";
-import { Button, Col, Row, Container } from "react-bootstrap";
-import NavbarComponents from "@/app/components/navbarWebUser/navbar";
-import Footer from "@/app/(user)/components/footer";
-import berita from "@/app/(user)/blog/components/DummyBerita";
-
-const IDCategory = (categoryId: string) => {
-  switch (categoryId) {
-    case "Category_1":
-      return "Nasi Goreng";
-    case "Category_2":
-      return "Mie Goreng";
-    case "Category_3":
-      return "Lainnya";
-    case "Category_4":
-      return "Kwetiau Goreng";
-    default:
-      return "Lainnya";
-  }
-};
-
-const getImagePath = (imageid: string) => {
-  switch (imageid) {
-    case "image_1":
-      return "/images/Nasi_Goreng_Ayam.jpg";
-    case "image_2":
-      return "/images/miegorengayam.png";
-    case "image_3":
-      return "/images/kwetiaugorengayam.png";
-    case "image_4":
-      return "/images/Gerobak_Pakde.jpg";
-    default:
-      return "/images/local_dining.png";
-  }
-};
+import { useEffect, useState } from "react";
+import { Button, Col, Row, Container, Image } from "react-bootstrap";
 
 export default function DetailBerita() {
   const params = useParams();
   const router = useRouter();
 
-  const blogId = params.blogId as string;
-  const blog = berita.find((b) => b.blogId === blogId);
+  const [load, setLoad] = useState(false);
+  const [err, setErr] = useState(false);
 
-  if (!blog) {
+  const [blog, setBlog] = useState<BlogData>();
+
+  const id = params.blogId as string;
+
+  async function asyncFetch() {
+    const data = await fetchData('/blog/' + id, { method: 'GET' });
+
+    if (data) {
+      setBlog(data);
+    } else {
+      setErr(err);
+    }
+    setLoad(true);
+  }
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect, react-hooks/exhaustive-deps
+  useEffect(() => { asyncFetch(); }, []);
+
+  if (!load) {
+    return <>Loading</>
+  }
+
+  if (!blog || err) {
     return (
       <Container className="text-center py-5">
         <h3>Berita tidak ditemukan 😢</h3>
@@ -65,9 +58,7 @@ export default function DetailBerita() {
         style={{
           width: "100%",
           height: "50vh",
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${getImagePath(
-            blog.imageid
-          )})`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${blog.image.name ? imgToData(blog.image.data, blog.image.name) : '/images/placeholder.jpg'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -77,7 +68,7 @@ export default function DetailBerita() {
           className="position-absolute bottom-0 start-0 pb-5 ps-4"
           style={{ maxWidth: "90%" }}
         >
-          <h1 className="fw-bold mb-2">{blog.title}</h1>
+          <h1 className="fw-bold mb-2">{blog.blog.title}</h1>
 
         </Container>
       </div>
@@ -93,9 +84,9 @@ export default function DetailBerita() {
       >
         <Row className="align-items-center g-4">
           <Col xs={12} md={6} className="text-center">
-            <img
-              src={getImagePath(blog.imageid)}
-              alt={blog.title}
+            <Image
+              src={blog.image.name ? imgToData(blog.image.data, blog.image.name) : '/images/placeholder.jpg'}
+              alt={blog.blog.title}
               className="img-fluid rounded shadow-sm"
               style={{
                 height: "auto",
@@ -106,21 +97,21 @@ export default function DetailBerita() {
           </Col>
 
           <Col xs={12} md={6}>
-            <h2 className="fw-bold text-dark mb-3">{blog.title}</h2>
+            <h2 className="fw-bold text-dark mb-3">{blog.blog.title}</h2>
             <p className="text-dark" style={{ fontSize: "16px" }}>
-              {blog.description}
+              {blog.blog.description}
             </p>
             <hr />
             <div className="text-dark" style={{ fontSize: "15px" }}>
-              {blog.story
-                ? blog.story
+              {blog.blog.story
+                ? blog.blog.story
                 : "Belum ada cerita untuk berita ini. Nantikan pembaruan selanjutnya!"}
             </div>
 
             <div className="mt-4 d-flex flex-column gap-3">
               <Button
                 onClick={() => {
-                  const message = `Baca berita "${blog.title}" di sini: http://localhost:3001/blog/${blog.blogId}`;
+                  const message = `Baca berita "${blog.blog.title}" di sini: http://localhost:3001/blog/${blog.id}`;
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
                 }}
@@ -131,7 +122,7 @@ export default function DetailBerita() {
                   padding: "10px 20px",
                 }}
               >
-                <img
+                <Image
                   src="/images/whatsapp.svg"
                   alt="WhatsApp"
                   style={{

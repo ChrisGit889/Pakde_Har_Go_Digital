@@ -1,65 +1,30 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
   Card,
   Button,
-  Badge,
   Pagination,
   Container,
 } from "react-bootstrap";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import berita from "./DummyBerita";
+import { useRouter } from "next/navigation";
+import { BlogData } from "@/utils/dataTypes/BlogData";
+import { imgToData } from "@/utils/clientUtils";
 
-const IDCategory = (categoryId: string) => {
-  switch (categoryId) {
-    case "Category_1":
-      return "Nasi Goreng";
-    case "Category_2":
-      return "Mie Goreng";
-    case "Category_3":
-      return "Lainnya";
-    case "Category_4":
-      return "Kwetiau Goreng";
-    case "Semua":
-      return "Semua";
-    default:
-      return "lainnya";
-  }
-};
-
-const getImagePath = (imageid: string) => {
-  switch (imageid) {
-    case "image_1":
-      return "/images/Nasi_Goreng_Ayam.jpg";
-    case "image_2":
-      return "/images/miegorengayam.png";
-    case "image_3":
-      return "/images/kwetiaugorengayam.png";
-    case "image_4":
-      return "/images/Gerobak_Pakde.jpg";
-    default:
-      return "/images/local_dining.png";
-  }
-};
-
-function CardBerita() {
-  const searchParams = useSearchParams();
+function CardBerita({ blogs, category }: { blogs: BlogData[], category: string }) {
   const router = useRouter();
-  const pathname = usePathname();
 
-  const kategori = searchParams.get("kategori");
-  const pageFromUrl = Number(searchParams.get("page")) || 1;
-
-  const [currentPage, setCurrentPage] = useState(pageFromUrl);
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  useEffect(() => {
-    setCurrentPage(pageFromUrl);
-  }, [pageFromUrl]);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
-  if (berita.length === 0) {
+  const filteredblogs = category == 'Semua' ? blogs : blogs.filter((b) => b.blog.category == category);
+
+  if (filteredblogs.length === 0) {
     return (
       <Container fluid className="py-4 px-3 px-md-5">
         <p className="text-center fw-bold mt-5">Saat ini belum ada blog.</p>
@@ -67,23 +32,10 @@ function CardBerita() {
     );
   }
 
-  const filteredblogs =
-    kategori && kategori.toLowerCase() !== "semua"
-      ? berita.filter((blog) => blog.CategoryID === kategori)
-      : berita;
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredblogs.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredblogs.length / itemsPerPage);
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-
-    const params = new URLSearchParams(searchParams);
-    params.set("page", pageNumber.toString());
-     router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
 
   return (
     <Container fluid className="py-4 px-3 px-md-5">
@@ -95,7 +47,7 @@ function CardBerita() {
         {currentItems.length > 0 ? (
           currentItems.map((item) => (
             <Col
-              key={item.blogId}
+              key={item.id}
               xs={12}
               sm={6}
               md={6}
@@ -111,8 +63,8 @@ function CardBerita() {
                 }}
               >
                 <Card.Img
-                  src={getImagePath(item.imageid)}
-                  alt={item.title}
+                  src={item.image.name ? imgToData(item.image.data, item.image.name) : '/images/placeholder.jpg'}
+                  alt={item.blog.title}
                   style={{
                     height: "180px",
                     objectFit: "cover",
@@ -121,18 +73,18 @@ function CardBerita() {
                 />
                 <Card.Body className="d-flex flex-column justify-content-between">
                   <div>
-                    <Card.Title className="mb-2">{item.title}</Card.Title>
+                    <Card.Title className="mb-2">{item.blog.title}</Card.Title>
 
                     <Card.Text
                       className="text-muted"
                       style={{ fontSize: "14px", color: "black" }}
                     >
-                      {item.description}
+                      {item.blog.description}
                     </Card.Text>
                   </div>
 
                   <Button
-                    onClick={() => router.push(`/blog/${item.blogId}`)}
+                    onClick={() => router.push(`/blog/${item.id}`)}
                     className="mt-3 fw-bold"
                     style={{
                       width: "100%",
