@@ -3,7 +3,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Badge, Button, Col, Row, Container } from "react-bootstrap";
 import foods from "@/app/(user)/menu/components/DataMenu";
 import NavbarComponents from "@/app/components/navbarWebUser/navbar";
-import Footer from "@/app/components/footerWebUser/footer";
+import Footer from "@/app/(user)/components/footer";
 
 const IDCategory = (categoryId: string) => {
   switch (categoryId) {

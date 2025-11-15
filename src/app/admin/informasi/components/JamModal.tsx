@@ -25,6 +25,7 @@ export default function JamModal({ show, data, onClose }: {
     setDisabled(true);
 
     for (const i of Object.keys(newSched)) {
+      // eslint-disable-next-line react-hooks/immutability
       newSched[i] = newSched[i].trim().replaceAll(' ', '');
       if (/^(2[1-4]|(1|0)[0-9]):[0-5][0-9]-(2[1-4]|(1|0)[0-9]):[0-5][0-9]$/.test(newSched[i])) {
         continue
@@ -39,7 +40,7 @@ export default function JamModal({ show, data, onClose }: {
     headers.append('Authorization', (await getToken())!);
     headers.append('Content-Type', 'application/json');
 
-    let res = await fetch(await route('/contact/schedule'), {
+    const res = await fetch(await route('/contact/schedule'), {
       method: 'PUT',
       body: JSON.stringify({
         mon: newSched.mon,

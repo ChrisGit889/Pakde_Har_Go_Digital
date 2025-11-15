@@ -2,7 +2,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { Button, Col, Row, Container } from "react-bootstrap";
 import NavbarComponents from "@/app/components/navbarWebUser/navbar";
-import Footer from "@/app/components/footerWebUser/footer";
+import Footer from "@/app/(user)/components/footer";
 import berita from "@/app/(user)/blog/components/DummyBerita";
 
 const IDCategory = (categoryId: string) => {

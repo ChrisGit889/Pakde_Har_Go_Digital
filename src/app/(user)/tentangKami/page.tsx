@@ -5,23 +5,6 @@ export default function Menu() {
   return (
     <>
       <HalamanUtamatentangKami />
-      <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
-        <img
-          src="/images/whatsapp.svg"
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            left: "20px",
-            width: "60px",
-            height: "60px",
-            borderRadius: "50%",
-            border: "4px solid #ffffff",
-            backgroundColor: "#ffffff",
-            cursor: "pointer",
-            zIndex: 999,
-          }}
-        />
-      </a>
 
       <div
         style={{

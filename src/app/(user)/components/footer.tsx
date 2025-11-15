@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import React from "react";
 import Link from 'next/link';
 
@@ -41,12 +41,12 @@ function Footer() {
           <h3 style={{ marginBottom: "12px" }}>Hubungi Kami</h3>
 
           <div style={{ display: "flex", gap: "12px" }}>
-    
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px", position:"relative", top:"2px" }}>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px", position: "relative", top: "2px" }}>
               <img src="/images/location_on.png" style={{ width: "20px" }} />
-              <img src="/images/call.png" style={{ width: "20px" , position:"relative", top:"43px"}} />
-              <img src="/images/mail.png" style={{ width: "20px" ,position:"relative", top:"47px"}} />
-              <img src="/images/access_time.png" style={{ width: "20px",position:"relative", top:"50px" }} />
+              <img src="/images/call.png" style={{ width: "20px", position: "relative", top: "43px" }} />
+              <img src="/images/mail.png" style={{ width: "20px", position: "relative", top: "47px" }} />
+              <img src="/images/access_time.png" style={{ width: "20px", position: "relative", top: "50px" }} />
             </div>
 
             <div>
