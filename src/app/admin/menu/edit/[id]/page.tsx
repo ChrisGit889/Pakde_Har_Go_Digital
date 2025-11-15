@@ -2,56 +2,122 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Product, masterProductList } from '../../data';
 import '../../tambah/TambahMenu.css';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
+import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
+import { Menu } from '@/utils/dataTypes/MenuData';
+import { imgToData } from '@/utils/clientUtils';
+import { Image } from 'react-bootstrap';
+import { CategoryData } from '@/utils/dataTypes/CategoryData';
 
 export default function EditMenuPage() {
   const router = useRouter();
   const params = useParams();
+
   const { id } = params;
-  const [namaMenu, setNamaMenu] = useState('');
-  const [kategoriMenu, setKategoriMenu] = useState('');
-  const [labelMenu, setLabelMenu] = useState('');
-  const [deskripsiMenu, setDeskripsiMenu] = useState('');
-  const [hargaMenu, setHargaMenu] = useState<number | ''>('');
+
+  const [load, setLoad] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+
+  const [name, setName] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [flavour, setFlavour] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [price, setPrice] = useState<number>(0);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [data, setData] = useState<Menu>();
+  const [categories, setCategories] = useState<CategoryData>();
+
+  const [show, setShow] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
+  async function asyncFetch() {
+    const data: Menu = await fetchData('/menu/' + id, {
+      method: 'GET',
+    });
+
+    const categories: CategoryData = await fetchData('/menu/categories', {
+      method: 'GET'
+    });
+
+    if (data) {
+      setName(data.food.name || name);
+      setDescription(data.food.description || description);
+      setFlavour(data.food.flavour || flavour);
+      setPreviewUrl(data.image.name ? imgToData(data.image.data, data.image.name) : '/images/placeholder.jpg');
+      setCategory(data.food.category || category);
+      setPrice(data.food.price || 0);
+      setData(data);
+    }
+
+    if (categories) {
+      setCategories(categories);
+    }
+
+    setError(data && categories ? false : true);
+    setLoad(true);
+  }
 
   useEffect(() => {
-    if (id) {
-      const productId = parseInt(Array.isArray(id) ? id[0] : id, 10);
-      const storedProducts = localStorage.getItem('myProducts');
-      const products: Product[] = storedProducts ? JSON.parse(storedProducts) : masterProductList;
-      const product = products.find(p => p.id === productId);
+    asyncFetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-      if (product) {
-        setNamaMenu(product.name);
-        setDeskripsiMenu(product.desc);
-        setPreviewUrl(product.img);
-        setKategoriMenu(product.category);
-        setLabelMenu(product.rasa);
-        setHargaMenu(product.harga || '');
-      }
-    }
-  }, [id]);
+  if (!load) return null;
+
+  if (error) return <>An Error has occured!</>;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
+    const tempFile = event.target.files?.[0];
+    if (tempFile) {
+      setPreviewUrl(URL.createObjectURL(tempFile));
+      setFile(tempFile);
     }
   };
   const triggerFileInput = () => { document.getElementById('imageUpload')?.click(); };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Menyimpan perubahan untuk ID:", id);
-    setIsSuccessModalOpen(true);
+    if (!category || !name || !description || !flavour) {
+      alert('Lengkapi datanya');
+      return;
+    }
+    setDisabled(true);
+    let headers;
+    let res1 = true;
+    const tok = await getToken();
+    if ((data!.image.name == null ? previewUrl != '/images/placeholder.jpg' : previewUrl != imgToData(data!.image.data, data!.image.name)) && file != undefined) {
+      headers = new Headers();
+      const formdata = new FormData()
+      formdata.append('uploaded_img', file!);
+      headers.append('Authorization', tok!.toString());
+      res1 = await fetchBoolean('/menu/' + id + '/image', {
+        method: 'PUT',
+        body: formdata,
+        headers: headers,
+      });
+    }
+    headers = new Headers();
+    headers.append('Content-type', "application/json");
+    headers.append('Authorization', tok!.toString());
+    const res2 = await fetchBoolean('/menu/' + id, {
+      method: 'PUT',
+      body: JSON.stringify({
+        name: name,
+        description: description,
+        flavour: flavour,
+        price: price || null,
+        category: category,
+      }),
+      headers: headers
+    });
+    if (res1 && res2) setShow(true);
+    setDisabled(false);
   };
 
   const handleModalClose = () => {
-    setIsSuccessModalOpen(false);
+    setShow(false);
     router.push('/admin/menu');
   };
 
@@ -75,7 +141,7 @@ export default function EditMenuPage() {
                 <input type="file" id="imageUpload" style={{ display: 'none' }} onChange={handleFileChange} />
                 <label htmlFor="imageUpload" className="image-uploader-box">
                   {previewUrl ? (
-                    <img src={previewUrl} alt="Preview" className="image-preview" />
+                    <Image src={previewUrl} alt="Image" className="image-preview" />
                   ) : (
                     <span className="upload-placeholder-icon">☺️</span>
                   )}
@@ -87,38 +153,36 @@ export default function EditMenuPage() {
             </div>
 
             <div className="form-section">
-              <label htmlFor="namaMenu" className="form-label">Nama Menu</label>
+              <label htmlFor="name" className="form-label">Nama Menu</label>
               <input
-                type="text" id="namaMenu"
+                type="text" id="name"
                 placeholder="Isi Nama Menu disini..."
-                value={namaMenu}
-                onChange={(e) => setNamaMenu(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
             <div className="form-section">
-              <label htmlFor="hargaMenu" className="form-label">Harga Menu (Rp)</label>
+              <label htmlFor="price" className="form-label">Harga Menu (Rp)</label>
               <input
-                type="number" id="hargaMenu"
-                placeholder="Cth: 25000"
-                value={hargaMenu}
-                onChange={(e) => setHargaMenu(parseFloat(e.target.value) || '')}
+                type="number" id="price"
+                placeholder="20000"
+                value={price}
+                onChange={(e) => setPrice(parseInt(e.target.value) ? parseInt(e.target.value) : price)}
               />
             </div>
 
             <div className="form-row">
               <div className="form-section-half">
-                <label htmlFor="kategoriMenu" className="form-label">Pilih kategori Menu</label>
-                <select id="kategoriMenu" value={kategoriMenu} onChange={(e) => setKategoriMenu(e.target.value)}>
+                <label htmlFor="category" className="form-label">Pilih kategori Menu</label>
+                <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
                   <option value="">Pilih Kategori...</option>
-                  <option value="Nasi Goreng">Nasi Goreng</option>
-                  <option value="Mie Goreng">Mie Goreng</option>
-                  <option value="Minuman">Minuman</option>
+                  {categories?.data.map((cat) => <option value={cat.name} key={cat.name}>{cat.name}</option>)}
                 </select>
               </div>
               <div className="form-section-half">
-                <label htmlFor="labelMenu" className="form-label">Label Menu (Rasa)</label>
-                <select id="labelMenu" value={labelMenu} onChange={(e) => setLabelMenu(e.target.value)}>
+                <label htmlFor="flavour" className="form-label">Label Menu (Rasa)</label>
+                <select id="flavour" value={flavour} onChange={(e) => setFlavour(e.target.value)}>
                   <option value="">Pilih Label...</option>
                   <option value="Pedas / Sedang">Pedas / Sedang</option>
                   <option value="Manis">Manis</option>
@@ -127,27 +191,27 @@ export default function EditMenuPage() {
             </div>
 
             <div className="form-section">
-              <label htmlFor="deskripsiMenu" className="form-label">Isi Deskripsi Menu</label>
+              <label htmlFor="Description" className="form-label">Isi Deskripsi Menu</label>
               <textarea
-                id="deskripsiMenu"
+                id="description"
                 placeholder="Isi Deskripsi disini..."
                 rows={8}
-                value={deskripsiMenu}
-                onChange={(e) => setDeskripsiMenu(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
           </div>
 
           <div className="form-actions">
-            <button type="submit" className="button button-green">
-              Simpan Perubahan
+            <button type="submit" className="button button-green" disabled={disabled}>
+              Simpan
             </button>
           </div>
         </form>
       </div>
 
       <SuccessModal
-        isOpen={isSuccessModalOpen}
+        isOpen={show}
         onClose={handleModalClose}
         message="Perubahan berhasil disimpan."
       />

@@ -1,38 +1,39 @@
 'use client';
-import React from 'react';
-import Link from 'next/link'; 
+import Link from 'next/link';
 import './AdminMenu.css';
+import { Image } from 'react-bootstrap';
 
-interface AdminMenuTopbarProps {
-  onAddCategoryClick: () => void;
-}
-
-export default function AdminMenuTopbar({ onAddCategoryClick }: AdminMenuTopbarProps) {
+export default function AdminMenuTopbar({ onAddCategoryClick, search, setSearch }: { onAddCategoryClick: () => void, search: string, setSearch: (str: string) => void }) {
   return (
     <div className="admin-menu-topbar">
       <h1 className="admin-menu-title">Daftar Produk</h1>
       <div className="topbar-right-group">
         <div className="search-wrapper">
-          <img 
+          <Image
             src="/images/search.png"
             alt="Cari"
-            className="topbar-icon" 
+            className="topbar-icon"
           />
-          <input type="text" placeholder="Cari Menu" />
+          <input
+            type="text"
+            placeholder="Cari Menu"
+            value={search}
+            onChange={(e) => setSearch(e.target.value || '')}
+          />
         </div>
 
         <div className="button-group">
           <button className="admin-button secondary" onClick={onAddCategoryClick}>
-            <img 
+            <Image
               src="/images/add.png"
               alt="Tambah Kategori"
               className="topbar-icon"
             />
             Tambah Kategori
           </button>
-          
+
           <Link href="/admin/menu/tambah" className="admin-button secondary">
-            <img 
+            <Image
               src="/images/cutlery.png"
               alt="Tambah Menu"
               className="topbar-icon"

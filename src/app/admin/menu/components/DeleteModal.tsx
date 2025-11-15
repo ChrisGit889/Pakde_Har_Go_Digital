@@ -1,16 +1,20 @@
 'use client';
-import React from 'react';
+import { Menu } from '@/utils/dataTypes/MenuData';
 import './AdminMenu.css';
+import { fetchBoolean, getToken } from '@/utils/utils';
 
-interface DeleteModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-  productName: string;
-}
+export default function DeleteModal({ show, onClose, item }: { show: boolean, onClose: () => void, item: Menu }) {
+  if (!show) return null;
 
-export default function DeleteModal({ isOpen, onClose, onConfirm, productName }: DeleteModalProps) {
-  if (!isOpen) return null;
+  const onConfirm = async () => {
+    const header = new Headers();
+    header.append('Authorization', (await getToken())!.toString());
+    await fetchBoolean('/menu/' + item.id, {
+      method: 'DELETE',
+      headers: header,
+    });
+    onClose();
+  }
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -24,11 +28,11 @@ export default function DeleteModal({ isOpen, onClose, onConfirm, productName }:
         <div className="modal-text-content">
           <h3>Hapus Menu</h3>
           <p>
-            Apakah Anda yakin ingin menghapus <strong>{productName}</strong>?
+            Apakah Anda yakin ingin menghapus <strong>{item.food.name}</strong>?
             Tindakan ini tidak dapat dibatalkan.
           </p>
         </div>
-        
+
         <div className="modal-actions">
           <button className="modal-button secondary" onClick={onClose}>
             Batal

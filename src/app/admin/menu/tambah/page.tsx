@@ -1,27 +1,57 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './TambahMenu.css';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
-import { Product, masterProductList } from '../data';
+import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
+import { fetchProcess } from '@/utils/clientUtils';
+import { Image } from 'react-bootstrap';
+import { CategoryData } from '@/utils/dataTypes/CategoryData';
 
 export default function TambahMenuPage() {
   const router = useRouter();
-  const [namaMenu, setNamaMenu] = useState('');
-  const [kategoriMenu, setKategoriMenu] = useState('');
-  const [labelMenu, setLabelMenu] = useState('');
-  const [deskripsiMenu, setDeskripsiMenu] = useState('');
-  const [hargaMenu, setHargaMenu] = useState<number | ''>('');
+
+  const [load, setLoad] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+
+  const [name, setName] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [flavour, setFlavour] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [price, setPrice] = useState<number>(0);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [categories, setCategories] = useState<CategoryData | null>(null);
+
+  const [show, setShow] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
+  async function asyncFetch() {
+    const categories: CategoryData = await fetchData('/menu/categories', {
+      method: 'GET'
+    });
+    if (categories) {
+      setCategories(categories);
+    }
+    setError(categories ? false : true);
+    setLoad(true);
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    asyncFetch();
+  }, []);
+
+  if (!load) return null;
+
+  if (error) return <>An Error has occured!</>;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
+    const tempFile = event.target.files?.[0];
+    if (tempFile) {
+      setPreviewUrl(URL.createObjectURL(tempFile));
+      setFile(tempFile);
     }
   };
 
@@ -29,36 +59,62 @@ export default function TambahMenuPage() {
     document.getElementById('imageUpload')?.click();
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!namaMenu || !kategoriMenu || !hargaMenu || !deskripsiMenu) {
-      alert('Harap lengkapi Nama, Kategori, Harga, dan Deskripsi.');
+    if (!name || !category || !description || !flavour) {
+      alert('Lengkapi datanya');
       return;
     }
-    const storedProducts = localStorage.getItem('myProducts');
-    const products: Product[] = storedProducts
-      ? JSON.parse(storedProducts)
-      : masterProductList;
 
-    const newId = products.length > 0 ? Math.max(...products.map((p) => p.id)) + 1 : 1;
-    const newProduct: Product = {
-      id: newId,
-      name: namaMenu,
-      img: previewUrl || '/images/default-image.png',
-      rasa: labelMenu,
-      desc: deskripsiMenu,
-      category: kategoriMenu,
-      harga: hargaMenu || 0,
-    };
+    setDisabled(true);
 
+    let headers, id;
+    const tok = await getToken();
+    headers = new Headers();
+    headers.append('Content-type', "application/json");
+    headers.append('Authorization', tok!.toString());
+    const res2 = await fetchProcess('/menu/', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name,
+        description: description,
+        flavour: flavour,
+        price: price || null,
+        category: category,
+      }),
+      headers: headers
+    }, async (res) => {
+      const d = await res.json();
+      id = d.foodId;
+    });
+    let res1 = true;
+    console.log("id is " + id);
+    if (file) {
+      headers = new Headers();
+      const formdata = new FormData()
+      formdata.append('uploaded_img', file!);
+      headers.append('Authorization', tok!.toString());
+      res1 = await fetchBoolean('/menu/' + id + '/image', {
+        method: 'PUT',
+        body: formdata,
+        headers: headers,
+      });
+    }
 
-    products.push(newProduct);
-    localStorage.setItem('myProducts', JSON.stringify(products));
-    setIsSuccessModalOpen(true);
-  };
+    if (res1 && res2) setShow(true);
+    else {
+      headers = new Headers();
+      headers.append('Authorization', tok!.toString());
+      await fetchBoolean('/menu/' + id, {
+        method: 'DELETE',
+        headers: headers
+      });
+    }
+    setDisabled(false);
+  }
 
   const handleModalClose = () => {
-    setIsSuccessModalOpen(false);
+    setShow(false);
     router.push('/admin/menu');
   };
 
@@ -87,9 +143,9 @@ export default function TambahMenuPage() {
                 />
                 <label htmlFor="imageUpload" className="image-uploader-box">
                   {previewUrl ? (
-                    <img src={previewUrl} alt="Preview" className="image-preview" />
+                    <Image src={previewUrl} alt="Preview" className="image-preview" />
                   ) : (
-                    <span className="upload-placeholder-icon">🖼️</span>
+                    <Image src={'/images/placeholder.jpg'} alt="Preview" className="image-preview" />
                   )}
                 </label>
                 <button
@@ -104,54 +160,52 @@ export default function TambahMenuPage() {
 
             {/* Nama Menu */}
             <div className="form-section">
-              <label htmlFor="namaMenu" className="form-label">
+              <label htmlFor="name" className="form-label">
                 Nama Menu
               </label>
               <input
                 type="text"
-                id="namaMenu"
-                value={namaMenu}
-                onChange={(e) => setNamaMenu(e.target.value)}
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
             <div className="form-section">
-              <label htmlFor="hargaMenu" className="form-label">
+              <label htmlFor="price" className="form-label">
                 Harga Menu (Rp)
               </label>
               <input
                 type="number"
-                id="hargaMenu"
-                value={hargaMenu}
-                onChange={(e) => setHargaMenu(parseFloat(e.target.value) || '')}
+                id="price"
+                value={price}
+                onChange={(e) => setPrice(parseInt(e.target.value) || price)}
               />
             </div>
 
             <div className="form-row">
               <div className="form-section-half">
-                <label htmlFor="kategoriMenu" className="form-label">
+                <label htmlFor="category" className="form-label">
                   Pilih Kategori Menu
                 </label>
                 <select
-                  id="kategoriMenu"
-                  value={kategoriMenu}
-                  onChange={(e) => setKategoriMenu(e.target.value)}
+                  id="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
                 >
                   <option value="">Pilih Kategori...</option>
-                  <option value="Nasi Goreng">Nasi Goreng</option>
-                  <option value="Mie Goreng">Mie Goreng</option>
-                  <option value="Minuman">Minuman</option>
+                  {categories?.data.map((cat) => <option value={cat.name} key={cat.name}>{cat.name}</option>)}
                 </select>
               </div>
 
               <div className="form-section-half">
-                <label htmlFor="labelMenu" className="form-label">
+                <label htmlFor="flavour" className="form-label">
                   Label Menu (Rasa)
                 </label>
                 <select
-                  id="labelMenu"
-                  value={labelMenu}
-                  onChange={(e) => setLabelMenu(e.target.value)}
+                  id="flavour"
+                  value={flavour}
+                  onChange={(e) => setFlavour(e.target.value)}
                 >
                   <option value="">Pilih Label...</option>
                   <option value="Pedas / Sedang">Pedas / Sedang</option>
@@ -161,28 +215,28 @@ export default function TambahMenuPage() {
             </div>
 
             <div className="form-section">
-              <label htmlFor="deskripsiMenu" className="form-label">
+              <label htmlFor="description" className="form-label">
                 Isi Deskripsi Menu
               </label>
               <textarea
-                id="deskripsiMenu"
+                id="description"
                 rows={8}
-                value={deskripsiMenu}
-                onChange={(e) => setDeskripsiMenu(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
           </div>
 
           <div className="form-actions">
-            <button type="submit" className="button button-green">
-              Simpan Perubahan
+            <button type="submit" className="button button-green" disabled={disabled}>
+              Simpan
             </button>
           </div>
-        </form>
-      </div>
+        </form >
+      </div >
 
       <SuccessModal
-        isOpen={isSuccessModalOpen}
+        isOpen={show}
         onClose={handleModalClose}
         message="Menu baru berhasil disimpan."
       />

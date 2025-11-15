@@ -1,14 +1,16 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import SuccessModal from './Successmodal';
 import { useRouter } from 'next/navigation';
 import { getToken, route } from '@/utils/utils';
 import { BlogData } from '@/utils/dataTypes/BlogData';
+import { Image } from 'react-bootstrap';
+import { imgToData } from '@/utils/clientUtils';
 
 //Komponen Synchronus untuk membuat listnya
 export default function BeritaListSync({ data }: { data: BlogData[] }) {
-    const [modal, setModal] = useState(false);
+    const [show, setShow] = useState(false);
     const router = useRouter();
 
     const createHandleDeleteClick = (id: number) => {
@@ -20,8 +22,9 @@ export default function BeritaListSync({ data }: { data: BlogData[] }) {
             await fetch(await route('/blog/' + id), {
                 method: 'DELETE',
                 headers: header
-            }).then((res) => {
-                setModal(true);
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            }).then((_res) => {
+                setShow(true);
             }).catch((e) => {
                 console.log(e);
             });
@@ -30,7 +33,7 @@ export default function BeritaListSync({ data }: { data: BlogData[] }) {
 
 
     const redirectBackToBlogs = () => {
-        setModal(false);
+        setShow(false);
         router.refresh();
     }
 
@@ -41,9 +44,9 @@ export default function BeritaListSync({ data }: { data: BlogData[] }) {
                     < div key={berita.id.toString()} className="berita-card" >
                         {   /* Weird way to do this, but this does work */
                             berita.image.data == null ?
-                                <img src={`data:image/jpeg;base64,`} alt={berita.blog.title} className="berita-card-image" />
+                                <Image src={`data:image/jpeg;base64,`} alt={berita.blog.title} className="berita-card-image" />
                                 :
-                                <img src={`data:image/${berita.image.name.split('.')[berita.image.name.split('.').length - 1]};base64,` + Buffer.from(berita.image.data).toString("base64")} alt={berita.blog.title} className="berita-card-image" />
+                                <Image src={imgToData(berita.image.data, berita.image.name)} alt={berita.blog.title} className="berita-card-image" />
                         }
 
                         <div className="berita-content">
@@ -75,7 +78,7 @@ export default function BeritaListSync({ data }: { data: BlogData[] }) {
             }
 
             <SuccessModal
-                isOpen={modal}
+                isOpen={show}
                 onClose={() => redirectBackToBlogs()}
                 message="Berita Anda berhasil dihapus."
             />
