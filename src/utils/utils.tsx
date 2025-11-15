@@ -6,7 +6,7 @@ async function route(endpoint: string) {
     return process.env.API_URL + endpoint;
 }
 
-async function login(username: string, password: string): Promise<Number | string> {
+async function login(username: string, password: string): Promise<number | string> {
     "use server"
 
     const data = await fetch(await route('/auth/signin'), {
@@ -52,8 +52,8 @@ async function getToken(): Promise<string | null> {
     "use server"
     const cookieStore = await cookies();
     if (cookieStore.has('Auth-Token')) {
-        let cookie = cookieStore.get('Auth-Token');
-        let val = cookie?.value || '';
+        const cookie = cookieStore.get('Auth-Token');
+        const val = cookie?.value || '';
         return val;
     }
     return null;
@@ -64,4 +64,28 @@ async function logout(): Promise<void> {
     if (cookieStore.has('Auth-Token')) cookieStore.delete('Auth-Token');
 }
 
-export { route, login, getToken, authenticate, logout };
+async function fetchBoolean(ro: string, params: object) {
+    return await fetch(await route(ro), params)
+        .then((res) => {
+            if (res.status == 200) return true;
+            throw Error('An error has occured!');
+        })
+        .catch((e) => {
+            console.log(e);
+            return false;
+        });
+}
+
+async function fetchData(ro: string, params: object) {
+    return await fetch(await route(ro), params)
+        .then((res) => {
+            if (res.status == 200) return res.json();
+            throw Error('An error has occured!');
+        })
+        .catch((e) => {
+            console.log(e);
+            return {};
+        });
+}
+
+export { route, login, getToken, authenticate, logout, fetchBoolean, fetchData };

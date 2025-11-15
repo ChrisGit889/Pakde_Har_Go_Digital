@@ -1,50 +1,23 @@
-'use client';
-import React, { useState, useMemo, useEffect } from 'react';
-import AdminMenuTopbar from '@/app/components/adminMenu/AdminMenuTopbar';
-import MenuFilterTabs from '@/app/components/adminMenu/MenuFilterTabs';
-import ProductGrid from '@/app/components/adminMenu/ProductGrid';
-import AddCategory from '@/app/components/adminMenu/AddCategory';
-import { Product, masterProductList, categories } from './data';
-import './MenuPage.css';
+'use server';
+import AdminMenuSync from './components/AdminMenuSync';
+import { fetchData } from '@/utils/utils';
 
-export default function AdminMenuPage() {
-  const [activeCategory, setActiveCategory] = useState('Semua');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
+export default async function AdminMenuPage() {
 
-  useEffect(() => {
-    const storedProducts = localStorage.getItem('myProducts');
-    if (storedProducts) {
-      setProducts(JSON.parse(storedProducts));
-    } else {
-      setProducts(masterProductList);
-      localStorage.setItem('myProducts', JSON.stringify(masterProductList));
-    }
-  }, []);
+  const data = await fetchData('/menu/list', {
+    method: 'GET',
+  });
 
-  const filteredProducts = useMemo(() => {
-    if (activeCategory === 'Semua') {
-      return products;
-    }
-    return products.filter(product => product.category === activeCategory);
-  }, [activeCategory, products]);
+  const categories = await fetchData('/menu/categories', {
+    method: 'GET'
+  });
+  categories.data.unshift({ name: 'Semua', description: 'Semua menu' });
 
   return (
     <>
-      <div className="menu-page-container">
-        <AdminMenuTopbar onAddCategoryClick={() => setIsModalOpen(true)} />
-        <MenuFilterTabs
-          categories={categories}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-        />
-        <ProductGrid
-          products={filteredProducts}
-        />
-      </div>
-      <AddCategory
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+      <AdminMenuSync
+        data={data}
+        categories={categories}
       />
     </>
   );

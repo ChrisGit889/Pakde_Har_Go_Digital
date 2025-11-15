@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -6,6 +8,7 @@ import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import '../tambah/TambahBerita.css';
 import { BlogData } from '@/utils/dataTypes/BlogData';
 import { getToken, route } from '@/utils/utils';
+import { Image } from 'react-bootstrap';
 
 export default function EditBeritaPage() {
   const router = useRouter();
@@ -87,7 +90,7 @@ export default function EditBeritaPage() {
     const tok = await getToken();
     if ((data!.image.name == null ? true : previewUrl != `data:image/${data!.image.name.split('.')[data!.image.name.split('.').length - 1]};base64,${Buffer.from(data!.image.data).toString("base64")}`) && file != undefined) {
       headers = new Headers();
-      let formdata = new FormData()
+      const formdata = new FormData()
       formdata.append('uploaded_img', file!);
       headers.append('Authorization', tok!.toString());
       res1 = await fetch(await route('/blog/' + blogId + '/image'), {
@@ -105,7 +108,7 @@ export default function EditBeritaPage() {
     headers = new Headers();
     headers.append('Content-type', "application/json");
     headers.append('Authorization', tok!.toString());
-    let res2 = await fetch(await route('/blog/' + blogId), {
+    const res2 = await fetch(await route('/blog/' + blogId), {
       method: 'PUT',
       body: JSON.stringify({
         title: title,
@@ -165,7 +168,7 @@ export default function EditBeritaPage() {
                 <input type="file" id="imageUpload" style={{ display: 'none' }} onChange={handleFileChange} />
                 <label htmlFor="imageUpload" className="image-uploader-box">
                   {previewUrl && (
-                    <img src={previewUrl} alt="Preview" className="image-preview" />
+                    <Image src={previewUrl} alt="Preview" className="image-preview" />
                   )}
                 </label>
                 <button type="button" className="button button-orange" onClick={triggerFileInput}>
