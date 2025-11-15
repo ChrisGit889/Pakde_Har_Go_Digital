@@ -1,7 +1,7 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { Badge, Button, Col, Row, Container } from "react-bootstrap";
-import foods from "@/app/components/KomponenMenu/DataMenu";
+import foods from "@/app/(user)/menu/components/DataMenu";
 import NavbarComponents from "@/app/components/navbarWebUser/navbar";
 import Footer from "@/app/components/footerWebUser/footer";
 
@@ -137,7 +137,7 @@ export default function FoodDetail() {
               </p>
             </div>
 
-           
+
 
             <Button
               onClick={() => {

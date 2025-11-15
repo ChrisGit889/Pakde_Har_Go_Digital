@@ -1,18 +1,15 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Card from "react-bootstrap/Card";
-import NavbarComponents from "./components/navbarWebUser/navbar";
-import MenuCards from "./components/KomponenBeranda/menuUnggulan";
-import MenuUnggulan from "./components/KomponenBeranda/menuUnggulan";
-import CeritaKami from "./components/KomponenBeranda/CeritaKami";
-import Ulasan from "./components/KomponenBeranda/Ulasan";
-import Footer from "./components/footerWebUser/footer";
-import HalamanUtama from "./components/KomponenBeranda/HalamanUtama";
+"use server"
 
-export default function Home() {
+import { Image } from 'react-bootstrap';
+import styles from "../page.module.css";
+import MenuUnggulan from "./components/menuUnggulan";
+import CeritaKami from "./components/CeritaKami";
+import Ulasan from "./components/Ulasan";
+import HalamanUtama from "./components/HalamanUtama";
+
+export default async function Home() {
   return (
-    <div className={styles.container}>
-      <NavbarComponents />
+    <>
       <HalamanUtama />
       <h2 className={styles.judulHalaman2} id="menuUnggulan">
         Menu Unggulan Kami
@@ -26,8 +23,9 @@ export default function Home() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img
+        <Image
           src="/images/whatsapp.svg"
+          alt=''
           style={{
             position: "fixed",
             bottom: "20px",
@@ -50,7 +48,7 @@ export default function Home() {
         Biarkan Pembeli yang Berbicara
       </h3>
       <Ulasan />
-      <Footer />
-    </div>
+
+    </>
   );
 }

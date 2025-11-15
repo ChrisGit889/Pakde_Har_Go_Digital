@@ -3,7 +3,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Button, Col, Row, Container } from "react-bootstrap";
 import NavbarComponents from "@/app/components/navbarWebUser/navbar";
 import Footer from "@/app/components/footerWebUser/footer";
-import berita from "@/app/components/KomponenBerita/DummyBerita";
+import berita from "@/app/(user)/blog/components/DummyBerita";
 
 const IDCategory = (categoryId: string) => {
   switch (categoryId) {
@@ -59,7 +59,6 @@ export default function DetailBerita() {
 
   return (
     <div className="d-flex flex-column min-vh-100 bg-white">
-      <NavbarComponents />
 
       <div
         className="position-relative text-white"
@@ -79,7 +78,7 @@ export default function DetailBerita() {
           style={{ maxWidth: "90%" }}
         >
           <h1 className="fw-bold mb-2">{blog.title}</h1>
-          
+
         </Container>
       </div>
 
@@ -159,7 +158,6 @@ export default function DetailBerita() {
         </Row>
       </Container>
 
-      <Footer />
     </div>
   );
 }

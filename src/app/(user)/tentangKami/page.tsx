@@ -1,16 +1,10 @@
 "use client";
-import styles from "../page.module.css";
-import NavbarComponents from "../components/navbarWebUser/navbar";
-import Footer from "../components/footerWebUser/footer";
-import HalamanUtamatentangKami from "../components/KomponenAboutusKontak/HalamanUtamatentangKami";
+import HalamanUtamatentangKami from "./components/HalamanUtamatentangKami";
 
 export default function Menu() {
   return (
-    <div className={styles.container}>
-      <NavbarComponents />
-
-      <HalamanUtamatentangKami/>
-
+    <>
+      <HalamanUtamatentangKami />
       <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
         <img
           src="/images/whatsapp.svg"
@@ -266,7 +260,6 @@ export default function Menu() {
         </div>
       </div>
 
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -1,15 +1,11 @@
-import styles from "../page.module.css";
-import NavbarComponents from "../components/navbarWebUser/navbar";
-import KategoriMenu from "../components/KomponenMenu/ButtonKategori";
-import { Card } from "react-bootstrap";
-import CardMenu from "../components/KomponenMenu/CardMenu";
-import Footer from "../components/footerWebUser/footer";
-import HalamanUtamaMenu from "../components/KomponenMenu/HalamanUtamaMenu";
+import styles from "../../page.module.css";
+import KategoriMenu from "./components/ButtonKategori";
+import CardMenu from "./components/CardMenu";
+import HalamanUtamaMenu from "./components/HalamanUtamaMenu";
 
 export default function Menu() {
   return (
-    <div className={styles.container}>
-      <NavbarComponents />
+    <>
       <HalamanUtamaMenu />
 
       <h2 className={styles.judulHalaman2} id="menuUnggulan">
@@ -38,8 +34,7 @@ export default function Menu() {
       </a>
 
       <KategoriMenu />
-      <CardMenu/>  
-      <Footer />
-    </div>
+      <CardMenu />
+    </>
   );
 }

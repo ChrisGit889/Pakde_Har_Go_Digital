@@ -1,15 +1,11 @@
 "use client";
-import styles from "../page.module.css";
-import NavbarComponents from "../components/navbarWebUser/navbar";
-import Footer from "../components/footerWebUser/footer";
-import HalamanUtamaKontak from "../components/KomponenAboutusKontak/halamanUtamaKontak";
+import HalamanUtamaKontak from "./components/halamanUtamaKontak";
 
 export default function Kontak() {
   return (
-    <div className={styles.container}>
-      <NavbarComponents />
+    <>
 
-      <HalamanUtamaKontak/>
+      <HalamanUtamaKontak />
 
       <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
         <img
@@ -254,7 +250,6 @@ export default function Kontak() {
         </div>
       </div>
 
-      <Footer />
-    </div>
+    </>
   );
 }

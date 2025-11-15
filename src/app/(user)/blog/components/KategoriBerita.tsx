@@ -28,6 +28,7 @@ function KategoriBerita() {
           return "lainnya";
       }
     };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveCategory(CategoryID(kategori));
   }, [kategori]);
 
@@ -65,28 +66,28 @@ function KategoriBerita() {
 
   return (
     <Container className="my-5">
-        <div className="text-center mb-4" id="blogterbaru">
-      <h1
-        className="fw-bold" id="blogterbaru"
-        style={{
-          fontSize: "clamp(20px, 4vw, 32px)",
-          color: "#000000ff",
-        }}
-      >
-        Blog Terbaru Kami
-      </h1>
+      <div className="text-center mb-4" id="blogterbaru">
+        <h1
+          className="fw-bold" id="blogterbaru"
+          style={{
+            fontSize: "clamp(20px, 4vw, 32px)",
+            color: "#000000ff",
+          }}
+        >
+          Blog Terbaru Kami
+        </h1>
 
-      <p
-        style={{
-          fontSize: "clamp(12px, 2vw, 16px)",
-          color: "#000000ff",
-          maxWidth: "600px",
-          margin: "0 auto",
-        }}
-      >
-        Temukan informasi terbaru, menu baru, cerita dapur, dan kabar penting dari Nasi Goreng Pakde Har.
-      </p>
-    </div>
+        <p
+          style={{
+            fontSize: "clamp(12px, 2vw, 16px)",
+            color: "#000000ff",
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}
+        >
+          Temukan informasi terbaru, menu baru, cerita dapur, dan kabar penting dari Nasi Goreng Pakde Har.
+        </p>
+      </div>
 
       <Row className="justify-content-center g-3 text-center" >
         {categories.map((cat) => (

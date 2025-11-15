@@ -26,6 +26,7 @@ function KategoriMenu() {
           return "Semua";
       }
     };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveCategory(CategoryID(kategori));
   }, [kategori]);
 
