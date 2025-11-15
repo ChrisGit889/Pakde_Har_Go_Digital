@@ -1,7 +1,16 @@
-"use client";
+"use server";
+import { Image } from "react-bootstrap";
 import HalamanUtamatentangKami from "./components/HalamanUtamatentangKami";
+import { AboutData } from "@/utils/dataTypes/AboutData";
+import { fetchData, serverImgToData } from "@/utils/utils";
+import Link from "next/link";
+import { EmployeeData } from "@/utils/dataTypes/EmployeeData";
+import { BlogData } from "@/utils/dataTypes/BlogData";
 
-export default function Menu() {
+export default async function Menu() {
+  const aboutData: AboutData = await fetchData('/page/about', { method: 'GET' });
+  const employees: EmployeeData = await fetchData('/employee/list', { method: 'GET' });
+  const blogData: BlogData[] = (await fetchData('/blog/list?limit=3', { method: 'GET' })).data;
   return (
     <>
       <HalamanUtamatentangKami />
@@ -27,23 +36,11 @@ export default function Menu() {
           Dari Awal yang Sederhana
         </h2>
 
-        <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }}>
-          Perjalanan Pakde Har dimulai pada tahun 2017, ketika Pakde Har mulai membuat nasi goreng
-          khas buatannya dari dapur rumah sederhana. Berkat cita rasa bumbu khas dan harga yang ramah
-          di kantong mahasiswa, aroma nasi goreng Pakde Har cepat menarik perhatian banyak pelanggan.
-        </p>
-
-        <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }}>
-          Setahun kemudian, Pakde mulai berjualan di samping Universitas Tarumanagara — tempat di
-          mana kehangatan, tawa, dan cerita para mahasiswa selalu menemani setiap wajan yang
-          bergoyang.
-        </p>
-
-        <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }}>
-          Kini, Warung Nasi Goreng Pakde Har terus berkembang. Dengan tempat yang telah direnovasi,
-          kami tetap berkomitmen menyajikan rasa autentik dan suasana akrab yang telah menjadi ciri
-          khas kami sejak awal.
-        </p>
+        {
+          aboutData.data.storyDescription.split('\n').map((par, i) => {
+            return <p style={{ fontSize: "20px", lineHeight: 1.7, color: "#000", marginBottom: "22px" }} key={i}>{par}</p>
+          })
+        }
       </div>
 
       <div style={{ marginTop: "100px", textAlign: "center" }}>
@@ -72,114 +69,52 @@ export default function Menu() {
           padding: "0 20px",
         }}
       >
-        <div
-          style={{
-            width: "330px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            overflow: "hidden",
-            backgroundColor: "white",
-          }}
-        >
-          <img
-            src="/images/Gerobak_Pakde.jpg"
-            style={{ width: "100%", height: "200px", objectFit: "cover" }}
-          />
-          <div style={{ padding: "20px", textAlign: "left" }}>
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Menu Baru Segera Hadir</h3>
-            <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
-              Menu terbaru kami, Nasi Goreng Gila Kambing, hadir dengan rasa istimewa yang memadukan
-              bumbu khas dan kelezatan daging kambing pilihan.
-            </p>
-            <button
-              style={{
-                width: "100%",
-                padding: "10px",
-                backgroundColor: "#ff8c00",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-            >
-              Detail Berita
-            </button>
-          </div>
-        </div>
-
-        <div
-          style={{
-            width: "330px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            overflow: "hidden",
-            backgroundColor: "white",
-          }}
-        >
-          <img
-            src="/images/Gerobak_Pakde.jpg"
-            style={{ width: "100%", height: "200px", objectFit: "cover" }}
-          />
-          <div style={{ padding: "20px", textAlign: "left" }}>
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Pindah Lokasi</h3>
-            <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
-              Pada 22 Oktober 2025 Nasi Goreng Pakde Har pindah ke sebelah Indomaret untuk sementara
-              dikarenakan ada renovasi.
-            </p>
-            <button
-              style={{
-                width: "100%",
-                padding: "10px",
-                backgroundColor: "#ff8c00",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-            >
-              Detail Berita
-            </button>
-          </div>
-        </div>
-
-        <div
-          style={{
-            width: "330px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            overflow: "hidden",
-            backgroundColor: "white",
-          }}
-        >
-          <img
-            src="/images/Gerobak_Pakde.jpg"
-            style={{ width: "100%", height: "200px", objectFit: "cover" }}
-          />
-          <div style={{ padding: "20px", textAlign: "left" }}>
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>Nasi Vegetarian</h3>
-            <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
-              Nikmati kelezatan Nasi Goreng Vegetarian dengan cita rasa autentik dan bahan-bahan segar
-              pilihan dan berkualitas.
-            </p>
-            <button
-              style={{
-                width: "100%",
-                padding: "10px",
-                backgroundColor: "#ff8c00",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-            >
-              Detail Berita
-            </button>
-          </div>
-        </div>
+        {
+          blogData.map(async (b) => {
+            return (
+              <div
+                key={b.id}
+                style={{
+                  width: "330px",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                  overflow: "hidden",
+                  backgroundColor: "white",
+                }}
+              >
+                <Image
+                  src={b.image.name ? await serverImgToData(b.image.data, b.image.name) : '/images/placeholder.jpg'}
+                  alt=""
+                  style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                />
+                <div style={{ padding: "20px", textAlign: "left" }}>
+                  <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>{b.blog.title}</h3>
+                  <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
+                    {b.blog.description}
+                  </p>
+                  <button
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      backgroundColor: "#ff8c00",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Detail Berita
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
 
       <div style={{ textAlign: "center", marginTop: "40px", marginBottom: "80px" }}>
-        <button
+        <Link
+          href={'/blog'}
           style={{
             padding: "10px 24px",
             backgroundColor: "white",
@@ -191,7 +126,7 @@ export default function Menu() {
           }}
         >
           Lihat Berita Lainnya
-        </button>
+        </Link>
       </div>
 
       <div style={{ marginTop: "120px", textAlign: "center" }}>
@@ -212,35 +147,42 @@ export default function Menu() {
           marginBottom: "80px",
         }}
       >
-        <div
-          style={{
-            width: "400px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
-            overflow: "hidden",
-            backgroundColor: "white",
-          }}
-        >
-          <img
-            src="/images/Wajah_Pakde.jpg"
-            style={{ width: "100%", height: "300px", objectFit: "cover" }}
-          />
+        {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          employees.data.map(async (emp, _) => {
+            return (<div
+              key={emp.id}
+              style={{
+                width: "400px",
+                borderRadius: "12px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
+                overflow: "hidden",
+                backgroundColor: "white",
+              }}
+            >
+              <Image
+                src={emp.image.name ? await serverImgToData(emp.image.data, emp.image.name) : '/images/placeholder.jpg'}
+                alt=""
+                style={{ width: "100%", height: "300px", objectFit: "cover" }}
+              />
 
-          <div style={{ padding: "20px", textAlign: "left" }}>
-            <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#000", marginBottom: "6px" }}>
-              Pakde Har
-            </h3>
+              <div style={{ padding: "20px", textAlign: "left" }}>
+                <h3 style={{ fontSize: "22px", fontWeight: 700, color: "#000", marginBottom: "6px" }}>
+                  {emp.profile.name}
+                </h3>
 
-            <p style={{ fontSize: "16px", color: "#ff8c00", fontWeight: 600, marginBottom: "12px" }}>
-              Pendiri & Koki
-            </p>
+                <p style={{ fontSize: "16px", color: "#ff8c00", fontWeight: 600, marginBottom: "12px" }}>
+                  {emp.profile.role}
+                </p>
 
-            <p style={{ fontSize: "16px", color: "#000", lineHeight: 1.6 }}>
-              Dengan pengalaman berjualan sejak tahun 2017, Pakde Har menghadirkan cita rasa nasi
-              goreng dengan rasa yang khas dan harga yang terjangkau.
-            </p>
-          </div>
-        </div>
+                <p style={{ fontSize: "16px", color: "#000", lineHeight: 1.6 }}>
+                  {emp.profile.description}
+                </p>
+              </div>
+            </div>);
+
+          })
+        }
       </div>
 
     </>
