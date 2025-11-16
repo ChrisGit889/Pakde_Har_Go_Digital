@@ -21,22 +21,20 @@ export default function AdminMenuTopbar({
       <div className="topbar-right-group">
         <div className="search-wrapper">
           <img src="/images/search.png" alt="Cari" className="topbar-icon" />
-          
           <input 
             type="text" 
             placeholder="Cari Menu"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)} 
           />
-
         </div>
         <div className="button-group">
           <button 
             className="admin-button secondary" 
             onClick={onAddCategoryClick} 
           >
-            <img src="/images/add.png" alt="Tambah Kategori" className="topbar-icon" />
-            Tambah Kategori
+            <img src="/images/add.png" alt="Edit Kategori" className="topbar-icon" />
+            Edit Kategori
           </button>
           
           <Link href="/admin/menu/tambah" className="admin-button secondary"> 

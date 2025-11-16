@@ -7,7 +7,7 @@
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid #f3f4f6;
-  min-height: 80px; 
+  min-height: 80px;
   box-sizing: border-box;
 }
 
@@ -47,6 +47,7 @@
   color: #333;
   font-weight: 500;
 }
+
 .admin-menu-topbar .search-wrapper input::placeholder {
   color: #9ca3af;
 }
@@ -69,6 +70,7 @@
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
+
 .admin-menu-topbar .admin-button:hover {
   opacity: 0.8;
 }
@@ -82,21 +84,23 @@
   background-color: #FFA500;
   color: white;
 }
-.admin-button.primary .button-icon {
-  color: white; 
-}
 
+.admin-button.primary .button-icon {
+  color: white;
+}
 
 .admin-button.secondary {
   background-color: #ffffff;
   color: #374151;
   border: 1px solid #e5e7eb;
 }
+
 .admin-button.secondary:hover {
-   background-color: #f9fafb;
+  background-color: #f9fafb;
 }
+
 .admin-button.secondary .button-icon {
-  color: #FFA500; 
+  color: #FFA500;
 }
 
 .topbar-icon {
@@ -113,7 +117,6 @@
   background-color: #FFF3E8;
   border-radius: 12px;
   padding: 8px;
-  border-bottom: none;
 }
 
 .filter-tab {
@@ -125,17 +128,17 @@
   color: #6B7280;
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  border-bottom: none;
 }
+
 .filter-tab:not(.active):hover {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #374151;
 }
+
 .filter-tab.active {
   color: #1f2937;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border-bottom-color: transparent;
 }
 
 .product-grid {
@@ -143,11 +146,13 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+
 @media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 640px) {
   .product-grid {
     grid-template-columns: 1fr;
@@ -183,23 +188,24 @@
   background-color: #ffffff;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
 }
+
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
 }
+
 .product-card-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  opacity: 1 !important;
-  filter: none !important;
 }
+
 .product-card-content {
   padding: 20px;
   display: flex;
@@ -208,13 +214,15 @@
   flex-grow: 1;
   justify-content: space-between;
 }
+
 .product-card-title {
   font-size: 1.125rem;
   font-weight: 700;
   color: #333;
 }
-.product-card-subtitle,
-.product-card-description {
+
+.product-card-description,
+.product-card-subtitle {
   font-size: 0.875rem;
   color: #6B7280;
   line-height: 1.5;
@@ -225,6 +233,7 @@
   border-top: 1px solid #F3F4F6;
   margin-top: 12px;
 }
+
 .product-card-button {
   flex: 1;
   background: none;
@@ -238,22 +247,27 @@
   padding: 16px 0;
   transition: background-color 0.2s ease;
 }
+
 .product-card-button .button-icon {
   width: 16px;
   height: 16px;
   object-fit: contain;
 }
+
 .product-card-button.edit {
   color: #374151;
   border-right: 1px solid #e5e7eb;
 }
+
 .product-card-button.edit:hover {
   background-color: #f0fdf4;
   color: #15803d;
 }
+
 .product-card-button.delete {
   color: #EF4444;
 }
+
 .product-card-button.delete:hover {
   background-color: #fef2f2;
   color: #dc2626;
@@ -300,11 +314,11 @@
   border-radius: 8px;
   border: 1px solid #d1d5db;
   font-size: 1rem;
-  box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   background-color: #ffffff !important;
   color: #374151 !important;
 }
+
 .modal-content .modal-input:focus {
   outline: none;
   border-color: #FFA500;
@@ -315,6 +329,9 @@
   display: flex;
   gap: 12px;
   justify-content: flex-end;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 20px;
+  margin-top: 10px;
 }
 
 .modal-button {
@@ -330,25 +347,36 @@
   transition: opacity 0.2s ease;
   flex: 1;
 }
+
 .modal-button:hover {
   opacity: 0.9;
 }
+
+.modal-button.primary {
+  background-color: #FFA500;
+  color: white;
+}
+
 .modal-button.green {
   background-color: #22c55e;
   color: white;
 }
+
 .modal-button.red {
   background-color: #ef4444;
   color: white;
 }
+
 .modal-button.secondary {
   background-color: #ffffff;
   color: #374151;
   border: 1px solid #e5e7eb;
 }
+
 .modal-button.secondary:hover {
   background-color: #f9fafb;
 }
+
 
 .modal-content.delete-modal {
   align-items: center;
@@ -386,39 +414,84 @@
   gap: 8px;
 }
 
-.modal-content.delete-modal h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #333;
-  margin: 0;
-}
-
-.modal-content.delete-modal p {
-  font-size: 1rem;
-  color: #6B7280;
-  margin: 0 0 16px 0;
-  line-height: 1.6;
-}
-
 .modal-content.delete-modal .modal-actions {
   justify-content: center;
   width: 100%;
   padding-top: 0;
   border-top: none;
-  background: none;
 }
 
 .modal-content.delete-modal .modal-button {
-  flex-grow: 1; 
+  flex-grow: 1;
   max-width: 200px;
+}
+
+
+.category-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.category-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.delete-button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.delete-button:hover {
+  background-color: #dc2626;
+}
+
+.add-category-section {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 20px;
+}
+
+.add-category-section .modal-button.green {
+  flex: 0 1 auto;
+  padding: 10px 16px;
+}
+
+.add-category-section .modal-input {
+  flex-grow: 1;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1); }
 }
