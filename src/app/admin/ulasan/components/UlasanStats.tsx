@@ -21,7 +21,7 @@ export default function UlasanStats({ stats }: { stats: { good: number, bad: num
 
       <div className="stat-card">
         <label>Rata-rata Bintang</label>
-        <div className="stat-value highlight">{stats.avg}</div>
+        <div className="stat-value highlight">{stats.avg.toString()}</div>
       </div>
     </div>
   );
