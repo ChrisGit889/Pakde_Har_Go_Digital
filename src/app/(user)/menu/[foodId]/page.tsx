@@ -17,7 +17,7 @@ export default function FoodDetail() {
   const id = params.foodId as string;
 
   async function asyncFetch() {
-    fetchBoolean('/menu/view/' + id, { method: 'PATCH' });
+    await fetchBoolean('/menu/view/' + id, { method: 'PATCH' });
     const data = await fetchData('/menu/' + id, { method: 'GET' });
     console.log(data);
     if (data) {

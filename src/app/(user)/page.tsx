@@ -11,7 +11,7 @@ export default async function Home() {
 
   let foodData = await fetchData('/menu/highlighted', { method: 'GET' });
   if (!foodData) foodData = await fetchData('/menu/list?limit=3', { method: 'GET' }); //failsafe
-  else if (foodData.data.length == 0) foodData = await fetchData('/menu/list?limit=3', { method: 'GET' }); //failsafe
+  else if (foodData.data) if (foodData.data.length == 0) foodData = await fetchData('/menu/list?limit=3', { method: 'GET' }); //failsafe
 
   let reviewData = await fetchData('/review/highlighted', { method: 'GET' });
   if (!reviewData) reviewData = await fetchData('/review/list?limit=3', { method: 'GET' }); //failsafe

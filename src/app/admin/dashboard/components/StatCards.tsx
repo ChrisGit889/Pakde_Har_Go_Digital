@@ -10,15 +10,15 @@ export default function StatCards({ views, menus }: { views: ViewsData, menus: M
       label: "Total Pengunjung",
       icon: <Person />,
       color: 'pink',
-      comparison: `+${views.data[0].visits}`,
+      comparison: `+${Math.round(Number(views.data[0].visits) / 2)}`,
       isUp: true,
     },
     {
-      value: Math.round(views.data[0].visits),
+      value: Math.round(views.data[0].visits / 2),
       label: 'Produk Di Klik',
       icon: <Mouse />,
       color: 'blue',
-      comparison: Math.abs(Number(views.data[1].visits) - Number(views.data[0].visits)),
+      comparison: Math.round(Math.abs(Number(views.data[1].visits) - Number(views.data[0].visits)) / 2),
       isUp: Number(views.data[1].visits) - Number(views.data[0].visits) < 0,
     },
     {
@@ -30,7 +30,7 @@ export default function StatCards({ views, menus }: { views: ViewsData, menus: M
       isUp: null,
     },
     {
-      value: Math.round(Number(menus.reduce((r, a) => r + Number(a.food.visitors), 0) / menus.length)),
+      value: Math.round(Number(menus.reduce((r, a) => r + Number(a.food.visitors), 0) / menus.length / 2)),
       label: 'Rata-rata pengunjung',
       icon: <People />,
       color: 'purple',
