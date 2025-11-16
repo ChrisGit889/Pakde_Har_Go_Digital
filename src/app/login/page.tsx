@@ -2,8 +2,10 @@
 import { Container, Row, Col, } from 'react-bootstrap';
 import './LoginPage.css';
 import AdminForm from './components/form';
+import { cookies } from 'next/headers';
 
 export default async function LoginPage() {
+  const x = cookies();
   return (
     <Container fluid className="login-page-wrapper-modern vh-100">
       <Row className="vh-100">

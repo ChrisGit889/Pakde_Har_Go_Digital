@@ -39,6 +39,7 @@ export default async function InformasiPage() {
 
 
     if (data) {
+      // eslint-disable-next-line react-hooks/immutability
       emails = data.emails;
       places = data.addresses;
       phones = data.phoneNumbers;

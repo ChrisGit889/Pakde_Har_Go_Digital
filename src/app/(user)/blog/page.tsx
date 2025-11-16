@@ -1,5 +1,4 @@
 "use server"
-
 import HalamanUtamaBerita from "./components/HalamanUtamaBerita";
 import KategoriBerita from "./components/KategoriBerita";
 import { fetchData } from "@/utils/utils";

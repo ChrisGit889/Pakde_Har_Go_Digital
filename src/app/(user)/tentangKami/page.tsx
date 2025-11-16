@@ -6,8 +6,10 @@ import { fetchData, serverImgToData } from "@/utils/utils";
 import Link from "next/link";
 import { EmployeeData } from "@/utils/dataTypes/EmployeeData";
 import { BlogData } from "@/utils/dataTypes/BlogData";
+import { cookies } from "next/headers";
 
 export default async function Menu() {
+  const x = (await cookies()).getAll();
   const aboutData: AboutData = await fetchData('/page/about', { method: 'GET' });
   const employees: EmployeeData = await fetchData('/employee/list', { method: 'GET' });
   const blogData: BlogData[] = (await fetchData('/blog/list?limit=3', { method: 'GET' })).data;
