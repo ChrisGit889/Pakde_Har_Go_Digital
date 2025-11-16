@@ -2,7 +2,7 @@
 import { Badge, Button, Col, Row, Container, Image } from "react-bootstrap";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { fetchData } from "@/utils/utils";
+import { fetchBoolean, fetchData } from "@/utils/utils";
 import { Menu } from "@/utils/dataTypes/MenuData";
 import { imgToData } from "@/utils/clientUtils";
 
@@ -17,6 +17,7 @@ export default function FoodDetail() {
   const id = params.foodId as string;
 
   async function asyncFetch() {
+    fetchBoolean('/menu/view/' + id, { method: 'PATCH' });
     const data = await fetchData('/menu/' + id, { method: 'GET' });
     console.log(data);
     if (data) {
@@ -113,12 +114,17 @@ export default function FoodDetail() {
               <p>
                 <strong>Rasa:</strong> {data.food.flavour}
               </p>
-              <p>
-                <strong>Harga:</strong>{" "}
-                <span style={{ color: "#FF7A00", fontWeight: "bold" }}>
-                  Rp {data.food.price.toLocaleString("id-ID")}
-                </span>
-              </p>
+              {
+                data.food.price ?
+
+                  <p>
+                    <strong>Harga:</strong>{" "}
+                    <span style={{ color: "#FF7A00", fontWeight: "bold" }}>
+                      Rp {data.food.price.toLocaleString("id-ID")}
+                    </span>
+                  </p> :
+                  null
+              }
             </div>
 
 

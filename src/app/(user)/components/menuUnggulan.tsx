@@ -47,7 +47,7 @@ function MenuUnggulan({ menu }: { menu: MenuData }) {
               }}
             >
               <Card.Img
-                src={imgToData(item.image.data, item.image.name)}
+                src={item.image.name ? imgToData(item.image.data, item.image.name) : '/images/placeholder.jpg'}
                 alt={item.image.name}
                 style={{
                   height: "180px",
