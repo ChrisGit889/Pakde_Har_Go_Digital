@@ -1,5 +1,5 @@
 import Footer from "./components/footer";
-import NavbarComponents from "../components/navbarWebUser/navbar";
+import NavbarComponents from "./components/navbar";
 import styles from "../page.module.css";
 import { Image } from "react-bootstrap";
 
