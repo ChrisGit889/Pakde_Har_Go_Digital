@@ -1,5 +1,4 @@
-"use server"
-
+import { cookies } from "next/headers";
 import styles from "../page.module.css";
 import MenuUnggulan from "./components/menuUnggulan";
 import CeritaKami from "./components/CeritaKami";
@@ -8,7 +7,7 @@ import HalamanUtama from "./components/HalamanUtama";
 import { fetchData } from "@/utils/utils";
 
 export default async function Home() {
-
+  const x = cookies();
   let foodData = await fetchData('/menu/highlighted', { method: 'GET' });
   if (!foodData) foodData = await fetchData('/menu/list?limit=3', { method: 'GET' }); //failsafe
   else if (foodData.data) if (foodData.data.length == 0) foodData = await fetchData('/menu/list?limit=3', { method: 'GET' }); //failsafe

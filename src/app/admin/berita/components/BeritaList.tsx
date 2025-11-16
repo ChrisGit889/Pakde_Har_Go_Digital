@@ -1,5 +1,4 @@
 'use server';
-
 import { route } from "@/utils/utils";
 import BeritaListSync from "./BeritaListSync";
 
