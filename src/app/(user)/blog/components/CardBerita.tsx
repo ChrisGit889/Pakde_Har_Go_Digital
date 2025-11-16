@@ -38,7 +38,7 @@ function CardBerita({ blogs, category }: { blogs: BlogData[], category: string }
   const totalPages = Math.ceil(filteredblogs.length / itemsPerPage);
 
   return (
-    <Container fluid className="py-4 px-3 px-md-5">
+    <Container className="py-4 px-3 px-md-5">
       <Row
         id="cardblog"
         className="justify-content-center g-4"

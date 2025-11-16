@@ -114,6 +114,7 @@ export default async function Menu() {
 
       <div style={{ textAlign: "center", marginTop: "40px", marginBottom: "80px" }}>
         <Link
+          suppressHydrationWarning
           href={'/blog'}
           style={{
             padding: "10px 24px",
@@ -129,7 +130,7 @@ export default async function Menu() {
         </Link>
       </div>
 
-      <div style={{ marginTop: "120px", textAlign: "center" }}>
+      <div style={{ marginTop: "100px", textAlign: "center" }}>
         <h2 style={{ fontSize: "36px", fontWeight: 700, marginBottom: "10px", color: "#000" }}>
           Kenali Tim Kami
         </h2>
@@ -145,6 +146,7 @@ export default async function Menu() {
           justifyContent: "center",
           padding: "0 20px",
           marginBottom: "80px",
+          gap: "20px"
         }}
       >
         {

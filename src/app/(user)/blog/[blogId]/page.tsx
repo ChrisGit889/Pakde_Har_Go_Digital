@@ -11,7 +11,6 @@ export default function DetailBerita() {
   const router = useRouter();
 
   const [load, setLoad] = useState(false);
-  const [err, setErr] = useState(false);
 
   const [blog, setBlog] = useState<BlogData>();
 
@@ -22,8 +21,6 @@ export default function DetailBerita() {
 
     if (data) {
       setBlog(data);
-    } else {
-      setErr(err);
     }
     setLoad(true);
   }
@@ -35,7 +32,7 @@ export default function DetailBerita() {
     return <>Loading</>
   }
 
-  if (!blog || err) {
+  if (!blog) {
     return (
       <Container className="text-center py-5">
         <h3>Berita tidak ditemukan 😢</h3>

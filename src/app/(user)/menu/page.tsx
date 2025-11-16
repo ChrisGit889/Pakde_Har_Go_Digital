@@ -1,10 +1,16 @@
-import { Image } from "react-bootstrap";
+"use server"
+import { CategoryData } from "@/utils/dataTypes/CategoryData";
 import styles from "../../page.module.css";
-import KategoriMenu from "./components/ButtonKategori";
-import CardMenu from "./components/CardMenu";
+import KategoriMenu from "./components/KategoriMenu";
 import HalamanUtamaMenu from "./components/HalamanUtamaMenu";
+import { fetchData } from "@/utils/utils";
+import { MenuData } from "@/utils/dataTypes/MenuData";
 
-export default function Menu() {
+export default async function Menu() {
+  const categories: CategoryData = await fetchData('/menu/categories', { method: 'GET' });
+  categories.data.unshift({ name: 'Semua', description: 'Semua makanan' });
+  const menu: MenuData = await fetchData('/menu/list', { method: 'GET' });
+
   return (
     <>
       <HalamanUtamaMenu />
@@ -13,8 +19,7 @@ export default function Menu() {
         Menu Unggulan Kami
       </h2>
 
-      <KategoriMenu />
-      <CardMenu />
+      <KategoriMenu categories={categories} menu={menu} />
     </>
   );
 }

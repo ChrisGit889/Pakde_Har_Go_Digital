@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "@mui/material";
 
@@ -8,7 +8,7 @@ function HalamanUtamaMenu() {
   return (
     <div
       style={{
-        backgroundImage: "url('/images/Nasi_Goreng_Ayam.jpg')", 
+        backgroundImage: "url('/images/Nasi_Goreng_Ayam.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -55,19 +55,19 @@ function HalamanUtamaMenu() {
         </p>
 
         <div style={{ marginTop: "30px" }}>
-           <Link href="/menu/#menuUnggulan">
-          <Button
-            style={{
-              backgroundColor: "#FF941A",
-              border: "none",
-              fontWeight: "bold",
-              color: "white",
-              padding: "10px 25px",
-              borderRadius: "6px",
-            }}
-          >
-            Lihat Menu
-          </Button>
+          <Link href="/menu/#menuUnggulan">
+            <Button
+              style={{
+                backgroundColor: "#FF941A",
+                border: "none",
+                fontWeight: "bold",
+                color: "white",
+                padding: "10px 25px",
+                borderRadius: "6px",
+              }}
+            >
+              Lihat Menu
+            </Button>
           </Link>
         </div>
       </Container>
@@ -80,8 +80,8 @@ function HalamanUtamaMenu() {
           transform: "translateX(-50%)",
         }}
       >
-        <img
-          src="/images/PanahBawah.png" 
+        <Image
+          src="/images/PanahBawah.png"
           alt="Scroll Down"
           style={{ width: "30px", opacity: 0.9 }}
         />

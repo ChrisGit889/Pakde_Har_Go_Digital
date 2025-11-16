@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Row,
   Col,
@@ -9,54 +9,21 @@ import {
   Pagination,
   Container,
 } from "react-bootstrap";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import foods from "./DataMenu";
+import { useRouter } from "next/navigation";
+import { MenuData } from "@/utils/dataTypes/MenuData";
+import { Category } from "@/utils/dataTypes/CategoryData";
+import { imgToData } from "@/utils/clientUtils";
 
-const IDCategory = (categoryId: string) => {
-  switch (categoryId) {
-    case "Category_1":
-      return "Nasi Goreng";
-    case "Category_2":
-      return "Mie Goreng";
-    case "Category_3":
-      return "Kwetiau Goreng";
-    case "Category_4":
-      return "Rekomendasi";
-    default:
-      return "Lainnya";
-  }
-};
-
-const getImagePath = (imageid: string) => {
-  switch (imageid) {
-    case "image_1":
-      return "/images/Nasi_Goreng_Ayam.jpg";
-    case "image_2":
-      return "/images/miegorengayam.png";
-    case "image_3":
-      return "/images/kwetiaugorengayam.png";
-    default:
-      return "/images/local_dining.png";
-  }
-};
-
-function CardMenu() {
-  const searchParams = useSearchParams();
+function CardMenu({ menu, activeCategory }: { menu: MenuData, activeCategory: Category }) {
   const router = useRouter();
-  const pathname = usePathname();
 
-  const kategori = searchParams.get("kategori");
-  const pageFromUrl = Number(searchParams.get("page")) || 1;
-
-  const [currentPage, setCurrentPage] = useState(pageFromUrl);
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  useEffect(() => {
-    setCurrentPage(pageFromUrl);
-  }, [pageFromUrl]);
+  const filteredFoods = menu.data.filter((m) => activeCategory.name == "Semua" ? true : m.food.category == activeCategory.name);
 
 
-  if (foods.length === 0) {
+  if (filteredFoods.length === 0) {
     return (
       <Container fluid className="py-4 px-3 px-md-5">
         <p className="text-center fw-bold mt-5">Saat ini belum ada menu.</p>
@@ -64,26 +31,13 @@ function CardMenu() {
     );
   }
 
-  const filteredFoods =
-    kategori && kategori !== "semua"
-      ? foods.filter((food) => food.categoryid.includes(kategori))
-      : foods;
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredFoods.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredFoods.length / itemsPerPage);
 
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-
-    const params = new URLSearchParams(searchParams);
-    params.set("page", pageNumber.toString());
-    router.push(`${pathname}?${params.toString()}#cardmenu`);
-  };
-
   return (
-    <Container fluid className="py-4 px-3 px-md-5">
+    <Container className="py-4 px-3 px-md-5">
       <Row
         id="cardmenu"
         className="justify-content-center g-4"
@@ -92,7 +46,7 @@ function CardMenu() {
         {currentItems.length > 0 ? (
           currentItems.map((item) => (
             <Col
-              key={item.foodId}
+              key={item.id}
               xs={12}
               sm={6}
               md={6}
@@ -108,8 +62,8 @@ function CardMenu() {
                 }}
               >
                 <Card.Img
-                  src={getImagePath(item.imageid)}
-                  alt={item.name}
+                  src={item.image.name ? imgToData(item.image.data, item.image.name) : '/images/placeholder.jpg'}
+                  alt={item.food.name}
                   style={{
                     height: "180px",
                     objectFit: "cover",
@@ -118,35 +72,32 @@ function CardMenu() {
                 />
                 <Card.Body className="d-flex flex-column justify-content-between">
                   <div>
-                    <Card.Title className="mb-2">{item.name}</Card.Title>
+                    <Card.Title className="mb-2">{item.food.name}</Card.Title>
 
                     <div className="d-flex flex-wrap gap-2 mb-3">
-                      {item.categoryid.map((cat, i) => (
-                        <Badge
-                          key={i}
-                          bg=""
-                          style={{
-                            backgroundColor: "#FFF2CC",
-                            color: "#FF941A",
-                            padding: "6px 10px",
-                            borderRadius: "6px",
-                          }}
-                        >
-                          {IDCategory(cat)}
-                        </Badge>
-                      ))}
+                      <Badge
+                        bg=""
+                        style={{
+                          backgroundColor: "#FFF2CC",
+                          color: "#FF941A",
+                          padding: "6px 10px",
+                          borderRadius: "6px",
+                        }}
+                      >
+                        {item.food.category}
+                      </Badge>
                     </div>
 
                     <Card.Text
                       className="text-muted"
                       style={{ fontSize: "14px", color: "black" }}
                     >
-                      {item.description}
+                      {item.food.description}
                     </Card.Text>
                   </div>
 
                   <Button
-                    onClick={() => router.push(`/menu/${item.foodId}`)}
+                    onClick={() => router.push(`/menu/${item.id}`)}
                     className="mt-3 fw-bold"
                     style={{
                       width: "100%",
@@ -173,14 +124,14 @@ function CardMenu() {
           <Pagination>
             <Pagination.Prev
               onClick={() =>
-                handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+                setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
               }
               disabled={currentPage === 1}
             />
 
             <Pagination.Item
               active={1 === currentPage}
-              onClick={() => handlePageChange(1)}
+              onClick={() => setCurrentPage(1)}
             >
               1
             </Pagination.Item>
@@ -199,7 +150,7 @@ function CardMenu() {
                 <Pagination.Item
                   key={num}
                   active={num === currentPage}
-                  onClick={() => handlePageChange(num)}
+                  onClick={() => setCurrentPage(num)}
                 >
                   {num}
                 </Pagination.Item>
@@ -210,7 +161,7 @@ function CardMenu() {
             {totalPages > 1 && (
               <Pagination.Item
                 active={totalPages === currentPage}
-                onClick={() => handlePageChange(totalPages)}
+                onClick={() => setCurrentPage(totalPages)}
               >
                 {totalPages}
               </Pagination.Item>
@@ -218,7 +169,7 @@ function CardMenu() {
 
             <Pagination.Next
               onClick={() =>
-                handlePageChange(
+                setCurrentPage(
                   currentPage < totalPages ? currentPage + 1 : totalPages
                 )
               }
