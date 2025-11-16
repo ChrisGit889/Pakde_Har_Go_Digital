@@ -2,14 +2,14 @@
 
 import { cookies } from "next/headers";
 
-async function route(endpoint: string) {
+async function serverRoute(endpoint: string) {
     return process.env.API_URL + endpoint;
 }
 
 async function login(username: string, password: string): Promise<number | string> {
     "use server"
 
-    const data = await fetch(await route('/auth/signin'), {
+    const data = await fetch(await serverRoute('/auth/signin'), {
         body: JSON.stringify({
             username: username,
             password: password,
@@ -37,7 +37,7 @@ async function login(username: string, password: string): Promise<number | strin
 async function authenticate(): Promise<boolean> {
     const token = await getToken();
     if (token == null) return false;
-    const data = await fetch(await route(`/auth/verify?token=${token}`), {
+    const data = await fetch(await serverRoute(`/auth/verify?token=${token}`), {
         method: 'GET'
     }).then(res => {
         if (res.status == 200) return res.json();
@@ -65,7 +65,7 @@ async function logout(): Promise<void> {
 }
 
 async function fetchBoolean(ro: string, params: object) {
-    return await fetch(await route(ro), params)
+    return await fetch(await serverRoute(ro), params)
         .then((res) => {
             if (res.status == 200) return true;
             throw Error('An error has occured!');
@@ -77,7 +77,7 @@ async function fetchBoolean(ro: string, params: object) {
 }
 
 async function fetchData(ro: string, params: object) {
-    return await fetch(await route(ro), params)
+    return await fetch(await serverRoute(ro), params)
         .then((res) => {
             if (res.status == 200) return res.json();
             throw Error('An error has occured!');
@@ -88,4 +88,8 @@ async function fetchData(ro: string, params: object) {
         });
 }
 
-export { route, login, getToken, authenticate, logout, fetchBoolean, fetchData };
+async function serverImgToData(data: Buffer, name: string) {
+    return `data:image/${name.split('.')[name.split('.').length - 1]};base64,` + Buffer.from(data).toString("base64")
+}
+
+export { serverRoute as route, login, getToken, authenticate, logout, fetchBoolean, fetchData, serverImgToData };

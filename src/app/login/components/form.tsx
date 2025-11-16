@@ -1,5 +1,4 @@
 'use client'
-import { route } from "@/utils/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
@@ -45,7 +44,7 @@ export default function AdminForm({ }) {
             setModalMessage('Harap isi bagian Password.'); // <-- Tampilkan modal
             return;
         }
-        let success: Number | string = await login(username, password);
+        const success: number | string = await login(username, password);
         if (success == 1) router.push('/admin/dashboard');
         else {
             setModalMessage("Informasi login invalid!");

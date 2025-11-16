@@ -20,7 +20,7 @@ const conversion: {
   thu: 'Kamis',
   fri: 'Jumat',
   sat: 'Sabtu',
-  sun: 'Minggu,'
+  sun: 'Minggu'
 };
 
 export default function InfoJamOperasional({ schedule }: {

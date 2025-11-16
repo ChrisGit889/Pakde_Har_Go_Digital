@@ -1,8 +1,8 @@
 'use server';
 import React from 'react';
-import Forbidden from '../components/Forbidden';
+import Forbidden from './components/Forbidden';
 import { authenticate } from '@/utils/utils';
-import DashboardLayout from '../components/DashboardLayout';
+import DashboardLayout from './components/DashboardLayout';
 
 export default async function AdminLayout({
   children,
