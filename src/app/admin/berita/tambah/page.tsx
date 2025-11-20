@@ -3,8 +3,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './TambahBerita.css';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
+import { toBase64 } from '@/utils/clientUtils';
+import { Image } from 'react-bootstrap';
 
 export default function TambahBeritaPage() {
   const router = useRouter();
@@ -27,7 +29,7 @@ export default function TambahBeritaPage() {
     document.getElementById('imageUpload')?.click();
   };
 
-  const handleReset = (e: any) => {
+  const handleReset = () => {
     setTitle('');
     setDescription('');
     setStory('');
@@ -49,7 +51,7 @@ export default function TambahBeritaPage() {
     headers = new Headers();
     headers.append('Content-type', "application/json");
     headers.append('Authorization', tok!.toString());
-    let res2 = await fetch(await route('/blog/'), {
+    const res2 = await fetchData('/blog/', {
       method: 'POST',
       body: JSON.stringify({
         title: title,
@@ -57,48 +59,32 @@ export default function TambahBeritaPage() {
         story: story,
       }),
       headers: headers
-    }).then(async (res) => {
-      if (res.status == 200) {
-        id = (await res.json()).blogId;
-        return true;
+    }).then((res) => {
+      if (res.blogId) {
+        id = res.blogId;
       }
-      throw Error("Something went wrong");
-    }).catch((e) => {
-      console.log(e);
-      return false;
+      return true;
     });
 
     let res1 = true;
     if (res2 && file) {
+      const fileData = await toBase64(file);
       headers = new Headers();
-      let formdata = new FormData()
-      formdata.append('uploaded_img', file!);
       headers.append('Authorization', tok!.toString());
-      res1 = await fetch(await route('/blog/' + id + '/image'), {
+      headers.append('Content-Type', 'application/json');
+      res1 = await fetchBoolean('/blog/' + id + '/image', {
         method: 'PUT',
-        body: formdata,
+        body: JSON.stringify({ data: fileData }),
         headers: headers,
-      }).then((res) => {
-        if (res.status == 200) return true;
-        throw Error("Something went wrong");
-      }).catch((e) => {
-        console.log(e);
-        return false;
-      });
+      }).then((res) => res);
     }
 
     if (res1 && res2) setSuccess(true);
     else {
-      res1 = await fetch(await route('/blog/' + id), {
+      await fetchBoolean('/blog/' + id, {
         method: 'DELETE',
         headers: headers,
-      }).then((res) => {
-        if (res.status == 200) return true;
-        throw Error("Something went wrong");
-      }).catch((e) => {
-        console.log(e);
-        return false;
-      });
+      }).then((res) => res);
     }
   };
 
@@ -130,11 +116,7 @@ export default function TambahBeritaPage() {
                   onChange={handleFileChange}
                 />
                 <label htmlFor="imageUpload" className="image-uploader-box">
-                  {previewUrl ? (
-                    <img src={previewUrl} alt="Preview" className="image-preview" />
-                  ) : (
-                    <span className="upload-placeholder-icon">🖼️</span>
-                  )}
+                  <Image src={previewUrl ? previewUrl : '/images/placeholder.jpg'} alt="Preview" className="image-preview" />
                 </label>
                 <button
                   type="button"

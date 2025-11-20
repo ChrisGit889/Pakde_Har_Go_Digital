@@ -1,5 +1,4 @@
 "use client";
-import { imgToData } from "@/utils/clientUtils";
 import { BlogData } from "@/utils/dataTypes/BlogData";
 import { fetchData } from "@/utils/utils";
 import { useParams, useRouter } from "next/navigation";
@@ -55,7 +54,7 @@ export default function DetailBerita() {
         style={{
           width: "100%",
           height: "50vh",
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${blog.image.name ? imgToData(blog.image.data, blog.image.name) : '/images/placeholder.jpg'})`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${blog.image.data ? blog.image.data : '/images/placeholder.jpg'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -82,7 +81,7 @@ export default function DetailBerita() {
         <Row className="align-items-center g-4">
           <Col xs={12} md={6} className="text-center">
             <Image
-              src={blog.image.name ? imgToData(blog.image.data, blog.image.name) : '/images/placeholder.jpg'}
+              src={blog.image.data ? blog.image.data : '/images/placeholder.jpg'}
               alt={blog.blog.title}
               className="img-fluid rounded shadow-sm"
               style={{

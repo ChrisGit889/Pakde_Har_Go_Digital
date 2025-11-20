@@ -14,9 +14,8 @@ interface Menu {
         category: string,
     },
     image: {
-        name: string,
         updated: string,
-        data: Buffer,
+        data: string,
     }
 }
 

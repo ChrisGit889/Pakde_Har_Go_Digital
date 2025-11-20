@@ -2,9 +2,10 @@
 import Link from 'next/link';
 import './BeritaDetail.css';
 import { BlogData } from '@/utils/dataTypes/BlogData';
-import { route } from '@/utils/utils';
+import { fetchData } from '@/utils/utils';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Image } from 'react-bootstrap';
 
 export default function BeritaDetailPage() {
   const [data, setData] = useState<BlogData | null>(null);
@@ -18,16 +19,10 @@ export default function BeritaDetailPage() {
   const blogId = parseInt(id, 10);
 
   const asyncFetch = async () => {
-    const data: BlogData = await fetch(await route('/blog/' + blogId), {
+    const data: BlogData = await fetchData('/blog/' + blogId, {
       method: 'GET',
     }).then((res) => {
-      if (res.status == 200) {
-        return res.json();
-      }
-      throw Error('Database Err!');
-    }).catch((e) => {
-      console.log(e);
-      return null;
+      return res;
     });
 
     if (data) {
@@ -37,12 +32,16 @@ export default function BeritaDetailPage() {
     }
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     asyncFetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     setLoad(!load);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (!load) {
@@ -76,20 +75,11 @@ export default function BeritaDetailPage() {
         </div>
 
         <article className="detail-article-card">
-          {
-            data.image.data == null ?
-              <img
-                src={"data:image/jpeg;base64,"}
-                alt={data.blog.title}
-                className="detail-image"
-              />
-              :
-              <img
-                src={`data:image/${data.image.name.split('.')[data.image.name.split('.').length - 1]};base64,` + Buffer.from(data.image.data).toString("base64")}
-                alt={data.blog.title}
-                className="detail-image"
-              />
-          }
+          <Image
+            src={data.image.data ? data.image.data : '/images/placeholder.jpg'}
+            alt={data.blog.title}
+            className="detail-image"
+          />
 
           <div className="detail-text-content">
             <h1 className="detail-title">{data.blog.title}</h1>

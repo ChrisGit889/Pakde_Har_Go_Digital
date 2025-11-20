@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import { BlogData } from "@/utils/dataTypes/BlogData";
-import { imgToData } from "@/utils/clientUtils";
 
 function CardBerita({ blogs, category }: { blogs: BlogData[], category: string }) {
   const router = useRouter();
@@ -63,7 +62,7 @@ function CardBerita({ blogs, category }: { blogs: BlogData[], category: string }
                 }}
               >
                 <Card.Img
-                  src={item.image.name ? imgToData(item.image.data, item.image.name) : '/images/placeholder.jpg'}
+                  src={item.image.data ? item.image.data : '/images/placeholder.jpg'}
                   alt={item.blog.title}
                   style={{
                     height: "180px",

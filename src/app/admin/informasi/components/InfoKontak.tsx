@@ -3,7 +3,7 @@ import { useState } from 'react';
 import KontakModal from './KontakModal';
 import { Envelope, Telephone } from 'react-bootstrap-icons';
 import { useRouter } from 'next/navigation';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, getToken } from '@/utils/utils';
 
 export default function InfoKontak({ contacts }: { contacts: { emails: string[], phones: string[] } }) {
   const router = useRouter();
@@ -23,16 +23,10 @@ export default function InfoKontak({ contacts }: { contacts: { emails: string[],
     const headers = new Headers();
     headers.append('Authorization', (await getToken())!);
 
-    let res = await fetch(await route('/contact/phone/' + id), {
+    const res = await fetchBoolean('/contact/phone/' + id, {
       method: 'DELETE',
       headers: headers,
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error('Database insertion error!');
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then(res => res);
 
     if (res) {
       onClose();
@@ -43,16 +37,10 @@ export default function InfoKontak({ contacts }: { contacts: { emails: string[],
     const headers = new Headers();
     headers.append('Authorization', (await getToken())!);
 
-    let res = await fetch(await route('/contact/email/' + id), {
+    const res = await fetchBoolean('/contact/email/' + id, {
       method: 'DELETE',
       headers: headers,
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error('Database insertion error!');
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then(res => res);
 
     if (res) {
       onClose();

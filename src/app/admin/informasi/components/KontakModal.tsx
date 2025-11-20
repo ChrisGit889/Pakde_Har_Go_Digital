@@ -1,7 +1,7 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '@/app/admin/informasi/InformasiPage.css';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, getToken } from '@/utils/utils';
 
 export default function KontakModal({ show, onClose }: { show: boolean, onClose: () => void, }) {
   const [kontak, setKontak] = useState({ email: '', phone: '' });
@@ -16,35 +16,23 @@ export default function KontakModal({ show, onClose }: { show: boolean, onClose:
     let res1 = true;
     let res2 = true;
     if (kontak.phone) {
-      res1 = await fetch(await route('/contact/phone/'), {
+      res1 = await fetchBoolean('/contact/phone/', {
         method: 'POST',
         body: JSON.stringify({
           phoneNumber: kontak.phone,
         }),
         headers: headers,
-      }).then((res) => {
-        if (res.status == 200) return true;
-        throw Error('Database insertion error!');
-      }).catch((e) => {
-        console.log(e);
-        return false;
-      });
+      }).then(res => res);
     }
 
     if (kontak.email) {
-      res2 = await fetch(await route('/contact/email/'), {
+      res2 = await fetchBoolean('/contact/email/', {
         method: 'POST',
         body: JSON.stringify({
           email: kontak.email,
         }),
         headers: headers,
-      }).then((res) => {
-        if (res.status == 200) return true;
-        throw Error('Database insertion error!');
-      }).catch((e) => {
-        console.log(e);
-        return false;
-      });
+      }).then(res => res);
     }
     if (res1 && res2) {
       onClose();

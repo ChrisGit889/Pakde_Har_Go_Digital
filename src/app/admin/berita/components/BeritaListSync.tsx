@@ -3,10 +3,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import SuccessModal from './Successmodal';
 import { useRouter } from 'next/navigation';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, getToken } from '@/utils/utils';
 import { BlogData } from '@/utils/dataTypes/BlogData';
 import { Image } from 'react-bootstrap';
-import { imgToData } from '@/utils/clientUtils';
 
 //Komponen Synchronus untuk membuat listnya
 export default function BeritaListSync({ data }: { data: BlogData[] }) {
@@ -19,14 +18,12 @@ export default function BeritaListSync({ data }: { data: BlogData[] }) {
             const tok = await getToken();
             const header = new Headers();
             header.append('Authorization', tok!);
-            await fetch(await route('/blog/' + id), {
+            await fetchBoolean('/blog/' + id, {
                 method: 'DELETE',
-                headers: header
+                headers: header,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
             }).then((_res) => {
                 setShow(true);
-            }).catch((e) => {
-                console.log(e);
             });
         };
     }
@@ -42,12 +39,7 @@ export default function BeritaListSync({ data }: { data: BlogData[] }) {
             {data.map((berita) => {
                 return (
                     < div key={berita.id.toString()} className="berita-card" >
-                        {   /* Weird way to do this, but this does work */
-                            berita.image.data == null ?
-                                <Image src={`data:image/jpeg;base64,`} alt={berita.blog.title} className="berita-card-image" />
-                                :
-                                <Image src={imgToData(berita.image.data, berita.image.name)} alt={berita.blog.title} className="berita-card-image" />
-                        }
+                        <Image src={berita.image.data ? berita.image.data : '/images/placeholder.jpg'} alt={berita.blog.title} className="berita-card-image" />
 
                         <div className="berita-content">
                             <div className="berita-content-top">

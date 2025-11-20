@@ -12,7 +12,6 @@ import {
 import { useRouter } from "next/navigation";
 import { MenuData } from "@/utils/dataTypes/MenuData";
 import { Category } from "@/utils/dataTypes/CategoryData";
-import { imgToData } from "@/utils/clientUtils";
 
 function CardMenu({ menu, activeCategory }: { menu: MenuData, activeCategory: Category }) {
   const router = useRouter();
@@ -62,7 +61,7 @@ function CardMenu({ menu, activeCategory }: { menu: MenuData, activeCategory: Ca
                 }}
               >
                 <Card.Img
-                  src={item.image.name ? imgToData(item.image.data, item.image.name) : '/images/placeholder.jpg'}
+                  src={item.image.data ? item.image.data : '/images/placeholder.jpg'}
                   alt={item.food.name}
                   style={{
                     height: "180px",

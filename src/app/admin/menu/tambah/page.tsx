@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import './TambahMenu.css';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
-import { fetchProcess } from '@/utils/clientUtils';
 import { Image } from 'react-bootstrap';
 import { CategoryData } from '@/utils/dataTypes/CategoryData';
+import { toBase64 } from '@/utils/clientUtils';
 
 export default function TambahMenuPage() {
   const router = useRouter();
@@ -73,7 +73,7 @@ export default function TambahMenuPage() {
     headers = new Headers();
     headers.append('Content-type', "application/json");
     headers.append('Authorization', tok!.toString());
-    const res2 = await fetchProcess('/menu/', {
+    const res2 = await fetchData('/menu/', {
       method: 'POST',
       body: JSON.stringify({
         name: name,
@@ -83,20 +83,23 @@ export default function TambahMenuPage() {
         category: category,
       }),
       headers: headers
-    }, async (res) => {
-      const d = await res.json();
-      id = d.foodId;
+    }).then((res) => {
+      if (res) {
+        id = res.foodId;
+        return true;
+      }
+      return false;
     });
     let res1 = true;
     console.log("id is " + id);
     if (file) {
+      const fileData = await toBase64(file);
       headers = new Headers();
-      const formdata = new FormData()
-      formdata.append('uploaded_img', file!);
       headers.append('Authorization', tok!.toString());
+      headers.append('Content-Type', 'application/json');
       res1 = await fetchBoolean('/menu/' + id + '/image', {
         method: 'PUT',
-        body: formdata,
+        body: JSON.stringify({ data: fileData }),
         headers: headers,
       });
     }

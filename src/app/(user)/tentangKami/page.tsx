@@ -2,7 +2,7 @@
 import { Image } from "react-bootstrap";
 import HalamanUtamatentangKami from "./components/HalamanUtamatentangKami";
 import { AboutData } from "@/utils/dataTypes/AboutData";
-import { fetchData, serverImgToData } from "@/utils/utils";
+import { fetchData } from "@/utils/utils";
 import Link from "next/link";
 import { EmployeeData } from "@/utils/dataTypes/EmployeeData";
 import { BlogData } from "@/utils/dataTypes/BlogData";
@@ -85,7 +85,7 @@ export default async function Menu() {
                 }}
               >
                 <Image
-                  src={b.image.name ? await serverImgToData(b.image.data, b.image.name) : '/images/placeholder.jpg'}
+                  src={b.image.data ? b.image.data : '/images/placeholder.jpg'}
                   alt=""
                   style={{ width: "100%", height: "200px", objectFit: "cover" }}
                 />
@@ -165,7 +165,7 @@ export default async function Menu() {
               }}
             >
               <Image
-                src={emp.image.name ? await serverImgToData(emp.image.data, emp.image.name) : '/images/placeholder.jpg'}
+                src={emp.image.data ? emp.image.data : '/images/placeholder.jpg'}
                 alt=""
                 style={{ width: "100%", height: "300px", objectFit: "cover" }}
               />
