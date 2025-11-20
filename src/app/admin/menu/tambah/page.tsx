@@ -93,12 +93,13 @@ export default function TambahMenuPage() {
     let res1 = true;
     console.log("id is " + id);
     if (file) {
-      const fileData = toBase64(file)
+      const fileData = await toBase64(file);
       headers = new Headers();
       headers.append('Authorization', tok!.toString());
+      headers.append('Content-Type', 'application/json');
       res1 = await fetchBoolean('/menu/' + id + '/image', {
         method: 'PUT',
-        body: { data: fileData },
+        body: JSON.stringify({ data: fileData }),
         headers: headers,
       });
     }

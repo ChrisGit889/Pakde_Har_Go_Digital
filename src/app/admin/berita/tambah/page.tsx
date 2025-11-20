@@ -71,9 +71,10 @@ export default function TambahBeritaPage() {
       const fileData = await toBase64(file);
       headers = new Headers();
       headers.append('Authorization', tok!.toString());
+      headers.append('Content-Type', 'application/json');
       res1 = await fetchBoolean('/blog/' + id + '/image', {
         method: 'PUT',
-        body: { data: fileData },
+        body: JSON.stringify({ data: fileData }),
         headers: headers,
       }).then((res) => res);
     }

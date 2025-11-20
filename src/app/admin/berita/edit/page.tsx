@@ -87,9 +87,10 @@ export default function EditBeritaPage() {
       const fileData: string = await toBase64(file);
       headers = new Headers();
       headers.append('Authorization', tok!.toString());
+      headers.append('Content-Type', 'application/json');
       res1 = await fetchBoolean('/blog/' + blogId + '/image', {
         method: 'PUT',
-        body: { data: fileData },
+        body: JSON.stringify({ data: fileData }),
         headers: headers,
       }).then(res => res);
     }
