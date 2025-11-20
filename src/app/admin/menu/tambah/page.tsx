@@ -7,6 +7,7 @@ import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import { Image } from 'react-bootstrap';
 import { CategoryData } from '@/utils/dataTypes/CategoryData';
+import { toBase64 } from '@/utils/clientUtils';
 
 export default function TambahMenuPage() {
   const router = useRouter();
@@ -92,13 +93,12 @@ export default function TambahMenuPage() {
     let res1 = true;
     console.log("id is " + id);
     if (file) {
+      const fileData = toBase64(file)
       headers = new Headers();
-      const formdata = new FormData()
-      formdata.append('uploaded_img', file!);
       headers.append('Authorization', tok!.toString());
       res1 = await fetchBoolean('/menu/' + id + '/image', {
         method: 'PUT',
-        body: formdata,
+        body: { data: fileData },
         headers: headers,
       });
     }

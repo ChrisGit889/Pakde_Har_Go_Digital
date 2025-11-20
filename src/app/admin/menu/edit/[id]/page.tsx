@@ -8,6 +8,7 @@ import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import { Menu } from '@/utils/dataTypes/MenuData';
 import { Image } from 'react-bootstrap';
 import { CategoryData } from '@/utils/dataTypes/CategoryData';
+import { toBase64 } from '@/utils/clientUtils';
 
 export default function EditMenuPage() {
   const router = useRouter();
@@ -87,13 +88,12 @@ export default function EditMenuPage() {
     let res1 = true;
     const tok = await getToken();
     if ((data!.image.data == null ? previewUrl != '/images/placeholder.jpg' : previewUrl != data!.image.data) && file != undefined) {
+      const fileData = await toBase64(file);
       headers = new Headers();
-      const formdata = new FormData()
-      formdata.append('uploaded_img', file!);
       headers.append('Authorization', tok!.toString());
       res1 = await fetchBoolean('/menu/' + id + '/image', {
         method: 'PUT',
-        body: formdata,
+        body: { data: fileData },
         headers: headers,
       });
     }
