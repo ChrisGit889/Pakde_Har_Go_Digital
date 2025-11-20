@@ -2,15 +2,14 @@
 import Link from 'next/link';
 import './AdminMenu.css';
 import { Menu } from '@/utils/dataTypes/MenuData';
-import { imgToData } from '@/utils/clientUtils';
 import { Image } from 'react-bootstrap';
 
 export default function ProductCard({ menu, onDelete }: { menu: Menu, onDelete: (m: Menu) => void }) {
   return (
     <div className="product-card">
       <Image
-        src={menu.image.name ? imgToData(menu.image.data, menu.image.name) : 'data'}
-        alt={menu.image.name}
+        src={menu.image.data ? menu.image.data : '/images/placeholder.jpg'}
+        alt={menu.food.name}
         className="product-card-image" />
       <div className="product-card-content">
         <div>

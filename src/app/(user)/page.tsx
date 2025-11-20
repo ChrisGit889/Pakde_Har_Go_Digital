@@ -1,3 +1,4 @@
+"use server"
 import { cookies } from "next/headers";
 import styles from "../page.module.css";
 import MenuUnggulan from "./components/menuUnggulan";

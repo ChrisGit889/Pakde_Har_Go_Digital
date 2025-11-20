@@ -7,9 +7,8 @@ interface EmployeeData {
             description: string,
         },
         image: {
-            name: string,
             updated: string,
-            data: Buffer,
+            data: string,
         }
     }[],
 }

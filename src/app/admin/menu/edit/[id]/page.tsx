@@ -6,7 +6,6 @@ import '../../tambah/TambahMenu.css';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import { Menu } from '@/utils/dataTypes/MenuData';
-import { imgToData } from '@/utils/clientUtils';
 import { Image } from 'react-bootstrap';
 import { CategoryData } from '@/utils/dataTypes/CategoryData';
 
@@ -45,7 +44,7 @@ export default function EditMenuPage() {
       setName(data.food.name || name);
       setDescription(data.food.description || description);
       setFlavour(data.food.flavour || flavour);
-      setPreviewUrl(data.image.name ? imgToData(data.image.data, data.image.name) : '/images/placeholder.jpg');
+      setPreviewUrl(data.image.data ? data.image.data : '/images/placeholder.jpg');
       setCategory(data.food.category || category);
       setPrice(data.food.price || 0);
       setData(data);
@@ -87,7 +86,7 @@ export default function EditMenuPage() {
     let headers;
     let res1 = true;
     const tok = await getToken();
-    if ((data!.image.name == null ? previewUrl != '/images/placeholder.jpg' : previewUrl != imgToData(data!.image.data, data!.image.name)) && file != undefined) {
+    if ((data!.image.data == null ? previewUrl != '/images/placeholder.jpg' : previewUrl != data!.image.data) && file != undefined) {
       headers = new Headers();
       const formdata = new FormData()
       formdata.append('uploaded_img', file!);

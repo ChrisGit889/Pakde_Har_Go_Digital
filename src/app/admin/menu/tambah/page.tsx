@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import './TambahMenu.css';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
-import { fetchProcess } from '@/utils/clientUtils';
 import { Image } from 'react-bootstrap';
 import { CategoryData } from '@/utils/dataTypes/CategoryData';
 
@@ -73,7 +72,7 @@ export default function TambahMenuPage() {
     headers = new Headers();
     headers.append('Content-type', "application/json");
     headers.append('Authorization', tok!.toString());
-    const res2 = await fetchProcess('/menu/', {
+    const res2 = await fetchData('/menu/', {
       method: 'POST',
       body: JSON.stringify({
         name: name,
@@ -83,9 +82,12 @@ export default function TambahMenuPage() {
         category: category,
       }),
       headers: headers
-    }, async (res) => {
-      const d = await res.json();
-      id = d.foodId;
+    }).then((res) => {
+      if (res) {
+        id = res.foodId;
+        return true;
+      }
+      return false;
     });
     let res1 = true;
     console.log("id is " + id);

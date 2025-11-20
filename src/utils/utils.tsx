@@ -87,9 +87,4 @@ async function fetchData(ro: string, params: object) {
             return {};
         });
 }
-
-async function serverImgToData(data: Buffer, name: string) {
-    return `data:image/${name.split('.')[name.split('.').length - 1]};base64,` + Buffer.from(data).toString("base64")
-}
-
-export { serverRoute as route, login, getToken, authenticate, logout, fetchBoolean, fetchData, serverImgToData };
+export { serverRoute as route, login, getToken, authenticate, logout, fetchBoolean, fetchData };

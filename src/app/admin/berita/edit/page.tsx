@@ -7,8 +7,9 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import SuccessModal from '@/app/admin/berita/components/Successmodal';
 import '../tambah/TambahBerita.css';
 import { BlogData } from '@/utils/dataTypes/BlogData';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import { Image } from 'react-bootstrap';
+import { toBase64 } from '@/utils/clientUtils';
 
 export default function EditBeritaPage() {
   const router = useRouter();
@@ -31,17 +32,11 @@ export default function EditBeritaPage() {
   }
 
   async function asyncFetch() {
-    const data: BlogData = await fetch(await route('/blog/' + blogId), {
+    const data: BlogData = await fetchData('/blog/' + blogId, {
       method: 'GET',
     }).then((res) => {
-      if (res.status == 200) {
-        return res.json();
-      }
-      throw Error('Database Err!');
-    }).catch((e) => {
-      console.log(e);
-      return null;
-    });
+      return res;
+    })
 
     if (data) {
       setData(data);
@@ -62,7 +57,7 @@ export default function EditBeritaPage() {
       setStory(data.blog.story || '');
       setDescription(data.blog.description || '');
       if (data.image.data != null) {
-        setPreviewUrl(`data:image/${data.image.name.split('.')[data.image.name.split('.').length - 1]};base64,${Buffer.from(data.image.data).toString("base64")}`);
+        setPreviewUrl(data.image.data);
       }
     }
     setLoad(!load);
@@ -88,27 +83,20 @@ export default function EditBeritaPage() {
     let headers;
     let res1 = true;
     const tok = await getToken();
-    if ((data!.image.name == null ? true : previewUrl != `data:image/${data!.image.name.split('.')[data!.image.name.split('.').length - 1]};base64,${Buffer.from(data!.image.data).toString("base64")}`) && file != undefined) {
+    if ((data!.image.data == null ? true : previewUrl != data!.image.data) && file != undefined) {
+      const fileData: string = await toBase64(file);
       headers = new Headers();
-      const formdata = new FormData()
-      formdata.append('uploaded_img', file!);
       headers.append('Authorization', tok!.toString());
-      res1 = await fetch(await route('/blog/' + blogId + '/image'), {
+      res1 = await fetchBoolean('/blog/' + blogId + '/image', {
         method: 'PUT',
-        body: formdata,
+        body: { data: fileData },
         headers: headers,
-      }).then((res) => {
-        if (res.status == 200) return true;
-        throw Error("Something went wrong");
-      }).catch((e) => {
-        console.log(e);
-        return false;
-      });
+      }).then(res => res);
     }
     headers = new Headers();
     headers.append('Content-type', "application/json");
     headers.append('Authorization', tok!.toString());
-    const res2 = await fetch(await route('/blog/' + blogId), {
+    const res2 = await fetchBoolean('/blog/' + blogId, {
       method: 'PUT',
       body: JSON.stringify({
         title: title,
@@ -116,13 +104,7 @@ export default function EditBeritaPage() {
         story: story,
       }),
       headers: headers
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error("Something went wrong");
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then(res => res);
     if (res1 && res2) setSuccess(true);
   };
 

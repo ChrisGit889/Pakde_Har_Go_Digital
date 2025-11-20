@@ -1,8 +1,7 @@
 'use client';
 import { useState } from 'react';
 import './AdminMenu.css';
-import { getToken } from '@/utils/utils';
-import { fetchProcess } from '@/utils/clientUtils';
+import { fetchData, getToken } from '@/utils/utils';
 
 export default function AddCategory({ show, onClose }: { show: boolean, onClose: () => void }) {
   const [name, setName] = useState('');
@@ -28,19 +27,24 @@ export default function AddCategory({ show, onClose }: { show: boolean, onClose:
     setDisabled(true);
 
     const tok = await getToken();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let id;
     const headers = new Headers();
     headers.append('Content-type', "application/json");
     headers.append('Authorization', tok!.toString());
-    const res = await fetchProcess('/menu/categories', {
+    const res = await fetchData('/menu/categories', {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
         name: name,
         description: description,
       })
-    }, async (res) => {
-      id = (await res.json()).id;
+    }).then((res) => {
+      if (res.id) {
+        id = res.id;
+        return true;
+      }
+      return false;
     });
 
     if (res) {

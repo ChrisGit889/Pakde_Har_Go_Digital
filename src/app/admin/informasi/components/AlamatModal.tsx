@@ -1,7 +1,7 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../InformasiPage.css';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, getToken, route } from '@/utils/utils';
 
 export default function AlamatModal({ id, data, modify, show, onClose }: { id: number, data: { address: string, name: string }, modify: boolean, show: boolean, onClose: () => void }) {
   const [name, setName] = useState('');
@@ -17,6 +17,7 @@ export default function AlamatModal({ id, data, modify, show, onClose }: { id: n
       setName('');
       setAddress('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   if (!show) return null;
@@ -26,16 +27,10 @@ export default function AlamatModal({ id, data, modify, show, onClose }: { id: n
     const headers = new Headers();
     headers.append('Authorization', (await getToken())!);
     headers.append('Content-Type', 'application/json');
-    let res = await fetch(await route('/contact/address/' + id), {
+    const res = await fetchBoolean('/contact/address/' + id, {
       method: 'DELETE',
       headers: headers,
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error('Database change error!');
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then((res) => res);
 
     if (res) {
       onClose();
@@ -48,20 +43,14 @@ export default function AlamatModal({ id, data, modify, show, onClose }: { id: n
     const headers = new Headers();
     headers.append('Authorization', (await getToken())!);
     headers.append('Content-Type', 'application/json');
-    let res = await fetch(await route('/contact/address/' + id), {
+    const res = await fetchBoolean(await route('/contact/address/' + id), {
       method: 'PUT',
       body: JSON.stringify({
         name: name,
         address: address,
       }),
       headers: headers,
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error('Database change error!');
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then(res => res);
 
     if (res) {
       onClose();
@@ -75,20 +64,14 @@ export default function AlamatModal({ id, data, modify, show, onClose }: { id: n
     headers.append('Authorization', (await getToken())!);
     headers.append('Content-Type', 'application/json');
 
-    let res = await fetch(await route('/contact/address'), {
+    const res = await fetchBoolean('/contact/address', {
       method: 'POST',
       body: JSON.stringify({
         name: name,
         address: address,
       }),
       headers: headers,
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error('Database insertion error!');
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then(res => res);
 
     if (res) {
       onClose();

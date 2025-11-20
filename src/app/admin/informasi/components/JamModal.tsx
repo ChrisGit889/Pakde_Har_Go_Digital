@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import './InformasiPage.css';
-import { getToken, route } from '@/utils/utils';
+import { fetchBoolean, getToken } from '@/utils/utils';
 
 export default function JamModal({ show, data, onClose }: {
   show: boolean, data: {
@@ -40,7 +40,7 @@ export default function JamModal({ show, data, onClose }: {
     headers.append('Authorization', (await getToken())!);
     headers.append('Content-Type', 'application/json');
 
-    const res = await fetch(await route('/contact/schedule'), {
+    const res = await fetchBoolean('/contact/schedule', {
       method: 'PUT',
       body: JSON.stringify({
         mon: newSched.mon,
@@ -52,13 +52,7 @@ export default function JamModal({ show, data, onClose }: {
         sun: newSched.sun,
       }),
       headers: headers,
-    }).then((res) => {
-      if (res.status == 200) return true;
-      throw Error('Database insertion error!');
-    }).catch((e) => {
-      console.log(e);
-      return false;
-    });
+    }).then(res => res);
 
     if (res) {
       onClose();

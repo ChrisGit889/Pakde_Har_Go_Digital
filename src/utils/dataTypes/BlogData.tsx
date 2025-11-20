@@ -11,8 +11,7 @@ interface BlogData {
         story: string,
     },
     image: {
-        name: string,
-        data: Buffer,
+        data: string,
     },
 };
 export type { BlogData };

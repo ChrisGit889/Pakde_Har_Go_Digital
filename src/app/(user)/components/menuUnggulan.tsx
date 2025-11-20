@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import { MenuData } from "@/utils/dataTypes/MenuData";
-import { imgToData } from "@/utils/clientUtils";
 
 function MenuUnggulan({ menu }: { menu: MenuData }) {
   const router = useRouter();
@@ -47,8 +45,8 @@ function MenuUnggulan({ menu }: { menu: MenuData }) {
               }}
             >
               <Card.Img
-                src={item.image.name ? imgToData(item.image.data, item.image.name) : '/images/placeholder.jpg'}
-                alt={item.image.name}
+                src={item.image.data ? item.image.data : '/images/placeholder.jpg'}
+                alt={item.food.name}
                 style={{
                   height: "180px",
                   objectFit: "cover",

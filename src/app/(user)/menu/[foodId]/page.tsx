@@ -4,7 +4,6 @@ import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { fetchBoolean, fetchData } from "@/utils/utils";
 import { Menu } from "@/utils/dataTypes/MenuData";
-import { imgToData } from "@/utils/clientUtils";
 
 export default function FoodDetail() {
   const params = useParams();
@@ -53,7 +52,7 @@ export default function FoodDetail() {
         style={{
           width: "100%",
           height: "50vh",
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${data.image.name ? imgToData(data.image.data, data.image.name) : '/images/placeholder.jpg'})`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${data.image.data ? data.image.data : '/images/placeholder.jpg'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -93,7 +92,7 @@ export default function FoodDetail() {
         <Row className="align-items-center g-4">
           <Col xs={12} md={6} className="text-center">
             <Image
-              src={data.image.name ? imgToData(data.image.data, data.image.name) : '/images/placeholder.jpg'}
+              src={data.image.data ? data.image.data : '/images/placeholder.jpg'}
               alt={data.food.name}
               className="img-fluid rounded shadow-sm"
               style={{
