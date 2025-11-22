@@ -24,15 +24,14 @@ function NavbarComponents() {
       expand="lg"
       expanded={expanded}
       onToggle={() => setExpanded(!expanded)}
-      className={`position-fixed w-100 z-3 transition-all ${
-        scrolled || expanded
+      className={`position-fixed w-100 z-3 transition-all ${scrolled || expanded
           ? "bg-white navbar-shadow py-2"
           : "bg-transparent py-4"
-      }`}
+        }`}
     >
       <Container fluid>
         <Navbar.Brand href="/">
-          <img src="/images/LogoPakde.png" alt="Logo" width="160" />
+          <img src="/images/LogoPakDe.png" alt="Logo" width="160" />
         </Navbar.Brand>
         <Navbar.Toggle
           className={scrolled || expanded ? "toggler-dark" : "toggler-light"}
@@ -41,56 +40,49 @@ function NavbarComponents() {
           <Nav className="ms-auto gap-4 align-items-center">
             <Nav.Link
               href="/"
-              className={`nav-link-custom ${
-                isActive("/") ? "active-link" : ""
-              } ${scrolled || expanded ? "text-dark" : "text-white"}`}
+              className={`nav-link-custom ${isActive("/") ? "active-link" : ""
+                } ${scrolled || expanded ? "text-dark" : "text-white"}`}
             >
               Beranda
             </Nav.Link>
             <Nav.Link
               href="/menu"
-              className={`nav-link-custom ${
-                isActive("/menu") ? "active-link" : ""
-              } ${scrolled || expanded ? "text-dark" : "text-white"}`}
+              className={`nav-link-custom ${isActive("/menu") ? "active-link" : ""
+                } ${scrolled || expanded ? "text-dark" : "text-white"}`}
             >
               Menu
             </Nav.Link>
 
             <Nav.Link
               href="/tentangKami"
-              className={`nav-link-custom ${
-                isActive("/tentangKami") ? "active-link" : ""
-              } ${
-                !isActive("/tentangKami") && (scrolled || expanded)
+              className={`nav-link-custom ${isActive("/tentangKami") ? "active-link" : ""
+                } ${!isActive("/tentangKami") && (scrolled || expanded)
                   ? "text-dark"
                   : !isActive("/tentangKami")
-                  ? "text-white"
-                  : ""
-              }`}
+                    ? "text-white"
+                    : ""
+                }`}
             >
               Tentang Kami
             </Nav.Link>
 
             <Nav.Link
               href="/kontak"
-              className={`nav-link-custom ${
-                isActive("/kontak") ? "active-link" : ""
-              } ${
-                !isActive("/kontak") && (scrolled || expanded)
+              className={`nav-link-custom ${isActive("/kontak") ? "active-link" : ""
+                } ${!isActive("/kontak") && (scrolled || expanded)
                   ? "text-dark"
                   : !isActive("/kontak")
-                  ? "text-white"
-                  : ""
-              }`}
+                    ? "text-white"
+                    : ""
+                }`}
             >
               Kontak
             </Nav.Link>
 
             <Nav.Link
               href="/blog"
-              className={`nav-link-custom ${
-                isActive("/blog") ? "active-link" : ""
-              } ${scrolled || expanded ? "text-dark" : "text-white"}`}
+              className={`nav-link-custom ${isActive("/blog") ? "active-link" : ""
+                } ${scrolled || expanded ? "text-dark" : "text-white"}`}
             >
               Blog
             </Nav.Link>
