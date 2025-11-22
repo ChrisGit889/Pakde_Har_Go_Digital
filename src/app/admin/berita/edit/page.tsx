@@ -60,7 +60,7 @@ export default function EditBeritaPage() {
         setPreviewUrl(data.image.data);
       }
     }
-    setLoad(!load);
+    setLoad(true);
   }, [data]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
