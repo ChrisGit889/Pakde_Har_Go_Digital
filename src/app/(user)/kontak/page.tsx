@@ -75,7 +75,7 @@ export default function Kontak() {
     });
 
     if (res) {
-      router.refresh();
+      router.replace('/kontak');
     } else {
       alert('Terjadi kesalahan halaman');
     }

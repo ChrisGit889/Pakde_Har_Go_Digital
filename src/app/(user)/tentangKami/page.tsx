@@ -7,6 +7,7 @@ import Link from "next/link";
 import { EmployeeData } from "@/utils/dataTypes/EmployeeData";
 import { BlogData } from "@/utils/dataTypes/BlogData";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Menu() {
   const x = (await cookies()).getAll();
@@ -95,6 +96,7 @@ export default async function Menu() {
                     {b.blog.description}
                   </p>
                   <button
+                    onClick={() => redirect(`/blog/${b.id}`)}
                     style={{
                       width: "100%",
                       padding: "10px",
