@@ -24,7 +24,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <img src="/images/logopakde.png" alt="Logo Pakde Har" width="120" />
+        <img src="/images/LogoPakDe.png" alt="Logo Pakde Har" width="120" />
       </div>
 
       <nav className="sidebar-nav">
