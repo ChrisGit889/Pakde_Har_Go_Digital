@@ -7,7 +7,7 @@ import Link from "next/link";
 import { EmployeeData } from "@/utils/dataTypes/EmployeeData";
 import { BlogData } from "@/utils/dataTypes/BlogData";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import CardBlog from "./components/blogCard";
 
 export default async function Menu() {
   const x = (await cookies()).getAll();
@@ -74,44 +74,7 @@ export default async function Menu() {
       >
         {
           blogData.map(async (b) => {
-            return (
-              <div
-                key={b.id}
-                style={{
-                  width: "330px",
-                  borderRadius: "12px",
-                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                  overflow: "hidden",
-                  backgroundColor: "white",
-                }}
-              >
-                <Image
-                  src={b.image.data ? b.image.data : '/images/placeholder.jpg'}
-                  alt=""
-                  style={{ width: "100%", height: "200px", objectFit: "cover" }}
-                />
-                <div style={{ padding: "20px", textAlign: "left" }}>
-                  <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#000" }}>{b.blog.title}</h3>
-                  <p style={{ fontSize: "16px", color: "#000", margin: "10px 0 20px 0" }}>
-                    {b.blog.description}
-                  </p>
-                  <button
-                    onClick={() => redirect(`/blog/${b.id}`)}
-                    style={{
-                      width: "100%",
-                      padding: "10px",
-                      backgroundColor: "#ff8c00",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Detail Berita
-                  </button>
-                </div>
-              </div>
-            );
+            return <CardBlog b={b} key={b.id} />
           })
         }
       </div>
