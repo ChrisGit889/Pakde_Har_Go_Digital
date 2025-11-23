@@ -4,7 +4,6 @@ import HalamanUtamaKontak from "./components/halamanUtamaKontak";
 import { useEffect, useState } from "react";
 import { Star, StarFill } from "react-bootstrap-icons";
 import { fetchBoolean, fetchData } from "@/utils/utils";
-import { useRouter } from "next/navigation";
 import { ContactsData } from "@/utils/dataTypes/ContactData";
 
 const conversion: {
@@ -27,7 +26,6 @@ const conversion: {
 };
 
 export default function Kontak() {
-  const router = useRouter();
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -75,7 +73,7 @@ export default function Kontak() {
     });
 
     if (res) {
-      router.replace('/kontak');
+      alert('Review berhasil ditambahkan');
     } else {
       alert('Terjadi kesalahan halaman');
     }
