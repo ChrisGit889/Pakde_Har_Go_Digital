@@ -1,7 +1,7 @@
+// Lokasi: src/app/components/sidebarWebAdmin/Sidebar.tsx
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation'; 
+import { usePathname, useRouter } from 'next/navigation'; 
 import './Sidebar.css';
 
 const navLinks = [
@@ -10,7 +10,7 @@ const navLinks = [
   { name: 'Informasi', href: '/admin/informasi', icon: '/images/informationPutih.png' },
   { name: 'Berita', href: '/admin/berita', icon: '/images/beritaPutih.png' },
   { name: 'Ulasan', href: '/admin/ulasan', icon: '/images/reviewPutih.png' },
-  { name: 'Karyawan', href: '/admin/karyawan', icon: '/images/employeePutih.png' }, // Pastikan Anda upload ikon ini
+  { name: 'Karyawan', href: '/admin/karyawan', icon: '/images/employeePutih.png' },
 ];
 
 export default function Sidebar() {
@@ -31,6 +31,7 @@ export default function Sidebar() {
       <nav className="sidebar-nav">
         {navLinks.map((link) => {
           const isActive = pathname.startsWith(link.href); 
+          
           return (
             <Link
               key={link.name}
