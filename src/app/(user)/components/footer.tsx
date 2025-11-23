@@ -1,7 +1,15 @@
 "use server";
+import { ContactsData } from '@/utils/dataTypes/ContactData';
+import { fetchData } from '@/utils/utils';
 import Link from 'next/link';
+import { Image } from 'react-bootstrap';
 
-function Footer() {
+async function Footer() {
+
+  const contacts: ContactsData = await fetchData('/contact', {
+    method: 'GET'
+  });
+
   return (
     <div
       style={{
@@ -41,25 +49,22 @@ function Footer() {
 
           <div style={{ display: "flex", gap: "12px" }}>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px", position: "relative", top: "2px" }}>
-              <img src="/images/location_on.png" style={{ width: "20px" }} />
-              <img src="/images/call.png" style={{ width: "20px", position: "relative", top: "43px" }} />
-              <img src="/images/mail.png" style={{ width: "20px", position: "relative", top: "47px" }} />
-              <img src="/images/access_time.png" style={{ width: "20px", position: "relative", top: "50px" }} />
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px", position: "relative", top: "2px" }}>
+              <Image alt='' src="/images/location_on.png" style={{ width: "20px" }} />
+              <Image alt='' src="/images/call.png" style={{ width: "20px", position: "relative", top: "43px" }} />
+              <Image alt='' src="/images/mail.png" style={{ width: "20px", position: "relative", top: "47px" }} />
+              <Image alt='' src="/images/access_time.png" style={{ width: "20px", position: "relative", top: "50px" }} />
             </div>
 
             <div>
               <p>
-                Jl. Taman S. Parman, RT.7/RW.8, Grogol,
-                Kec. Grogol Petamburan, Kota Jakarta Barat,
-                DKI Jakarta 11440
+                {contacts.addresses[0].address ? contacts.addresses[0].address : ''}
               </p>
-              <p>08123456789</p>
+              <p>{contacts.phoneNumbers[0] ? contacts.phoneNumbers[0] : ''}</p>
               <p>PakDeHar@gmail.com</p>
-              <p>
-                <strong>Senin - Jumat:</strong> 07:00 - 22:00 <br />
-                <strong>Sabtu - Minggu:</strong> Tutup
-              </p>
+              <Link href="/kontak">
+                <strong>Lihat jadwal</strong>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 'use server';
-import AdminEmployeeSync from '@/app/components/dashboard/AdminEmployeeSync'; // Kita akan buat ini
+import AdminEmployeeSync from './components/AdminEmployeeSync';
 import { fetchData } from '@/utils/utils';
 
 export default async function AdminEmployeePage() {
@@ -9,7 +9,7 @@ export default async function AdminEmployeePage() {
 
   return (
     <AdminEmployeeSync
-      employees={Array.isArray(employeesData) ? employeesData : employeesData.data}
+      employees={employeesData}
     />
   );
 }

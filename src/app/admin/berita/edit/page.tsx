@@ -10,7 +10,6 @@ import { BlogData } from '@/utils/dataTypes/BlogData';
 import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import { Image } from 'react-bootstrap';
 import { toBase64 } from '@/utils/clientUtils';
-import DashboardLayout from '@/app/admin/components/DashboardLayout';
 
 export default function EditBeritaPage() {
   const router = useRouter();
@@ -27,11 +26,9 @@ export default function EditBeritaPage() {
 
   if (!id) {
     return (
-      <DashboardLayout>
-        <div className="form-container">
-          <p>Data tidak ditemukan (ID Missing)...</p>
-        </div>
-      </DashboardLayout>
+      <div className="form-container">
+        <p>Data tidak ditemukan (ID Missing)...</p>
+      </div>
     );
   }
 
@@ -118,26 +115,22 @@ export default function EditBeritaPage() {
 
   if (!load) {
     return (
-      <DashboardLayout>
-        <div className="form-container" style={{ padding: '20px' }}>
-          <p>Loading...</p>
-        </div>
-      </DashboardLayout>
+      <div className="form-container" style={{ padding: '20px' }}>
+        <p>Loading...</p>
+      </div>
     );
   }
 
   if (data == null) {
     return (
-      <DashboardLayout>
-        <div className="form-container" style={{ padding: '20px' }}>
-          <p>Gagal memuat data berita.</p>
-        </div>
-      </DashboardLayout>
+      <div className="form-container" style={{ padding: '20px' }}>
+        <p>Gagal memuat data berita.</p>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout>
+    <>
       <div className="form-container">
         <div className="form-header">
           <Link href="/admin/berita" className="back-button">
@@ -145,10 +138,10 @@ export default function EditBeritaPage() {
           </Link>
         </div>
         <h1 className="form-page-title">Edit Berita</h1>
-        
+
         <form className="form-card" onSubmit={handleSubmit}>
           <div className="form-card-content">
-            
+
             <div className="form-section">
               <label className="form-label">Gambar Berita</label>
               <div className="image-upload-section">
@@ -213,12 +206,12 @@ export default function EditBeritaPage() {
           </div>
         </form>
       </div>
-      
+
       <SuccessModal
         isOpen={success}
         onClose={handleModalClose}
         message="Perubahan Anda berhasil disimpan."
       />
-    </DashboardLayout>
+    </>
   );
 }
