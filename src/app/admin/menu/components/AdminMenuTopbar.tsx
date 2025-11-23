@@ -26,10 +26,10 @@ export default function AdminMenuTopbar({ onAddCategoryClick, search, setSearch 
           <button className="admin-button secondary" onClick={onAddCategoryClick}>
             <Image
               src="/images/add.png"
-              alt="Tambah Kategori"
+              alt="Edit Kategori"
               className="topbar-icon"
             />
-            Tambah Kategori
+            Edit Kategori
           </button>
 
           <Link href="/admin/menu/tambah" className="admin-button secondary">
