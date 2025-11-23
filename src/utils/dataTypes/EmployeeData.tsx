@@ -1,16 +1,18 @@
-interface EmployeeData {
-    data: {
-        id: number,
-        profile: {
-            name: string,
-            role: string,
-            description: string,
-        },
-        image: {
-            updated: string,
-            data: string,
-        }
-    }[],
+interface Employee {
+    id: number,
+    profile: {
+        name: string,
+        role: string,
+        description: string,
+    },
+    image: {
+        updated: string,
+        data: string,
+    }
 }
 
-export type { EmployeeData };
+interface EmployeeData {
+    data: Employee[],
+}
+
+export type { EmployeeData, Employee };
