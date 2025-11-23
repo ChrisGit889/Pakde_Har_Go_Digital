@@ -117,7 +117,6 @@ export default async function Menu() {
         }}
       >
         {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           employees.data.map(async (emp, _) => {
             return (<div
               key={emp.id}
