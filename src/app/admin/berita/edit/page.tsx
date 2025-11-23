@@ -10,16 +10,14 @@ import { BlogData } from '@/utils/dataTypes/BlogData';
 import { fetchBoolean, fetchData, getToken } from '@/utils/utils';
 import { Image } from 'react-bootstrap';
 import { toBase64 } from '@/utils/clientUtils';
+import DashboardLayout from '@/app/admin/components/DashboardLayout';
 
 export default function EditBeritaPage() {
   const router = useRouter();
-
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-
   const [data, setData] = useState<BlogData | null>(null);
   const [load, setLoad] = useState<boolean>(false);
-
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [story, setStory] = useState<string>('');
@@ -28,15 +26,21 @@ export default function EditBeritaPage() {
   const [file, setFile] = useState<File | undefined>(undefined);
 
   if (!id) {
-    return <>Page Missing...</>;
+    return (
+      <DashboardLayout>
+        <div className="form-container">
+          <p>Data tidak ditemukan (ID Missing)...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
+
+  const blogId = parseInt(id, 10);
 
   async function asyncFetch() {
     const data: BlogData = await fetchData('/blog/' + blogId, {
       method: 'GET',
-    }).then((res) => {
-      return res;
-    })
+    });
 
     if (data) {
       setData(data);
@@ -44,8 +48,6 @@ export default function EditBeritaPage() {
       setData(null);
     }
   }
-
-  const blogId = parseInt(id, 10);
 
   useEffect(() => {
     asyncFetch();
@@ -92,7 +94,7 @@ export default function EditBeritaPage() {
         method: 'PUT',
         body: JSON.stringify({ data: fileData }),
         headers: headers,
-      }).then(res => res);
+      });
     }
     headers = new Headers();
     headers.append('Content-type', "application/json");
@@ -105,7 +107,7 @@ export default function EditBeritaPage() {
         story: story,
       }),
       headers: headers
-    }).then(res => res);
+    });
     if (res1 && res2) setSuccess(true);
   };
 
@@ -116,26 +118,26 @@ export default function EditBeritaPage() {
 
   if (!load) {
     return (
-      <>
-        <div className="berita-detail-container">
-          <p>Loading</p>
+      <DashboardLayout>
+        <div className="form-container" style={{ padding: '20px' }}>
+          <p>Loading...</p>
         </div>
-      </>
+      </DashboardLayout>
     );
   }
 
   if (data == null) {
     return (
-      <>
-        <div className="berita-detail-container">
-          <p>Error loading blog</p>
+      <DashboardLayout>
+        <div className="form-container" style={{ padding: '20px' }}>
+          <p>Gagal memuat data berita.</p>
         </div>
-      </>
-    )
+      </DashboardLayout>
+    );
   }
 
   return (
-    <>
+    <DashboardLayout>
       <div className="form-container">
         <div className="form-header">
           <Link href="/admin/berita" className="back-button">
@@ -143,15 +145,19 @@ export default function EditBeritaPage() {
           </Link>
         </div>
         <h1 className="form-page-title">Edit Berita</h1>
+        
         <form className="form-card" onSubmit={handleSubmit}>
           <div className="form-card-content">
+            
             <div className="form-section">
               <label className="form-label">Gambar Berita</label>
               <div className="image-upload-section">
                 <input type="file" id="imageUpload" style={{ display: 'none' }} onChange={handleFileChange} />
                 <label htmlFor="imageUpload" className="image-uploader-box">
-                  {previewUrl && (
+                  {previewUrl ? (
                     <Image src={previewUrl} alt="Preview" className="image-preview" />
+                  ) : (
+                    <span style={{ fontSize: '3rem', color: '#ccc' }}>🖼️</span>
                   )}
                 </label>
                 <button type="button" className="button button-orange" onClick={triggerFileInput}>
@@ -207,11 +213,12 @@ export default function EditBeritaPage() {
           </div>
         </form>
       </div>
+      
       <SuccessModal
         isOpen={success}
         onClose={handleModalClose}
         message="Perubahan Anda berhasil disimpan."
       />
-    </>
+    </DashboardLayout>
   );
 }
