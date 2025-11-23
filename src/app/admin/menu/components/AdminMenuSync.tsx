@@ -54,6 +54,7 @@ export default function AdminMenuSync({ data, categories }: {
             <AddCategory
                 show={show}
                 onClose={() => { setShow(false); onClose(); }}
+                cat={categories}
             />
         </>
     )

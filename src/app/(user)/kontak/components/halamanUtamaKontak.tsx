@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "@mui/material";
 
@@ -9,7 +8,7 @@ function HalamanUtamaKontak() {
   return (
     <div
       style={{
-        backgroundImage: "url('/images/backgroundKontak.png')", 
+        backgroundImage: "url('/images/backgroundKontak.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -57,18 +56,18 @@ function HalamanUtamaKontak() {
 
         <div style={{ marginTop: "30px" }}>
           <Link href="/kontak/#kontak">
-          <Button
-            style={{
-              backgroundColor: "#FF941A",
-              border: "none",
-              fontWeight: "bold",
-              color: "white",
-              padding: "10px 25px",
-              borderRadius: "6px",
-            }}
-          >
-            Hubungi
-          </Button>
+            <Button
+              style={{
+                backgroundColor: "#FF941A",
+                border: "none",
+                fontWeight: "bold",
+                color: "white",
+                padding: "10px 25px",
+                borderRadius: "6px",
+              }}
+            >
+              Hubungi
+            </Button>
           </Link>
         </div>
       </Container>
@@ -81,8 +80,8 @@ function HalamanUtamaKontak() {
           transform: "translateX(-50%)",
         }}
       >
-        <img
-          src="/images/PanahBawah.png" 
+        <Image
+          src="/images/PanahBawah.png"
           alt="Scroll Down"
           style={{ width: "30px", opacity: 0.9 }}
         />
