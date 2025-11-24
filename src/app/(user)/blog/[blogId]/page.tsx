@@ -107,7 +107,7 @@ export default function DetailBerita() {
             <div className="mt-4 d-flex flex-column gap-3">
               <Button
                 onClick={() => {
-                  const message = `Baca berita "${blog.blog.title}" di sini: http://localhost:3001/blog/${blog.id}`;
+                  const message = `Baca berita "${blog.blog.title}" di sini: http://pakde-har-go-digital.vercel.app/blog/${blog.id}`;
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
                 }}
