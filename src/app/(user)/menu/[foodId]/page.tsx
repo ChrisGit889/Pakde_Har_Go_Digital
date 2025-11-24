@@ -130,7 +130,7 @@ export default function FoodDetail() {
 
             <Button
               onClick={() => {
-                const message = `Lihat menu ${data.food.name} yang saya lihat di link: http://localhost:3001/menu/${data.id}`;
+                const message = `Lihat menu ${data.food.name} yang saya lihat di link: http://pakde-har-go-digital.vercel.app/menu/${data.id}`;
                 const encodedMessage = encodeURIComponent(message);
                 window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
               }}
